@@ -11,24 +11,43 @@ filetype plugin indent on    " identify the kind of filetype automatically
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'SirVer/ultisnips'
 "Plugin 'honza/vim-snippets'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'ap/vim-buftabline'
-Plugin 'tikhomirov/vim-glsl'
-Plugin 'morhetz/gruvbox'
-Plugin 'lervag/vimtex'
-Plugin 'vimwiki/vimwiki', { 'branch': 'dev' }
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'nvie/vim-flake8' " Vim Linting
+Plugin 'ap/vim-buftabline' " To show the tabs at the top of vim
+"Plugin 'tikhomirov/vim-glsl'
+Plugin 'morhetz/gruvbox' " Adds gruvbox theme
+Plugin 'lervag/vimtex' " Adds a lot of LaTeX functionality
+Plugin 'vimwiki/vimwiki', { 'branch': 'dev' } " Adds the vimwiki support
+Plugin 'vim-airline/vim-airline' " Adds the status line
+Plugin 'vim-scripts/indentpython.vim' " Should fix python indendation
+Plugin 'nvie/vim-flake8' " Python Linting
 Plugin 'Raimondi/delimitMate' " Complete parenthesis and stuff
 Plugin 'ryanoasis/vim-devicons' " Cool icons
-" Plugin 'scrooloose/syntastic' "code syntax
+"Plugin 'scrooloose/syntastic' "code syntax
 call vundle#end()
+
+"---------------------------------------------------------------------
+" Syntastic stuff
+
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 1
+
+"let g:syntastic_python_checkers = ['flake8']
+"let g:syntastic_cpp_check_header = 1
+"let g:syntastic_c_check_header = 1
+"let g:syntastic_c_include_dirs = ['../../include','../include', 'include']
+"let b:syntastic_c_cflags = '-I/usr/include/libsoup-2.4'
+"let g:syntastic_c_compiler_options = '-ansi -DMACRO_NAME'
 
 "---------------------------------------------------------------------
 " Airline Stuff (https://vimawesome.com/plugin/vim-airline-superman)
@@ -49,8 +68,11 @@ let g:UltiSnipsExpandTrigger="<CR>"
 let g:UltiSnipsJumpForwardTrigger="<c-v>"
 let g:UltiSnipsJumpBackwardTrigger="<c-c>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
-" If you want :UltiSnipsEdit to split your window.
+" If you want :UltiSnipsEdit to split your indow.
+let g:UltiSnipsExpandTrigger="<nop>"
 let g:UltiSnipsEditSplit="vertical"
+
+inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
 
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
@@ -92,24 +114,34 @@ colorscheme gruvbox
 set whichwrap+=<,>,h,l,[,]
 
 " -----------------------------------------------------------------------------------------
-" scrolling up and down multiple lines atonce
-:nmap <c-j> +3
-:vmap <c-j> +3
-:nmap <c-k> -3
-:vmap <c-k> -3
+" scrolling
+:nnoremap k gk
+:nnoremap j gj
 
-" -----------------------------------------------------------------------------------------
+" ---------------------------------------------------------------------------- "
+" Windows
+nnoremap <leader>wv :vnew<CR>
+nnoremap <leader>wd :new<CR>
+nnoremap <leader>cw :bd!<CR>
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>k
+nnoremap <C-l> <C-w>l
+nnoremap <C-k> <C-w>j
+
+nnoremap + <C-w>+
+nnoremap - <C-w>-
+nnoremap = <C-w>=
+"  C-w v -> new to the right
+"  C-w j -> movefrom l -> r (,wl
+"  C-w s -> new window to bottom (,wh
+"  C-w j -> window down (,wj
+"  C-w k -> window up (,wk
+"
+" " -----------------------------------------------------------------------------------------
 " Shift between multiple buffers with tab and shift-tab
 nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
-
-" -----------------------------------------------------------------------------------------
-" Unbind the cursor keys in insert, normal and visual modes.
-for prefix in ['i', 'n', 'v']
- for key in ['<Up>', '<Down>', '<Left>', '<Right>']
-   exe prefix . "noremap " . key . " <Nop>"
- endfor
-endfor
 
 " -----------------------------------------------------------------------------------------
 " autocomplete
@@ -118,6 +150,11 @@ let g:ycm_auto_trigger = 1
 let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
+" Turn off syntax check
+let g:ycm_show_diagnostics_ui = 1
+let g:ycm_enable_diagnostic_signs = 0
+let g:ycm_enable_diagnostic_highlighting = 0
+
 "Make sure the blacklist is empty
 let g:ycm_filetype_blacklist = {}
 
@@ -134,7 +171,8 @@ set expandtab
 set ttyfast " faster redrawing
 set autoindent
 set shiftround
-set smarttab "tabs will then only be used for indenting (in the third and fourth lines), while spaces will be used for alignment:
+set smarttab " tabs will then only be used for indenting (in the third and fourth lines),
+             " while spaces will be used for alignment:
 set smartindent
 set splitbelow "Causes splits to happen in the lower window
 
@@ -142,7 +180,8 @@ set splitbelow "Causes splits to happen in the lower window
 set backspace=indent,eol,start "Make Backspace work on all modes
 set wildmenu
 
-" setting indent markers-------------------------------------------------------------------
+"-------------------------------------------------------------------
+" setting indent markers
 set list          " Display unprintable characters f12 - switches (displays symbol for spaces)
 set showbreak=↪\
 set listchars=tab:\|\ ,eol:↲,nbsp:␣,trail:•,extends:»,precedes:« " Unprintable chars mapping syntax
@@ -150,10 +189,15 @@ set listchars=tab:\|\ ,eol:↲,nbsp:␣,trail:•,extends:»,precedes:« " Unpri
 " Searching
 set ignorecase " case insensitive searching
 set smartcase " case-sensitive if expresson contains a capital letter
-"set hlsearch
+set hlsearch
 set incsearch " set incremental search, like modern browsers
 set nolazyredraw " don't redraw while executing macros
 
+" Clear search highlight
+nnoremap <leader><leader> :noh<CR>
+
+"-------------------------------------------------------------------
+" Macros
 
 " set a map leader for more key combos
 let mapleader = ','
@@ -168,11 +212,16 @@ map <leader>es :UltiSnipsEdit<CR>
 " Restart vimrc
 map <leader>rs :so ~/.vimrc<CR> "
 
+" Toggle Spell check
+nnoremap <leader>sp :setlocal spell!<CR>
+
 " Get rid of all trailing whitespace
 nnoremap <leader>dw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
 
 " Open terminal
 map <leader>t :terminal<CR>
+map <leader>vt :vertical terminal<CR>
+
 " Open a terminal and then run make
 map <leader>mk :terminal<CR>make<CR>
 " Open a terminal and then run make and then open the last edited pdf and exit
@@ -207,10 +256,6 @@ let NERDTreeNodeDelimiter = "\u263a" " smiley face
 nmap // <leader>c<space>
 vmap // <leader>c<space>
 
-" UltiSnips stuff
-let g:UltiSnipsExpandTrigger = "<nop>"
-inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
-let g:UltiSnipsSnippetDirectories = ['/$HOME/config_files/nvim/UltiSnips', 'UltiSnips']
 " -------------------------------------------------------------------------------
 " latex stuff
 filetype plugin on
@@ -241,7 +286,6 @@ if $TERM_PROGRAM =~ "iTerm"
     "let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
 
-
 au BufReadPost *
    \ if line("'\"") > 0 && line("'\"") <= line("$") && &filetype != "gitcommit" |
        \ execute("normal `\"") |
@@ -257,4 +301,5 @@ au BufNewFile,BufRead *.py
     \ set textwidth=79 |
     \ set expandtab |
     \ set autoindent |
-    \ set fileformat=unix
+    \ set fileformat=unix |
+    \ set cc=80
