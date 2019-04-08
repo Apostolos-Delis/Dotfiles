@@ -1,0 +1,23 @@
+snippet make "this creates a simple makefile for c++" b 
+
+CC = g++
+
+CFLAGS = -g
+
+INCLUDE =
+
+LIBS = 
+
+# enter filename without extension
+FILENAME =
+
+all: $(FILENAME).cpp
+	@$(CC) $(CFLAGS) $(INCLUDE) $(FILENAME).cpp -o $(FILENAME) $(LIBS)
+
+run:
+	@./$(FILENAME)	
+
+clean:
+	rm ./$(FILENAME) 
+
+endsnippet

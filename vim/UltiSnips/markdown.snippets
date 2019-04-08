@@ -1,0 +1,74 @@
+
+snippet python "Python block" b
+\`\`\`python
+${1:code}
+\`\`\`
+endsnippet
+
+snippet bl "bold text" i
+**${1:text}**
+endsnippet
+
+snippet un "underlined text" i
+<u>${1:text}</u>
+endsnippet
+
+snippet link "Insert Link" b
+[${1:name}](http://www.${2:google}.com)
+endsnippet
+
+snippet img "image insert" b
+![${2:desc}](images/${1:image_name}.png){ width=50% }
+
+endsnippet 
+
+snippet bash "bash script" b
+\`\`\`bash
+${1:code}
+\`\`\`
+endsnippet
+
+
+snippet table "table"
+| ${1:Items}    | ${2:Values}   | 
+| ------------- |:-------------:|
+| ...           | ...           | 
+endsnippet
+
+snippet cc "C code" b
+\`\`\`c
+${1:code}
+\`\`\`
+endsnippet
+
+snippet ml "Ocaml code" b
+\`\`\`ocaml
+${1:code}
+\`\`\`
+endsnippet
+
+snippet cd "generic coding snippet" b
+\`\`\`${1:language}
+${2:code}
+\`\`\`
+endsnippet
+
+snippet math "Insert Equation" b
+\begin{equation}
+${1:math}
+\end{equation}
+endsnippet
+
+snippet chap "Chapter Starter"
+### Chapter ${1:Title}
+
+endsnippet
+
+snippet date "date" 
+`date +'%Y-%m-%d'`
+endsnippet
+
+snippet nt "date" 
+**Note**: ${0}
+endsnippet
+
