@@ -1,4 +1,4 @@
-" ------------------------------------------------------------------------
+" ------------------------------------------------------------------------ " 
 " set theruntime path to include Vundle and initialize
 set hidden
 set autochdir
@@ -63,7 +63,6 @@ let g:UltiSnipsUsePythonVersion = 3
 
 set runtimepath+=~/.vim/UltiSnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-
 let g:UltiSnipsExpandTrigger="<CR>"
 let g:UltiSnipsJumpForwardTrigger="<c-v>"
 let g:UltiSnipsJumpBackwardTrigger="<c-c>"
@@ -74,9 +73,6 @@ let g:UltiSnipsEditSplit="vertical"
 
 inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
 
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 "---------------------------------------------------------------------
 syntax on " Turn on coloring for syntax
 
@@ -118,26 +114,6 @@ set whichwrap+=<,>,h,l,[,]
 :nnoremap k gk
 :nnoremap j gj
 
-" ---------------------------------------------------------------------------- "
-" Windows
-nnoremap <leader>wv :vnew<CR>
-nnoremap <leader>wd :new<CR>
-nnoremap <leader>cw :bd!<CR>
-
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>k
-nnoremap <C-l> <C-w>l
-nnoremap <C-k> <C-w>j
-
-nnoremap + <C-w>+
-nnoremap - <C-w>-
-nnoremap = <C-w>=
-"  C-w v -> new to the right
-"  C-w j -> movefrom l -> r (,wl
-"  C-w s -> new window to bottom (,wh
-"  C-w j -> window down (,wj
-"  C-w k -> window up (,wk
-"
 " " -----------------------------------------------------------------------------------------
 " Shift between multiple buffers with tab and shift-tab
 nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
@@ -150,6 +126,8 @@ let g:ycm_auto_trigger = 1
 let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_always_populate_location_list = 1 " C-w doesn't work with this on
+
 " Turn off syntax check
 let g:ycm_show_diagnostics_ui = 1
 let g:ycm_enable_diagnostic_signs = 0
@@ -176,15 +154,15 @@ set smarttab " tabs will then only be used for indenting (in the third and fourt
 set smartindent
 set splitbelow "Causes splits to happen in the lower window
 
-
 set backspace=indent,eol,start "Make Backspace work on all modes
 set wildmenu
 
 "-------------------------------------------------------------------
 " setting indent markers
 set list          " Display unprintable characters f12 - switches (displays symbol for spaces)
-set showbreak=↪\
-set listchars=tab:\|\ ,eol:↲,nbsp:␣,trail:•,extends:»,precedes:« " Unprintable chars mapping syntax
+
+set showbreak=↪\ \ \ "
+set listchars=tab:▶\ ,eol:↲,nbsp:␣,trail:~,extends:»,precedes:« " Unprintable chars mapping syntax
 
 " Searching
 set ignorecase " case insensitive searching
@@ -193,8 +171,6 @@ set hlsearch
 set incsearch " set incremental search, like modern browsers
 set nolazyredraw " don't redraw while executing macros
 
-" Clear search highlight
-nnoremap <leader><leader> :noh<CR>
 
 "-------------------------------------------------------------------
 " Macros
@@ -202,33 +178,71 @@ nnoremap <leader><leader> :noh<CR>
 " set a map leader for more key combos
 let mapleader = ','
 
+" Clear search highlight
+nnoremap <leader><leader> :noh<CR>
+
 " Edit vimrc
-map <leader>ev :e! ~/.vimrc<CR>
+nnoremap <leader>ev :e! ~/.vimrc<CR>
 " Edit bashrc
-map <leader>eb :e! ~/.bashrc<CR>
+nnoremap <leader>eb :e! ~/.bashrc<CR>
+" Edit zshrc
+nnoremap <leader>ez :e! ~/.zshrc<CR>
+
 " Edit snippet file
-map <leader>es :UltiSnipsEdit<CR>
+nnoremap <leader>es :UltiSnipsEdit<CR>
+" Edit file
+nnoremap <leader>ed :edit 
+
+" Edit file in new window
+nnoremap <leader>ew :vert new 
 
 " Restart vimrc
-map <leader>rs :so ~/.vimrc<CR> "
+nnoremap <leader>rs :so ~/.vimrc<CR> "
 
 " Toggle Spell check
-nnoremap <leader>sp :setlocal spell!<CR>
+nnoremap <leader>st :setlocal spell!<CR>
+
+" Toggle list
+nnoremap <leader>ts :set list!<CR>
 
 " Get rid of all trailing whitespace
-nnoremap <leader>dw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+nnoremap <leader>dw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>
 
 " Open terminal
-map <leader>t :terminal<CR>
-map <leader>vt :vertical terminal<CR>
+nnoremap <leader>th :terminal<CR>
+nnoremap <leader>tv :vertical terminal<CR>
 
 " Open a terminal and then run make
-map <leader>mk :terminal<CR>make<CR>
+nnoremap <leader>mk :w<CR>:terminal<CR>make<CR>
 " Open a terminal and then run make and then open the last edited pdf and exit
-map <leader>om :terminal<CR>make<CR>open <Up><CR>exit<CR>
+nnoremap <leader>mo :terminal<CR>make<CR>open <Up><CR>exit<CR>
+
+" Open a terminal and then make test and then open the last edited pdf and exit
+nnoremap <leader>mt :terminal<CR>make<CR>make test<CR>
 
 " Remap so it quits rather than entering ex mode
 nnoremap Q :q<CR>
+
+" ---------------------------------------------------------------------------- "
+" Windows
+nnoremap <leader>wv :vnew<CR>
+nnoremap <leader>wd :new<CR>
+nnoremap <leader>cw :bd!<CR>
+
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-l> <C-w>l
+nnoremap <C-k> <C-w>k
+
+nnoremap + <C-w>+
+nnoremap - <C-w>-
+nnoremap = <C-w>=
+"  C-w v -> new to the right
+"  C-w j -> movefrom l -> r (,wl
+"  C-w s -> new window to bottom (,wh
+"  C-w j -> window down (,wj
+"  C-w k -> window up (,wk
+"
 
 " -----------------------------------------------------------------------------------------
 " Nerd Tree file manager
@@ -303,3 +317,4 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix |
     \ set cc=80
+
