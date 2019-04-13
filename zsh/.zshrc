@@ -21,8 +21,32 @@ SAVEHIST=4096
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="agnoster"
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+#DISABLE_AUTO_TITLE="true"
+
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='\uf0da'
+#POWERLEVEL9K_VCS_GIT_ICON='\ue60a'
+
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='red'
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
+#POWERLEVEL9K_VCS_UNTRACKED_ICON='?'
+
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status dir vcs)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time background_jobs virtualenv rbenv rvm)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(background_jobs virtualenv rbenv rvm)
+
+POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+
+#POWERLEVEL9K_CUSTOM_TIME_FORMAT="%D{\uf017 %H:%M:%S}"
+POWERLEVEL9K_TIME_FORMAT="%D{\uf017 %H:%M \uf073 %d.%m.%y}"
+
+# Only show status on failure
+POWERLEVEL9K_STATUS_VERBOSE=false
+
 DEFAULT_USER="apostolos"
 
 # Set list of themes to pick from when loading at random
@@ -144,10 +168,13 @@ function cdd() {
     then
         #cdd-helper $@ -p
         DIR=`cdd-helper $@ -p`;
-        cd $DIR
+        if [[ ! -z $DIR ]]
+        then
+            cd $DIR;
+        fi
     else
         cdd-helper $@;
-    fi 
+    fi
 }
 
 function cs() {
@@ -158,3 +185,5 @@ function cs() {
   fi
 }
 alias cd='cs'
+
+
