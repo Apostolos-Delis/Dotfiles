@@ -22,3 +22,11 @@ alias root='cd $(git rev-parse --show-cdup)'
 # kill a rogue process running on a specific port
 # usage: `killp 3000`
 killp() { lsof -n "-i4TCP:${1:-3002}" | grep LISTEN | tr -s ' ' | cut -f 2 -d ' ' | xargs kill -9}
+
+# Auto expand aliases
+function expand-alias() {
+    zle _expand_alias
+    zle self-insert
+}
+zle -N expand-alias
+bindkey -M main ' ' expand-alias

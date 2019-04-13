@@ -22,8 +22,8 @@ SAVEHIST=4096
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="powerlevel9k/powerlevel9k"
 #DISABLE_AUTO_TITLE="true"
+ZSH_THEME=powerlevel10k/powerlevel10k
 
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='\uf0da'
