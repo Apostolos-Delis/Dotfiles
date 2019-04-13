@@ -74,9 +74,6 @@ let g:UltiSnipsEditSplit="vertical"
 inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
 
 "---------------------------------------------------------------------
-syntax on " Turn on coloring for syntax
-
-"---------------------------------------------------------------------
 " prevent vim from giving a warning it the swp file is open
 set shortmess=A
 set cursorline
@@ -103,6 +100,8 @@ set laststatus=2
 " -----------------------------------------------------------------------------------------
 " This sets the color scheme
 set background=dark
+"colorscheme solarized
+"let g:solarized_termcolors=256
 colorscheme gruvbox
 
 " -----------------------------------------------------------------------------------------

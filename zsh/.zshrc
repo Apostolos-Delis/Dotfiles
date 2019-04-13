@@ -1,16 +1,29 @@
-#!/usr/bin/env zsh 
+#!/usr/bin/env zsh
 
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Bind Up and down arrow to searching upwards with the matching content
+# before the cursor
+bindkey '^[[A' up-line-or-search
+bindkey '^[[B' down-line-or-search
+
+# Initialize the path
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+
+# history settings
+setopt hist_ignore_all_dups inc_append_history
+HISTFILE=~/.zhistory
+HISTSIZE=4096
+SAVEHIST=4096
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+#ZSH_THEME="agnoster"
 ZSH_THEME="robbyrussell"
+DEFAULT_USER="apostolos"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -64,7 +77,21 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git
+  colorize
+  pip
+  python
+  bundler
+  dotenv
+  osx
+  rake
+  rbenv
+  ruby
+)
+# TODO: Add TMUX plugin at some point
+
+#plugins=(git colored-man colorize pip python brew osx zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -76,11 +103,11 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
+export EDITOR='vim'
+
+stty -ixon
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -93,3 +120,41 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/apostolos/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/apostolos/Downloads/google-cloud-sdk/completion.bash.inc'; fi
+
+# Adds syntax highlighting to zsh and autosuggestions
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Add home bin
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# aliases
+[[ -f ~/.aliases ]] && source ~/.aliases
+
+# Functions
+
+function cdd() {
+    if [ $# -eq 0 ]; then
+        cdd-helper --help;
+    elif [ ${1:0:1} != "-" ] && [ $1 != "add" ] && [ $1 != "rm" ];
+    then
+        #cdd-helper $@ -p
+        DIR=`cdd-helper $@ -p`;
+        cd $DIR
+    else
+        cdd-helper $@;
+    fi 
+}
+
+function cs() {
+  if [ $# -eq 0  ]; then
+    cd && ls;
+  else
+    cd "$*" && ls;
+  fi
+}
+alias cd='cs'

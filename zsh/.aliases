@@ -1,0 +1,24 @@
+#!/usr/bin/env zsh 
+
+alias tlf="tail -f"
+alias ln='ln -v'
+alias mkdir='mkdir -p'
+alias ...='../..'
+alias lh='ls -Alh'
+alias -g G='| grep'
+alias -g M='| less'
+alias -g L='| wc -l'
+alias -g ONE="| awk '{ print \$1}'"
+alias e="$EDITOR"
+alias v="$VISUAL"
+alias skim='open -a "Skim"'
+
+# Pretty print the path
+alias path="echo $PATH | tr -s ':' '\n'"
+
+# Go to the root of a project (git root)
+alias root='cd $(git rev-parse --show-cdup)'
+
+# kill a rogue process running on a specific port
+# usage: `killp 3000`
+killp() { lsof -n "-i4TCP:${1:-3002}" | grep LISTEN | tr -s ' ' | cut -f 2 -d ' ' | xargs kill -9}
