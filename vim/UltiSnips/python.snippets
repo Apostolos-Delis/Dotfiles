@@ -1,17 +1,6 @@
-snippet pyheader "this creates a header for py files" b 
-# *****************************************************************************
-# * Filename: ${1:filename}.py
-# * Date : `date`
-# * Author : Apostolos
-# * Email : apost.delis@gmail.com
-# * Brief Description :
-# * Detailed Description :
-# *****************************************************************************
-endsnippet
-
-snippet s! "Adds shebang to the top of python file" b
+snippet sb "Adds shebang to the top of python file" b
 #!/usr/bin/env python3
-# encoding: UTF-8
+# encoding: utf8
 
 endsnippet
 
@@ -74,7 +63,57 @@ self.
 endsnippet
 
 snippet ifm "main check"
-if __name__ == "__main__":
-	${0}
+if __name__ == `!p snip.rv = get_quoting_style(snip)`__main__`!p snip.rv = get_quoting_style(snip)`:
+	${1:${VISUAL:main()}}
 endsnippet
 
+snippet with "with" b
+with ${1:expr}`!p snip.rv = " as " if t[2] else ""`${2:var}:
+	${3:${VISUAL:pass}}
+${0}
+endsnippet
+
+snippet for "for loop" b
+for ${1:item} in ${2:iterable}:
+	${3:${VISUAL:pass}}
+endsnippet
+
+####################
+# If / Else / Elif #
+####################
+snippet if "If" b
+if ${1:condition}:
+	${2:${VISUAL:pass}}
+endsnippet
+
+snippet ife "If / Else" b
+if ${1:condition}:
+	${2:${VISUAL:pass}}
+else:
+	${3:pass}
+endsnippet
+
+snippet ifee "If / Elif / Else" b
+if ${1:condition}:
+	${2:${VISUAL:pass}}
+elif ${3:condition}:
+	${4:pass}
+else:
+	${5:pass}
+endsnippet
+
+snippet op "os.path"
+os.path.
+endsnippet
+
+####################
+# imports
+####################
+
+snippet impnp "import numpy" b
+import numpy as np
+endsnippet
+
+snippet imppd "import pandas" b
+import pandas as pd
+endsnippet

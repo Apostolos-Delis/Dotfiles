@@ -9,16 +9,16 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
-Plug 'junegunn/vim-journal'
 Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'nightsense/forgotten'
 Plug 'zaki/zazen'
-Plug 'ap/vim-buftabline' " To show the tabs at the top of vim 
+
 " Aethetics - Additional
 Plug 'nightsense/nemo' 
 Plug 'yuttie/hydrangea-vim'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 Plug 'rhysd/vim-color-spring-night'
+Plug 'ap/vim-buftabline' " To show the tabs at the top of vim 
 
 " Functionalities
 Plug 'tpope/vim-fugitive'
@@ -95,13 +95,13 @@ set relativenumber
 set rnu
 set mouse=a
 
-
 " Searching
 set ignorecase " case insensitive searching
 set smartcase " case-sensitive if expresson contains a capital letter
 set hlsearch
 set incsearch " set incremental search, like modern browsers
 set nolazyredraw " don't redraw while executing macros
+set softtabstop=4
 
 
 "Cursor
@@ -171,6 +171,12 @@ nnoremap <leader>st :setlocal spell!<CR>
 " Toggle list
 nnoremap <leader>ts :set list!<CR>
 
+" Toggle Tags
+nmap <leader>tt :TagbarToggle<CR>
+
+" Toggle Rainbow Parentheses
+nnoremap <leader>tr :RainbowParentheses!!<CR>
+
 " Get rid of all trailing whitespace
 nnoremap <leader>dw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>
 
@@ -191,6 +197,10 @@ nnoremap <leader>fd :Files<CR>
 " Toggle Limelight on and off
 nmap <leader>ll :Limelight!!<CR>
 xmap <leader>ll :Limelight!!<CR>
+
+" Apply Pydocstring
+nmap <leader>ps <Plug>(pydocstring)
+
 
 nmap <leader>a gaip*
 
@@ -269,8 +279,8 @@ let g:UltiSnipsUsePythonVersion = 3
 set runtimepath+=~/.vim/UltiSnips
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<CR>"
-let g:UltiSnipsJumpForwardTrigger="<c-n>"
-let g:UltiSnipsJumpBackwardTrigger="<c-p>"
+let g:UltiSnipsJumpForwardTrigger="<c-e>"
+let g:UltiSnipsJumpBackwardTrigger="<c-q>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
 " If you want :UltiSnipsEdit to split your indow.
 let g:UltiSnipsExpandTrigger="<nop>"
@@ -313,6 +323,29 @@ let g:tagbar_iconchars = ['↠', '↡']
 nmap // <leader>c<space>
 vmap // <leader>c<space>
 
+" Rainbow Parentheses
+let g:rbpt_colorpairs = [
+    \ ['brown',       'RoyalBlue3'],
+    \ ['Darkblue',    'SeaGreen3'],
+    \ ['darkgray',    'DarkOrchid3'],
+    \ ['darkgreen',   'firebrick3'],
+    \ ['darkcyan',    'RoyalBlue3'],
+    \ ['darkred',     'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['brown',       'firebrick3'],
+    \ ['gray',        'RoyalBlue3'],
+    \ ['black',       'SeaGreen3'],
+    \ ['darkmagenta', 'DarkOrchid3'],
+    \ ['Darkblue',    'firebrick3'],
+    \ ['darkgreen',   'RoyalBlue3'],
+    \ ['darkcyan',    'SeaGreen3'],
+    \ ['darkred',     'DarkOrchid3'],
+    \ ['red',         'firebrick3'],
+    \ ]
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
+
 " fzf-vim
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -345,6 +378,10 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix |
     \ set cc=80
+    
+autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
+autocmd FileType python nmap <leader>pt :0,$!~/.config/nvim/env/bin/python -m yapf<CR>
+
 
 " HTML, XML, Jinja
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -355,9 +392,8 @@ autocmd FileType htmldjango inoremap {{ {{  }}<left><left><left>
 autocmd FileType htmldjango inoremap {% {%  %}<left><left><left>
 autocmd FileType htmldjango inoremap {# {#  #}<left><left><left>
 
-" Markdown and Journal
+" Markdown
 autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType journal setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 """ Custom Functions
 " Dracula Mode (Dark)
