@@ -5,7 +5,6 @@ set autochdir
 set clipboard^=unnamed " This sets the clipboard as the default register. Useful for copy paste from tmux
 
 set nocompatible " This tells vim not to act like it predecessor vi
-syntax enable " enables syntax highlighting
 filetype plugin indent on    " identify the kind of filetype automatically
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -27,27 +26,9 @@ Plugin 'vim-scripts/indentpython.vim' " Should fix python indendation
 Plugin 'nvie/vim-flake8' " Python Linting
 Plugin 'Raimondi/delimitMate' " Complete parenthesis and stuff
 Plugin 'ryanoasis/vim-devicons' " Cool icons
-"Plugin 'scrooloose/syntastic' "code syntax
+
 call vundle#end()
 
-"---------------------------------------------------------------------
-" Syntastic stuff
-
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 1
-
-"let g:syntastic_python_checkers = ['flake8']
-"let g:syntastic_cpp_check_header = 1
-"let g:syntastic_c_check_header = 1
-"let g:syntastic_c_include_dirs = ['../../include','../include', 'include']
-"let b:syntastic_c_cflags = '-I/usr/include/libsoup-2.4'
-"let g:syntastic_c_compiler_options = '-ansi -DMACRO_NAME'
 
 "---------------------------------------------------------------------
 " Airline Stuff (https://vimawesome.com/plugin/vim-airline-superman)
@@ -75,6 +56,7 @@ inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" 
 
 "---------------------------------------------------------------------
 " prevent vim from giving a warning it the swp file is open
+syntax enable " enables syntax highlighting
 set shortmess=A
 set cursorline
 set magic " Set magic on, for regex
@@ -245,7 +227,7 @@ nnoremap = <C-w>=
 
 " -----------------------------------------------------------------------------------------
 " Nerd Tree file manager
-let g:NERDTreeWinSize=60
+let g:NERDTreeWinSize=35
 map <C-f> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
@@ -253,7 +235,7 @@ let NERDTreeQuitOnOpen=1 " closes upon opening a file in nerdtree
 let NERDTreeShowHidden=1 " show hidden files in NERDTree
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
-let NERDTreeNodeDelimiter = "\u263a" " smiley face
+let NERDTreeNodeDelimiaer = "\u263a" " smiley face
 
 
 " -----------------------------------------------------------------------------------------

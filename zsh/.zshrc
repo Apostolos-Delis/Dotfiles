@@ -5,6 +5,7 @@
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
+export TERM=xterm-256color
 # Initialize the path
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin"
 
@@ -154,6 +155,7 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Add home bin
+export PATH="$HOME/anaconda/bin:$PATH"  # Anaconda Bin
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # aliases

@@ -12,6 +12,7 @@ alias -g ONE="| awk '{ print \$1}'"
 alias e="$EDITOR"
 alias v="$VISUAL"
 alias skim='open -a "Skim"'
+alias vim='nvim'
 
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"
@@ -29,4 +30,4 @@ function expand-alias() {
     zle self-insert
 }
 zle -N expand-alias
-bindkey -M main ' ' expand-alias
+bindkey -M main '+' expand-alias
