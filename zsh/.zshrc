@@ -11,6 +11,7 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/o
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export TIMEFMT=$'\t%E real,\t%U user,\t%S sys'
 
 # history settings
 setopt hist_ignore_all_dups inc_append_history
@@ -168,7 +169,6 @@ function cdd() {
         cdd-helper --help;
     elif [ ${1:0:1} != "-" ] && [ $1 != "add" ] && [ $1 != "rm" ];
     then
-        #cdd-helper $@ -p
         DIR=`cdd-helper $@ -p`;
         if [[ ! -z $DIR ]]
         then

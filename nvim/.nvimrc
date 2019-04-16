@@ -2,6 +2,7 @@
 call plug#begin()
 " Aesthetics - Main
 Plug 'morhetz/gruvbox' " Adds gruvbox theme
+Plug 'altercation/vim-colors-solarized'
 Plug 'dracula/vim', { 'commit': '147f389f4275cec4ef43ebc25e2011c57b45cc00' }
 Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
@@ -24,6 +25,7 @@ Plug 'ap/vim-buftabline' " To show the tabs at the top of vim
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'easymotion/vim-easymotion'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
@@ -31,6 +33,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer --java-completer --ts-completer' }
 " Adds LateX functionality
 Plug 'lervag/vimtex' 
+Plug 'christoomey/vim-tmux-navigator'
 
 "Plug 'zchee/deoplete-jedi'
 Plug 'ervandew/supertab'
@@ -38,17 +41,18 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'alvan/vim-closetag'
 Plug 'tpope/vim-abolish'
-Plug 'Yggdroot/indentLine'
+"Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'chrisbra/Colorizer'
 Plug 'heavenshell/vim-pydocstring'
 Plug 'vim-scripts/loremipsum'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 Plug 'metakirby5/codi.vim'
 Plug 'dkarter/bullets.vim'
+Plug 'w0rp/ale'
+Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
 
 " Entertainment
 "Plug 'ryanss/vim-hackernews'
@@ -127,12 +131,22 @@ if $TERM_PROGRAM =~ "iTerm"
     "let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
 endif
 
+if exists('$TMUX')
+  let &t_SI = "\ePtmux;\e\e[5 q\e\\"
+  let &t_EI = "\ePtmux;\e\e[2 q\e\\"
+else
+  let &t_SI = "\e[5 q"
+  let &t_EI = "\e[2 q"
+endif
+
 
 """ Bindings
 
 " scrolling
 :nnoremap k gk
 :nnoremap j gj
+
+map <Leader> <Plug>(easymotion-prefix)
 
 " Absolute conversions for when mistyping :wq
 :ab Wq :wq
@@ -152,6 +166,36 @@ nnoremap <leader>ev :e! ~/.vimrc<CR>
 nnoremap <leader>eb :e! ~/.bashrc<CR>
 " Edit zshrc
 nnoremap <leader>ez :e! ~/.zshrc<CR>
+" Edit tmux config
+nnoremap <leader>et :e! ~/.tmux.conf<CR>
+" Edit init.vim
+nnoremap <leader>ei :e! ~/.config/nvim/init.vim<CR>
+" Edit snippet file
+nnoremap <leader>es :UltiSnipsEdit<CR>
+" Edit file
+nnoremap <leader>ed :edit 
+
+" Edit file in new window
+nnoremap <leader>ew :vert new 
+
+" Restart vimrc
+nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR> "
+
+" Toggle Spell check
+nnoremap <leader>st :setlocal spell!<CR>
+
+" Toggle list
+nnoremap <leader>ts :set list!<CR>
+
+" Toggle Tags
+nmap <leader>tt :TagbarToggle<CR>
+
+" Toggle Rainbow Parentheses
+nnoremap <leader>tr :RainbowParentheses!!<CR>
+
+" Get rid of all trailing whitespace
+nnoremap <leader>dw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>
+
 " Edit init.vim
 nnoremap <leader>ei :e! ~/.config/nvim/init.vim<CR>
 " Edit snippet file
@@ -181,16 +225,16 @@ nnoremap <leader>tr :RainbowParentheses!!<CR>
 nnoremap <leader>dw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>
 
 " Open terminal
-nnoremap <leader>th :terminal<CR>
-nnoremap <leader>tv :vertical terminal<CR>
+nnoremap <leader>wv :vsplit<CR>
+nnoremap <leader>ws :split<CR>
 
 " Open a terminal and then run make
-nnoremap <leader>mk :w<CR>:terminal<CR>make<CR>
-" Open a terminal and then run make and then open the last edited pdf and exit
-nnoremap <leader>mo :terminal<CR>make<CR>open <Up><CR>exit<CR>
+nnoremap <leader>mk :make<CR>
 
 " Open a terminal and then make test and then open the last edited pdf and exit
-nnoremap <leader>mt :terminal<CR>make<CR>make test<CR>
+nnoremap <leader>mo :make<CR>!open<CR>
+" Open a terminal and run make and make test
+nnoremap <leader>mt :make<CR>:make test<CR>
 
 nnoremap <leader>fd :Files<CR>
 
@@ -210,20 +254,33 @@ nnoremap Q :q<CR>
 
 " ---------------------------------------------------------------------------- "
 " Windows
+set splitbelow
+set splitright
+
 nnoremap <leader>wv :vnew<CR>
 
 nnoremap <leader>wd :new<CR>
 nnoremap <leader>cw :bd!<CR>
 
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-l> <C-w>l
-nnoremap <C-k> <C-w>k
+"nnoremap <C-J> <C-W><C-J>
+"nnoremap <C-K> <C-W><C-K>
+"nnoremap <C-L> <C-W><C-L>
+"nnoremap <C-H> <C-W><C-H>
 
 nnoremap + <C-w>+
 nnoremap - <C-w>-
 nnoremap = <C-w>=
+nnoremap <C-[> <C-W><
+nnoremap <C-]> <C-W>>
 
+" Tmux with windows
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <C-H> :TmuxNavigateLeft<cr>
+nnoremap <silent> <C-J> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-K> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-L> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-/> :TmuxNavigatePrevious<cr>
 
 """ Plugin Configurations
 
@@ -248,14 +305,13 @@ let NERDTreeNodeDelimiaer = "\u263a" " smiley face
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
+"let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
 let g:airline_powerline_fonts = 1
 let g:airline_theme='gruvbox'
 
 
 " Bullets.vim
 let g:bullets_enabled_file_types = [
-    \ 'markdown',
     \ 'text',
     \ 'gitcommit',
     \ 'scratch'
@@ -264,7 +320,6 @@ let g:bullets_enabled_file_types = [
 " Neovim :Terminal
 tmap <Esc> <C-\><C-n>
 tmap <C-w> <Esc><C-w>
-"tmap <C-d> <Esc>:q<CR>
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
@@ -282,9 +337,11 @@ let g:UltiSnipsExpandTrigger="<CR>"
 let g:UltiSnipsJumpForwardTrigger="<c-e>"
 let g:UltiSnipsJumpBackwardTrigger="<c-q>"
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/UltiSnips']
+
 " If you want :UltiSnipsEdit to split your indow.
 let g:UltiSnipsExpandTrigger="<nop>"
 let g:UltiSnipsEditSplit="vertical"
+
 
 inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
 
@@ -383,6 +440,7 @@ autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd FileType python nmap <leader>pt :0,$!~/.config/nvim/env/bin/python -m yapf<CR>
 
 
+
 " HTML, XML, Jinja
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
@@ -393,7 +451,7 @@ autocmd FileType htmldjango inoremap {% {%  %}<left><left><left>
 autocmd FileType htmldjango inoremap {# {#  #}<left><left><left>
 
 " Markdown
-autocmd FileType markdown setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType markdown setlocal textwidth=99 autoindent expandtab
 
 """ Custom Functions
 " Dracula Mode (Dark)
@@ -412,6 +470,13 @@ function! ColorGruvBox()
     "IndentLinesEnable
 endfunction
 
+" Gruvbox
+function! ColorSolarized()
+    "let g:airline_theme='gruvbox'
+    set background=dark
+    color solarized
+    "IndentLinesEnable
+endfunction
 
 " Seoul256 Mode (Dark & Light)
 function! ColorSeoul256()
@@ -443,8 +508,8 @@ set background=dark
 color gruvbox
 
 """ Custom Mappings for Color
-nmap <leader>e1 :call ColorDracula()<CR>
-nmap <leader>e2 :call ColorGruvBox()<CR>
-nmap <leader>e3 :call ColorSeoul256()<CR>
-nmap <leader>e4 :call ColorForgotten()<CR>
-nmap <leader>e5 :call ColorZazen()<CR>
+nmap <leader>c1 :call ColorDracula()<CR>
+nmap <leader>c2 :call ColorGruvBox()<CR>
+nmap <leader>c3 :call ColorSolarized()<CR>
+nmap <leader>c4 :call ColorSeoul256()<CR>
+nmap <leader>c5 :call ColorForgotten()<CR>

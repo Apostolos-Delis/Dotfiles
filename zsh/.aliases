@@ -13,6 +13,7 @@ alias e="$EDITOR"
 alias v="$VISUAL"
 alias skim='open -a "Skim"'
 alias vim='nvim'
+alias c='clear'
 
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"
