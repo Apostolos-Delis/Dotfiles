@@ -124,7 +124,6 @@ endif
 
 
 set guicursor=v-sm:block,n-c-i-ci-ve:ver25-Cursor,r-cr-o:hor20
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 if $TERM_PROGRAM =~ "iTerm"
     let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
     let &t_EI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in normal mode
@@ -218,16 +217,6 @@ nnoremap <leader>ts :set list!<CR>
 " Toggle Tags
 nmap <leader>tt :TagbarToggle<CR>
 
-" Toggle Rainbow Parentheses
-nnoremap <leader>tr :RainbowParentheses!!<CR>
-
-" Get rid of all trailing whitespace
-nnoremap <leader>dw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>
-
-" Open terminal
-nnoremap <leader>wv :vsplit<CR>
-nnoremap <leader>ws :split<CR>
-
 " Open a terminal and then run make
 nnoremap <leader>mk :make<CR>
 
@@ -258,8 +247,9 @@ set splitbelow
 set splitright
 
 nnoremap <leader>wv :vnew<CR>
+"nnoremap <leader>wv :vsplit<CR>
 
-nnoremap <leader>wd :new<CR>
+nnoremap <leader>ws :new<CR>
 nnoremap <leader>cw :bd!<CR>
 
 "nnoremap <C-J> <C-W><C-J>
@@ -270,8 +260,8 @@ nnoremap <leader>cw :bd!<CR>
 nnoremap + <C-w>+
 nnoremap - <C-w>-
 nnoremap = <C-w>=
-nnoremap <C-[> <C-W><
-nnoremap <C-]> <C-W>>
+nnoremap <C-]> <C-W><
+nnoremap <C-[> <C-W>>
 
 " Tmux with windows
 let g:tmux_navigator_no_mappings = 1
@@ -286,13 +276,16 @@ nnoremap <silent> <C-/> :TmuxNavigatePrevious<cr>
 
 " Vimtex
 let g:tex_flavor='latex'
+let g:vimtex_compiler_progname = 'nvr' 
+
+
 " Compile latex file using latexmk with control T
 autocmd FileType tex nmap <buffer> <C-T> :!latexmk -pdf %<CR>
 
 " Ale Lint
 let g:ale_set_highlights = 0
 let g:ale_change_sign_column_color = 0
-let g:ale_sign_column_always = 1
+let g:ale_sign_column_always = 0
 let g:ale_fix_on_save = 1
 let g:ale_lint_delay = 1000
 let g:ale_lint_on_text_changed = 'always'

@@ -25,6 +25,8 @@ SAVEHIST=4096
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
 #DISABLE_AUTO_TITLE="true"
+
+#powerline-daemon -q
 ZSH_THEME=powerlevel10k/powerlevel10k
 
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
