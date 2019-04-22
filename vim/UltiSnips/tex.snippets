@@ -50,7 +50,7 @@ snippet half "Insert 1/2 as a fraction"
 endsnippet
 
 snippet mor "Math or"
-\; \; \; or \; \; \; 
+\; \; \; \text{or} \; \; \; 
 endsnippet
 
 snippet it "item"
@@ -63,4 +63,12 @@ endsnippet
 
 snippet fr "frac"
 \frac\{${1:dx}/${2:dt}\}
+endsnippet
+
+snippet '([A-Za-z])(\d)' "auto subscript" wrA
+`!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
+endsnippet
+
+snippet '([A-Za-z])_(\d\d)' "auto subscript2" wrA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
 endsnippet

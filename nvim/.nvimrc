@@ -221,7 +221,7 @@ nmap <leader>tt :TagbarToggle<CR>
 nnoremap <leader>mk :make<CR>
 
 " Open a terminal and then make test and then open the last edited pdf and exit
-nnoremap <leader>mo :make<CR>!open<CR>
+nnoremap <leader>mo :make<CR>:!open<CR>
 " Open a terminal and run make and make test
 nnoremap <leader>mt :make<CR>:make test<CR>
 
@@ -322,8 +322,6 @@ let g:bullets_enabled_file_types = [
     \]
 
 " Neovim :Terminal
-tmap <Esc> <C-\><C-n>
-tmap <C-w> <Esc><C-w>
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
@@ -427,6 +425,9 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+set ttimeout
+set ttimeoutlen=0
+
 """ Filetype-Specific Configurations
 
 " Add support for PEP 8 file formatting
@@ -455,7 +456,7 @@ autocmd FileType htmldjango inoremap {% {%  %}<left><left><left>
 autocmd FileType htmldjango inoremap {# {#  #}<left><left><left>
 
 " Markdown
-autocmd FileType markdown setlocal textwidth=99 autoindent expandtab
+autocmd FileType markdown setlocal textwidth=89 autoindent expandtab
 
 """ Custom Functions
 " Dracula Mode (Dark)
