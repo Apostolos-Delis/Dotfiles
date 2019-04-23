@@ -15,11 +15,11 @@ Plug 'nightsense/forgotten'
 Plug 'zaki/zazen'
 
 " Aethetics - Additional
-Plug 'nightsense/nemo' 
+Plug 'nightsense/nemo'
 Plug 'yuttie/hydrangea-vim'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 Plug 'rhysd/vim-color-spring-night'
-Plug 'ap/vim-buftabline' " To show the tabs at the top of vim 
+Plug 'ap/vim-buftabline' " To show the tabs at the top of vim
 
 " Functionalities
 Plug 'tpope/vim-fugitive'
@@ -32,7 +32,7 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer --java-completer --ts-completer' }
 " Adds LateX functionality
-Plug 'lervag/vimtex' 
+Plug 'lervag/vimtex'
 Plug 'christoomey/vim-tmux-navigator'
 
 "Plug 'zchee/deoplete-jedi'
@@ -90,7 +90,7 @@ set ruler laststatus=2 showcmd showmode
 set whichwrap+=<,>,h,l,[,]
 " Unprintable chars mapping syntax
 set list listchars=tab:▶\ ,eol:↲,nbsp:␣,trail:~,extends:»,precedes:«
-set fillchars+=vert:\ 
+set fillchars+=vert:\
 set wrap breakindent
 set encoding=utf-8
 set title
@@ -98,6 +98,7 @@ set number
 set relativenumber
 set rnu
 set mouse=a
+set scrolloff=10
 
 " Searching
 set ignorecase " case insensitive searching
@@ -172,17 +173,17 @@ nnoremap <leader>ei :e! ~/.config/nvim/init.vim<CR>
 " Edit snippet file
 nnoremap <leader>es :UltiSnipsEdit<CR>
 " Edit file
-nnoremap <leader>ed :edit 
+nnoremap <leader>ed :edit
 
 " Edit file in new window
-nnoremap <leader>ew :vert new 
+nnoremap <leader>ew :vert new
 
 " Restart vimrc
 nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR> "
 
 " Toggle Spell check
-nnoremap <leader>st :setlocal spell!<CR>
 set spelllang=en
+nnoremap <leader>st :setlocal spell!<CR>
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " Toggle list
@@ -202,10 +203,10 @@ nnoremap <leader>ei :e! ~/.config/nvim/init.vim<CR>
 " Edit snippet file
 nnoremap <leader>es :UltiSnipsEdit<CR>
 " Edit file
-nnoremap <leader>ed :edit 
+nnoremap <leader>ed :edit
 
 " Edit file in new window
-nnoremap <leader>ew :vert new 
+nnoremap <leader>ew :vert new
 
 " Restart nvimrc
 nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR> "
@@ -218,8 +219,12 @@ nnoremap <leader>mo :make<CR>:!open<CR>
 " Open a terminal and run make and make test
 nnoremap <leader>mt :make<CR>:make test<CR>
 
+" Fuzzy Find files in the current directory
 nnoremap <leader>fd :Files<CR>
 
+" Fussy Find files in the git repo
+nnoremap <leader>gd :GFiles<CR>
+"
 " Toggle Limelight on and off
 nmap <leader>ll :Limelight!!<CR>
 xmap <leader>ll :Limelight!!<CR>
@@ -253,8 +258,8 @@ nnoremap <leader>cw :bd!<CR>
 nnoremap + <C-w>+
 nnoremap - <C-w>-
 nnoremap = <C-w>=
-nnoremap <C-]> <C-W><
-nnoremap <C-[> <C-W>>
+nnoremap <C-]> <C-W>>
+nnoremap <C-[> <C-W><
 
 " Tmux with windows
 let g:tmux_navigator_no_mappings = 1
@@ -269,7 +274,7 @@ nnoremap <silent> <C-/> :TmuxNavigatePrevious<cr>
 
 " Vimtex
 let g:tex_flavor='latex'
-let g:vimtex_compiler_progname = 'nvr' 
+let g:vimtex_compiler_progname = 'nvr'
 let g:tex_flavor='latex'
 let g:vimtex_view_method='skim'
 let g:vimtex_quickfix_mode=0
@@ -438,7 +443,7 @@ au BufNewFile,BufRead *.py
     \ set autoindent |
     \ set fileformat=unix |
     \ set cc=80
-    
+
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd FileType python nmap <leader>pt :0,$!~/.config/nvim/env/bin/python -m yapf<CR>
 
