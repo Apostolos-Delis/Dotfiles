@@ -182,6 +182,8 @@ nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR> "
 
 " Toggle Spell check
 nnoremap <leader>st :setlocal spell!<CR>
+set spelllang=en
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " Toggle list
 nnoremap <leader>ts :set list!<CR>
@@ -205,17 +207,8 @@ nnoremap <leader>ed :edit
 " Edit file in new window
 nnoremap <leader>ew :vert new 
 
-" Restart vimrc
+" Restart nvimrc
 nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR> "
-
-" Toggle Spell check
-nnoremap <leader>st :setlocal spell!<CR>
-
-" Toggle list
-nnoremap <leader>ts :set list!<CR>
-
-" Toggle Tags
-nmap <leader>tt :TagbarToggle<CR>
 
 " Open a terminal and then run make
 nnoremap <leader>mk :make<CR>
@@ -277,6 +270,11 @@ nnoremap <silent> <C-/> :TmuxNavigatePrevious<cr>
 " Vimtex
 let g:tex_flavor='latex'
 let g:vimtex_compiler_progname = 'nvr' 
+let g:tex_flavor='latex'
+let g:vimtex_view_method='skim'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
 
 
 " Compile latex file using latexmk with control T
