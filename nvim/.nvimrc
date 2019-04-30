@@ -7,15 +7,14 @@ Plug 'dracula/vim', { 'commit': '147f389f4275cec4ef43ebc25e2011c57b45cc00' }
 Plug 'vim-airline/vim-airline'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
-Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
-Plug 'junegunn/rainbow_parentheses.vim'
+"Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'nightsense/forgotten'
 Plug 'zaki/zazen'
 
 " Aethetics - Additional
-Plug 'nightsense/nemo'
+"Plug 'nightsense/nemo'
 Plug 'yuttie/hydrangea-vim'
 Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 Plug 'rhysd/vim-color-spring-night'
@@ -32,11 +31,11 @@ Plug 'scrooloose/nerdcommenter'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer --java-completer --ts-completer' }
 " Adds LateX functionality
-Plug 'lervag/vimtex'
+"Plug 'lervag/vimtex'
 Plug 'christoomey/vim-tmux-navigator'
 
 "Plug 'zchee/deoplete-jedi'
-Plug 'ervandew/supertab'
+"Plug 'ervandew/supertab'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'alvan/vim-closetag'
@@ -105,7 +104,9 @@ set ignorecase " case insensitive searching
 set smartcase " case-sensitive if expresson contains a capital letter
 set hlsearch
 set incsearch " set incremental search, like modern browsers
-set nolazyredraw " don't redraw while executing macros
+"set nolazyredraw " don't redraw while executing macros
+set ttyfast
+set lazyredraw
 set softtabstop=4
 
 
@@ -124,7 +125,7 @@ if &term =~ "xterm\\|urxvt"
 endif
 
 
-set guicursor=v-sm:block,n-c-i-ci-ve:ver25-Cursor,r-cr-o:hor20
+set guicursor=n-v-sm:block,c-i-ci-ve:ver25-Cursor,r-cr-o:hor20
 if $TERM_PROGRAM =~ "iTerm"
     let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
     let &t_EI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in normal mode
@@ -184,7 +185,7 @@ nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR> "
 " Toggle Spell check
 set spelllang=en
 nnoremap <leader>st :setlocal spell!<CR>
-inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+inoremap <C-T> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " Toggle list
 nnoremap <leader>ts :set list!<CR>
@@ -194,6 +195,9 @@ nmap <leader>tt :TagbarToggle<CR>
 
 " Toggle Rainbow Parentheses
 nnoremap <leader>tr :RainbowParentheses!!<CR>
+
+" Toggle ALE
+nnoremap <leader>ta :ALEToggle<CR>
 
 " Get rid of all trailing whitespace
 nnoremap <leader>dw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>
@@ -282,8 +286,8 @@ set conceallevel=1
 let g:tex_conceal='abdmg'
 
 
-" Compile latex file using latexmk with control T
-autocmd FileType tex nmap <buffer> <C-T> :!latexmk -pdf %<CR>
+ "Compile latex file using latexmk with control T
+"autocmd FileType tex nmap <buffer> <C-T> :!latexmk -pdf %<CR>
 
 " Ale Lint
 let g:ale_set_highlights = 0
