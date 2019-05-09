@@ -98,6 +98,7 @@ set relativenumber
 set rnu
 set mouse=a
 set scrolloff=10
+set fillchars+=vert:\ " Changing the styling of vertical borders for windows
 
 " Searching
 set ignorecase " case insensitive searching
@@ -108,6 +109,7 @@ set incsearch " set incremental search, like modern browsers
 set ttyfast
 set lazyredraw
 set softtabstop=4
+set nopaste
 
 
 "Cursor
@@ -140,6 +142,29 @@ else
   let &t_EI = "\e[2 q"
 endif
 
+" Added this for pasting in tmux
+" Reference: https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
+function! WrapForTmux(s)
+  if !exists('$TMUX')
+    return a:s
+  endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 """ Bindings
 
@@ -181,6 +206,8 @@ nnoremap <leader>ew :vert new
 
 " Restart vimrc
 nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR> "
+
+nnoremap <leader>sp :set nopaste<CR>
 
 " Toggle Spell check
 set spelllang=en
