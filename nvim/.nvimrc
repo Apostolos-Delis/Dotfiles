@@ -269,6 +269,12 @@ nmap <leader>a gaip*
 " Remap so it quits rather than entering ex mode
 nnoremap Q :q<CR>
 
+" Highlight non-ascii characters
+nnoremap <leader>hn /[^\x00-\x7F]<CR>
+
+" converts the current line to Title Case
+" Reference: https://vim.fandom.com/wiki/Switching_case_of_characters
+nnoremap <leader>ct :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR>:noh<CR>
 
 " ---------------------------------------------------------------------------- "
 " Windows
