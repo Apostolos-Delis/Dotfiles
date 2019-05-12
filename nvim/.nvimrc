@@ -483,7 +483,7 @@ au BufNewFile,BufRead *.py
 
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd FileType python nmap <leader>pt :0,$!~/.config/nvim/env/bin/python -m yapf<CR>
-
+autocmd FileType python noremap <leader>fb :!black -q --line-length 79 %<CR>
 
 
 " HTML, XML, Jinja
