@@ -23,6 +23,8 @@ Then to make sure the that all the python environments are setup:
 ```bash
 python3 -m virtualenv ~/.config/nvim/env
 source ~/.config/nvim/env/bin/activate
+pip3 install neovim
+pip install neovim
 ```
 Finally to install all the plugins:
 ```bash
