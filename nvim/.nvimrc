@@ -498,6 +498,9 @@ autocmd FileType htmldjango inoremap {# {#  #}<left><left><left>
 " Markdown
 autocmd FileType markdown setlocal textwidth=89 autoindent expandtab
 
+" Latex
+autocmd FileType tex setlocal textwidth=89 autoindent expandtab
+
 """ Custom Functions
 " Dracula Mode (Dark)
 function! ColorDracula()

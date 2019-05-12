@@ -30,9 +30,9 @@ endsnippet
 
 
 snippet list "Ordered List"
-\begin{enumerate}
+\begin{itemize}
     \item ${0}
-\end{enumerate}
+\end{itemize}
 endsnippet
 
 snippet sec "section"
@@ -76,7 +76,7 @@ snippet dxdt "dx/dt"
 \frac{dx}{dt}${0}
 endsnippet
 
-snippet fr "Fraction" iA
+snippet fr "Fraction" i
 \\frac{$1}{$2}$0
 endsnippet
 
@@ -99,7 +99,7 @@ snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
 `{$1}$0
 endsnippet
 
-snippet / "Fraction" iA
+snippet ./ "Fraction" iA
 \\frac{${VISUAL}}{$1}$0
 endsnippet
 
@@ -118,6 +118,6 @@ snippet "([a-zA-Z])bar" "bar" riA
 endsnippet
 
 priority 10
-snippet "hat" "hat" riA
+snippet "ht" "hat" riA
 \hat{$1}$0
 endsnippet
