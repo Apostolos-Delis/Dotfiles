@@ -112,7 +112,6 @@ plugins=(
   python
   bundler
   dotenv
-  osx
   rake
   rbenv
   ruby

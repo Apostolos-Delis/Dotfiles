@@ -204,9 +204,6 @@ nnoremap <leader>ed :edit
 " Edit file in new window
 nnoremap <leader>ew :vert new
 
-" Restart vimrc
-nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR> "
-
 nnoremap <leader>sp :set nopaste<CR>
 
 " Toggle Spell check
@@ -229,6 +226,9 @@ nnoremap <leader>ta :ALEToggle<CR>
 " Get rid of all trailing whitespace
 nnoremap <leader>dw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>
 
+" Remove trailing lines
+nnoremap <leader>dl :%s#\($\n\s*\)\+\%$##<CR>
+
 " Edit init.vim
 nnoremap <leader>ei :e! ~/.config/nvim/init.vim<CR>
 " Edit snippet file
@@ -246,7 +246,7 @@ nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR> "
 nnoremap <leader>mk :make<CR>
 
 " Open a terminal and then make test and then open the last edited pdf and exit
-nnoremap <leader>mo :make<CR>:!open<CR>
+nnoremap <leader>mo :make<CR>:!!CR>
 " Open a terminal and run make and make test
 nnoremap <leader>mt :make<CR>:make test<CR>
 
@@ -274,10 +274,13 @@ nnoremap <leader>hn /[^\x00-\x7F]<CR>
 
 " converts the current line to Title Case
 " Reference: https://vim.fandom.com/wiki/Switching_case_of_characters
-nnoremap <leader>ct :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR>:noh<CR>
+nnoremap <leader>ci :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR>:noh<CR>
+
+" Conversts all tabs to 4 spaces
+nnoremap <leader>ct :%s/\t/    /g<CR>:noh<CR>
 
 " ---------------------------------------------------------------------------- "
-" Windows
+" Window
 set splitbelow
 set splitright
 
