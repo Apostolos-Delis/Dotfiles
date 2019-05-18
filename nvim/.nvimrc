@@ -172,7 +172,6 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 :nnoremap k gk
 :nnoremap j gj
 
-map <Leader> <Plug>(easymotion-prefix)
 
 " Absolute conversions for when mistyping :wq
 :ab Wq :wq
@@ -180,8 +179,10 @@ map <Leader> <Plug>(easymotion-prefix)
 :ab WQ :wq
 :ab Q :q
 
-" set a map leader for more key combos
 let mapleader = ','
+
+" set a map leader for more key combos
+map <Leader> <Plug>(easymotion-prefix)
 
 " Clear search highlight
 nnoremap <leader><leader> :noh<CR>
@@ -200,47 +201,31 @@ nnoremap <leader>ei :e! ~/.config/nvim/init.vim<CR>
 nnoremap <leader>es :UltiSnipsEdit<CR>
 " Edit file
 nnoremap <leader>ed :edit
-
 " Edit file in new window
 nnoremap <leader>ew :vert new
 
+" Restart nvimrc
+nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR>:noh<CR>
+"
+" Set nopaste
 nnoremap <leader>sp :set nopaste<CR>
-
 " Toggle Spell check
 set spelllang=en
 nnoremap <leader>st :setlocal spell!<CR>
 inoremap <C-T> <c-g>u<Esc>[s1z=`]a<c-g>u
-
 " Toggle list
 nnoremap <leader>ts :set list!<CR>
-
 " Toggle Tags
 nmap <leader>tt :TagbarToggle<CR>
-
 " Toggle Rainbow Parentheses
 nnoremap <leader>tr :RainbowParentheses!!<CR>
-
 " Toggle ALE
 nnoremap <leader>ta :ALEToggle<CR>
 
 " Get rid of all trailing whitespace
 nnoremap <leader>dw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>
-
 " Remove trailing lines
 nnoremap <leader>dl :%s#\($\n\s*\)\+\%$##<CR>
-
-" Edit init.vim
-nnoremap <leader>ei :e! ~/.config/nvim/init.vim<CR>
-" Edit snippet file
-nnoremap <leader>es :UltiSnipsEdit<CR>
-" Edit file
-nnoremap <leader>ed :edit
-
-" Edit file in new window
-nnoremap <leader>ew :vert new
-
-" Restart nvimrc
-nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR> "
 
 " Open a terminal and then run make
 nnoremap <leader>mk :make<CR>
@@ -255,14 +240,13 @@ nnoremap <leader>fd :Files<CR>
 
 " Fussy Find files in the git repo
 nnoremap <leader>gd :GFiles<CR>
-"
+
 " Toggle Limelight on and off
 nmap <leader>ll :Limelight!!<CR>
 xmap <leader>ll :Limelight!!<CR>
 
 " Apply Pydocstring
 nmap <leader>ps <Plug>(pydocstring)
-
 
 nmap <leader>a gaip*
 
@@ -272,15 +256,16 @@ nnoremap Q :q<CR>
 " Highlight non-ascii characters
 nnoremap <leader>hn /[^\x00-\x7F]<CR>
 
-" converts the current line to Title Case
+" Converts the current line to Title Case
 " Reference: https://vim.fandom.com/wiki/Switching_case_of_characters
-nnoremap <leader>ci :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR>:noh<CR>
+"nnoremap <leader>rc :s#\v(\w)(\S*)#\u\1\L\2#g<CR>:s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR>:noh<CR>
+nnoremap <leader>rc :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR>:noh<CR>
 
-" Conversts all tabs to 4 spaces
-nnoremap <leader>ct :%s/\t/    /g<CR>:noh<CR>
+" Replaces all tabs to 4 spaces
+nnoremap <leader>rt :%s/\t/    /g<CR>:noh<CR>
 
-" ---------------------------------------------------------------------------- "
-" Window
+"" ---------------------------------------------------------------------------- "
+" Windows
 set splitbelow
 set splitright
 
@@ -290,16 +275,17 @@ nnoremap <leader>wv :vnew<CR>
 nnoremap <leader>ws :new<CR>
 nnoremap <leader>cw :bd!<CR>
 
-"nnoremap <C-J> <C-W><C-J>
-"nnoremap <C-K> <C-W><C-K>
-"nnoremap <C-L> <C-W><C-L>
-"nnoremap <C-H> <C-W><C-H>
+""nnoremap <C-J> <C-W><C-J>
+""nnoremap <C-K> <C-W><C-K>
+""nnoremap <C-L> <C-W><C-L>
+""nnoremap <C-H> <C-W><C-H>
 
-nnoremap + <C-w>+
-nnoremap - <C-w>-
-nnoremap = <C-w>=
-nnoremap <C-]> <C-W>>
-nnoremap <C-[> <C-W><
+" This causes esc to resize if there is more than one window so :(
+"nnoremap + <C-w>+
+"nnoremap - <C-w>-
+"nnoremap = <C-w>=
+"nnoremap <C-]> <C-W>>
+"nnoremap <C-[> <C-W><
 
 " Tmux with windows
 let g:tmux_navigator_no_mappings = 1
