@@ -208,7 +208,7 @@ nnoremap <leader>ew :vert new
 nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR>:noh<CR>
 "
 " Set nopaste
-nnoremap <leader>sp :set nopaste<CR>
+nnoremap <leader>sp :set nopaste<CR>:%s/<Paste>//g<CR>
 " Toggle Spell check
 set spelllang=en
 nnoremap <leader>st :setlocal spell!<CR>

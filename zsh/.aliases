@@ -3,7 +3,7 @@
 alias tlf="tail -f"
 alias ln='ln -v'
 alias mkdir='mkdir -p'
-alias ...='../..'
+alias ...='cd ../..'
 alias lh='ls -Alh'
 alias -g G='| grep'
 alias -g M='| less'
@@ -16,6 +16,7 @@ alias vim='nvim'
 alias c='clear'
 alias chunkrestart='brew services restart chunkwm'
 alias fn='fg nvim'
+alias rmswp='rm -f ~/.local/share/nvim/swap/*.swp'
 
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"

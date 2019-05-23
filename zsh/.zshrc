@@ -114,7 +114,6 @@ plugins=(
   dotenv
   rake
   rbenv
-  ruby
 )
 # TODO: Add TMUX plugin at some point
 
@@ -161,31 +160,8 @@ export PATH="$HOME/anaconda/bin:$PATH"  # Anaconda Bin
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # aliases
-[[ -f ~/.aliases ]] && source ~/.aliases
+[[ -f .aliases ]] && source .aliases
 
 # Functions
-
-function cdd() {
-    if [ $# -eq 0 ]; then
-        cdd-helper --help;
-    elif [ ${1:0:1} != "-" ] && [ $1 != "add" ] && [ $1 != "rm" ];
-    then
-        DIR=`cdd-helper $@ -p`;
-        if [[ ! -z $DIR ]]
-        then
-            cd $DIR;
-        fi
-    else
-        cdd-helper $@;
-    fi
-}
-
-function cs() {
-  if [ $# -eq 0  ]; then
-    cd && ls;
-  else
-    cd "$*" && ls;
-  fi
-}
-alias cd='cs'
+[[ -f 'functions.sh' ]] && source 'functions.sh'
 

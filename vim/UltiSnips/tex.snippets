@@ -1,18 +1,23 @@
 snippet latex_document "this is a latex document snippet" b
-
-\documentclass[11pt]{article}
+\documentclass[11pt, a4paper]{article}
 \usepackage[letterpaper, portrait, margin=0.5in]{geometry}
-
-\usepackage[english]{babel}
+\usepackage[english]{babel}  % force American English hyphenation patterns
 \usepackage{amsmath,mathtools}
+
+\usepackage{graphicx}
+\usepackage{wrapfig}
+
 
 \begin{document}
 \title{`!p snip.rv = snip.basename.replace('-', ' ')`}
 \author{Apostolos Delis}
 \date{\today}
 \maketitle
-\end{document}
 
+\tableofcontents
+\section[]{}
+
+\end{document}
 endsnippet
 
 snippet eq "Equation" bi
@@ -121,12 +126,12 @@ snippet "([a-zA-Z])bar" "bar" riA
 endsnippet
 
 priority 10
-snippet "([a-zA-Z])ht" "hat" riA
+snippet "([a-zA-Z])_ht" "hat" riA
 \hat{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 10
-snippet "([a-zA-Z])bdt" "bold hat" riA
+snippet "([a-zA-Z])_bt" "bold hat" riA
 \hat{\mathbf{`!p snip.rv=match.group(1)`}}
 endsnippet
 
