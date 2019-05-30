@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 #
 # NOTE: any 'chunkc' command that is run from this config file
@@ -28,7 +28,7 @@ chunkc core::log_level warn
 # NOTE: specify the absolutepath to the directory to use when loading a plugin.
 #
 
-chunkc core::plugin_dir ~/.chunkwm_plugins
+chunkc core::plugin_dir /usr/local/opt/chunkwm/share/chunkwm/plugins
 
 #
 # NOTE: if enabled, chunkwm will monitor the specified plugin_dir
@@ -109,7 +109,7 @@ chunkc set window_use_cgs_move           0
 #       1 = true, outline border
 #
 
-chunkc set focused_border_color          0x00ffffff
+chunkc set focused_border_color          0xff0f6288
 chunkc set focused_border_width          5
 chunkc set focused_border_radius         0
 chunkc set focused_border_outline        0

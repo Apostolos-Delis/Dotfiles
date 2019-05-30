@@ -22,6 +22,10 @@ def create_table(snip):
     snip.expand_anon(anon_snippet_table)
 endglobal
 
+snippet " ([A-Z]|[A-Za-z]_[A-Za-z0-9]) " "Expand to be in latex" riA
+ $`!p snip.rv=match.group(0).strip()`$ 
+endsnippet
+
 snippet python "Python block" b
 
 \`\`\`python
@@ -55,9 +59,9 @@ endsnippet
 
 
 snippet table "table"
-| ${1:Items}    | ${2:Values}   | 
+| ${1:Items}    | ${2:Values}   |
 | ------------- |:-------------:|
-| ...           | ...           | 
+| ...           | ...           |
 endsnippet
 
 snippet cc "C code" sb
@@ -116,5 +120,5 @@ snippet nt "Note"
 endsnippet
 
 pre_expand "create_table(snip)"
-snippet "tb(\d+x\d+)" "Customizable table" br
+snippet "tb(\d+x\d+)" "Customizable table" brA
 endsnippet

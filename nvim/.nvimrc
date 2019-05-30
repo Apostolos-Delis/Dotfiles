@@ -193,10 +193,12 @@ nnoremap <leader>ev :e! ~/.vimrc<CR>
 nnoremap <leader>eb :e! ~/.bashrc<CR>
 " Edit zshrc
 nnoremap <leader>ez :e! ~/.zshrc<CR>
+" Edit aliases
+nnoremap <leader>ea :e! ~/.aliases<CR>
 " Edit tmux config
 nnoremap <leader>et :e! ~/.tmux.conf<CR>
 " Edit init.vim
-nnoremap <leader>ei :e! ~/.config/nvim/init.vim<CR>
+nnoremap <leader>ei :e! +200 ~/.config/nvim/init.vim<CR>
 " Edit snippet file
 nnoremap <leader>es :UltiSnipsEdit<CR>
 " Edit file
@@ -225,7 +227,7 @@ nnoremap <leader>ta :ALEToggle<CR>
 " Get rid of all trailing whitespace
 nnoremap <leader>dw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>
 " Remove trailing lines
-nnoremap <leader>dl :%s#\($\n\s*\)\+\%$##<CR>
+nnoremap <leader>ds :%s#\($\n\s*\)\+\%$##<CR>
 
 " Open a terminal and then run make
 nnoremap <leader>mk :make<CR>
