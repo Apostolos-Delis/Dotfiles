@@ -171,7 +171,7 @@ function cdd() {
         DIR=`cdd-helper $@ -p`;
         if [[ ! -z $DIR ]]
         then
-            cd $DIR;
+            cd "$DIR";
         fi
     else
         cdd-helper $@;

@@ -159,10 +159,9 @@ function cdd() {
     elif [ ${1:0:1} != "-" ] && [ $1 != "add" ] && [ $1 != "rm" ];
     then
         DIR=`cdd-helper $@ -p`;
-        echo $DIR
         if [[ ! -z $DIR ]]
         then
-            cd $DIR;
+            cd "$DIR";
         fi
     else
         cdd-helper $@;
