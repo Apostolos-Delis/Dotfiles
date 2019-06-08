@@ -65,7 +65,7 @@ snippet '([A-Za-z])(\d)' "auto subscript" wrA
 `!p snip.rv = match.group(1)`_`!p snip.rv = match.group(2)`
 endsnippet
 
-snippet '([A-Za-z])_([A-Za-z0-9]+) ' "auto subscript2" wrA
+snippet '([A-Za-z])_([A-Za-z0-9][A-Za-z0-9]+) ' "auto subscript2" wrA
 `!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
 endsnippet
 
@@ -135,10 +135,19 @@ snippet "([a-zA-Z])_bt" "bold hat" riA
 \hat{\mathbf{`!p snip.rv=match.group(1)`}}
 endsnippet
 
-snippet mbl "Math Bold" iA
+priority 10
+snippet "([a-zA-Z])_pr" "prime" riA
+`!p snip.rv=match.group(1)`^{\prime}
+endsnippet
+
+snippet mbl "Math Bold" i
 \mathbf{$1}$0
 endsnippet
 
-snippet tbl "Text Bold" iA
+snippet tbl "Text Bold" i
 \textbf{$1}$0
+endsnippet
+
+snippet "([A-Z])mc" "mathcal" riA
+\mathcal{`!p snip.rv=match.group(1)`}
 endsnippet
