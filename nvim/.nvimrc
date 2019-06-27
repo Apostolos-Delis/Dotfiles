@@ -5,12 +5,9 @@ Plug 'morhetz/gruvbox' " Adds gruvbox theme
 Plug 'altercation/vim-colors-solarized'
 Plug 'dracula/vim', { 'commit': '147f389f4275cec4ef43ebc25e2011c57b45cc00' }
 Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/seoul256.vim'
-"Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'nightsense/forgotten'
 Plug 'zaki/zazen'
 
 " Aethetics - Additional
@@ -227,7 +224,7 @@ nnoremap <leader>ta :ALEToggle<CR>
 " Get rid of all trailing whitespace
 nnoremap <leader>dw :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>:noh<CR>
 " Remove trailing lines
-nnoremap <leader>ds :%s#\($\n\s*\)\+\%$##<CR>
+nnoremap <leader>ds :%s#\($\n\s*\)\+\%$##<CR>:noh<CR>
 
 " Open a terminal and then run make
 nnoremap <leader>mk :make<CR>
@@ -492,63 +489,8 @@ autocmd FileType markdown setlocal textwidth=89 autoindent expandtab
 " Latex
 autocmd FileType tex setlocal textwidth=89 autoindent expandtab
 
-""" Custom Functions
-" Dracula Mode (Dark)
-function! ColorDracula()
-    "let g:airline_theme=''
-    set background=dark
-    color dracula
-    "IndentLinesEnable
-endfunction
-
-" Gruvbox
-function! ColorGruvBox()
-    "let g:airline_theme='gruvbox'
-    set background=dark
-    color gruvbox
-    "IndentLinesEnable
-endfunction
-
-" Gruvbox
-function! ColorSolarized()
-    "let g:airline_theme='gruvbox'
-    set background=dark
-    color solarized
-    "IndentLinesEnable
-endfunction
-
-" Seoul256 Mode (Dark & Light)
-function! ColorSeoul256()
-    "let g:airline_theme='silver'
-    color seoul256
-    "IndentLinesDisable
-endfunction
-
-" Forgotten Mode (Light)
-function! ColorForgotten()
-    " Light airline themes: tomorrow, silver, alduin
-    " Light colors: forgotten-light, nemo-light
-    "let g:airline_theme='tomorrow'
-    color forgotten-light
-    "IndentLinesDisable
-endfunction
-
-" Zazen Mode (Black & White)
-function! ColorZazen()
-    "let g:airline_theme='badcat'
-    color zazen
-    "IndentLinesEnable
-endfunction
-
 " Coloring
 let g:gruvbox_termcolors=16
 let g:gruvbox_italic=1
 set background=dark
 color gruvbox
-
-""" Custom Mappings for Color
-nmap <leader>c1 :call ColorDracula()<CR>
-nmap <leader>c2 :call ColorGruvBox()<CR>
-nmap <leader>c3 :call ColorSolarized()<CR>
-nmap <leader>c4 :call ColorSeoul256()<CR>
-nmap <leader>c5 :call ColorForgotten()<CR>

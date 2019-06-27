@@ -1,38 +1,17 @@
-snippet make_latex1 "this creates a simple makefile for latex to compile text with biber" b 
-# enter a filename without the extension
-FILENAME = 
+snippet make_latex "Boilerplate LaTeX Makefile"
 
+TEX_FILES=$(shell find . -name *.tex)
+
+.PHONY: all
 all:
-	pdflatex $(FILENAME).tex
+	@latexmk -pdf $(TEX_FILES)
 
-run:
-	biber $(FILENAME)
-	pdflatex $(FILENAME).tex
-	evince $(FILENAME).pdf &!
+.PHONY: cache
+cache:
+	@rm -rf *.aux *.fls *.gz *.toc *.log *.fdb_latexmk
 
+
+.PHONY: clean
 clean:
-	rm $(FILENAME).log $(FILENAME).aux
-
-endsnippet
-
-
-
-
-
-snippet make_latex2 "this creates a simple makefile for latex to compile text with bibtex" b 
-# enter a filename without the extension
-FILENAME = 
-
-all:
-	pdflatex $(FILENAME).tex
-
-run:
-	pdflatex $(FILENAME).tex
-	bibtex $(FILENAME) 
-	pdflatex $(FILENAME).tex
-	pdflatex $(FILENAME).tex
-
-clean:
-	rm $(FILENAME).log $(FILENAME).aux
-
+	@rm -rf *.aux *.fls *.pdf *.gz *.toc *.log *.fdb_latexmk
 endsnippet

@@ -1,5 +1,13 @@
 #!/usr/bin/env zsh 
 
+# lsd aliases
+# Reference: https://github.com/Peltoche/lsd
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -A'
+alias lla='ls -lA'
+alias lt='ls --tree'
+
 alias tlf="tail -f"
 alias ln='ln -v'
 alias mkdir='mkdir -p'
@@ -17,6 +25,7 @@ alias c='clear'
 alias chunkrestart='brew services restart chunkwm'
 alias fn='fg nvim'
 alias rmswp='rm -f ~/.local/share/nvim/swap/*.swp'
+alias weather='curl http://wttr.in/'
 
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"
