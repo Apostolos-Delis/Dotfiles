@@ -164,6 +164,8 @@ nnoremap <leader><leader> :noh<CR>
 
 " Edit vimrc
 nnoremap <leader>ev :e! ~/.vimrc<CR>
+" Edit init.vim
+nnoremap <leader>ei :e! ~/.config/old_nvim/init.vim<CR>
 " Edit bashrc
 nnoremap <leader>eb :e! ~/.bashrc<CR>
 " Edit zshrc
