@@ -1,9 +1,8 @@
 """ Vim-Plug
 call plug#begin()
 " Aesthetics - Main
-Plug 'morhetz/gruvbox' " Adds gruvbox theme
+"Plug 'morhetz/gruvbox' " Adds gruvbox theme
 Plug 'taigacute/gruvbox9'
-"Plug 'vim-airline/vim-airline'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/limelight.vim'
@@ -52,10 +51,8 @@ let g:python3_host_prog = expand('~/.config/nvim/env/bin/python')
 
 """ Coloring
 syntax enable
-set background=dark
 let g:gruvbox_termcolors=16
 let g:gruvbox_italic=1
-color gruvbox
 highlight Pmenu guibg=white guifg=black gui=bold
 highlight Comment gui=bold
 highlight Normal gui=none
@@ -69,16 +66,44 @@ set termguicolors
 highlight Normal guibg=NONE ctermbg=NONE
 highlight LineNr guibg=NONE ctermbg=NONE
 
-""" Other Configurations
+""" Other General Configurations
 filetype plugin indent on
-set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 set incsearch ignorecase smartcase hlsearch
 set ruler laststatus=2 showcmd showmode
 " wrapping lines when arrows are pressed
 set whichwrap+=<,>,h,l,[,]
-" Unprintable chars mapping syntax
-set list listchars=tab:▶\ ,eol:↲,nbsp:␣,trail:~,extends:»,precedes:«
-set fillchars+=vert:\
+set history=2000
+set number
+set relativenumber
+set rnu
+set timeout ttimeout
+set cmdheight=1         " Height of the command line
+set timeoutlen=500
+set ttimeoutlen=10
+set updatetime=100
+set undofile
+set undodir=~/.tmp/undo
+set backspace=2
+set backspace=indent,eol,start
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set smarttab
+set autoindent
+set cindent
+set showcmd
+set autoindent
+set expandtab
+set nocursorline
+set hidden
+set lazyredraw
+set shortmess=aFc
+set signcolumn=no           " Makes the error vertical column permanent if 1
+set completefunc=emoji#complete
+set completeopt =longest,menu
+set completeopt-=preview
+set list
+set listchars=tab:»·,eol:↲,nbsp:␣,trail:·,extends:→,precedes:←
 set wrap breakindent
 set encoding=utf-8
 set title
@@ -88,12 +113,24 @@ set rnu
 set mouse=a
 set scrolloff=10
 set fillchars+=vert:\ " Changing the styling of vertical borders for windows
+set tabstop=4 softtabstop=4 shiftwidth=4 expandtab smarttab autoindent
 
 " Searching
-set ignorecase " case insensitive searching
-set smartcase " case-sensitive if expresson contains a capital letter
-set hlsearch
-set incsearch " set incremental search, like modern browsers
+set smartcase       " Keep case when searching with *
+set infercase       " Adjust case in insert completion mode
+set incsearch       " Incremental search
+set hlsearch        " Highlight search results
+set wrapscan        " Searches wrap around the end of the file
+set showmatch       " Jump to matching bracket
+set matchpairs+=<:> " Add HTML brackets to pair matching
+set matchtime=1     " Tenths of a second to show the matching paren
+set cpoptions-=m    " showmatch will wait 0.5s or until a char is typed
+set grepprg=rg\ --vimgrep\ $*
+set wildignore+=*.so,*~,*/.git/*,*/.svn/*,*/.DS_Store,*/tmp/*
+
+set incsearch ignorecase smartcase hlsearch
+set ruler laststatus=2 showcmd showmode
+
 "set nolazyredraw " don't redraw while executing macros
 set ttyfast
 set lazyredraw
@@ -105,7 +142,6 @@ set nopaste
 
 
 "Cursor
-
 "changes cursor color between insert mode and normal mode
 if &term =~ "xterm\\|urxvt"
  " use an orange cursor in insert mode
@@ -178,6 +214,8 @@ map <Leader> <Plug>(easymotion-prefix)
 
 " Clear search highlight
 nnoremap <leader><leader> :noh<CR>
+
+nnoremap Y y$ " Yank to end of the line
 
 " Edit vimrc
 nnoremap <leader>ev :e! ~/.vimrc<CR>
@@ -267,7 +305,7 @@ nnoremap <leader>wv :vnew<CR>
 "nnoremap <leader>wv :vsplit<CR>
 
 nnoremap <leader>ws :new<CR>
-nnoremap <leader>cw :bd!<CR>
+nnoremap <leader>bd :bd!<CR>
 
 ""nnoremap <C-J> <C-W><C-J>
 ""nnoremap <C-K> <C-W><C-K>
@@ -320,21 +358,13 @@ let g:ale_echo_msg_error_str = '✖'
 " NERDTree
 let g:NERDTreeWinSize=35
 map <C-f> :NERDTreeToggle<CR>
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 let NERDTreeQuitOnOpen=1 " closes upon opening a file in nerdtree
 let NERDTreeShowHidden=1 " show hidden files in NERDTree
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeNodeDelimiaer = "\u263a" " smiley face
-
-" Airline
-"let g:airline#extensions#tabline#left_sep = ' '
-"let g:airline#extensions#tabline#formatter = 'default'
-"let g:airline#extensions#tabline#left_alt_sep = '|'
-""let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
-"let g:airline_powerline_fonts = 1
-"let g:airline_theme='gruvbox'
 
 " Bullets.vim
 let g:bullets_enabled_file_types = [
@@ -518,7 +548,8 @@ autocmd FileType tex setlocal textwidth=89 autoindent expandtab
 let g:gruvbox_termcolors=16
 let g:gruvbox_italic=1
 set background=dark
-color gruvbox
+color gruvbox9
+colorscheme gruvbox9
 
 
 " lightline
@@ -529,7 +560,7 @@ let g:lightline = {
       \   'left': [ ['homemode'],
       \             ['gitinfo'],['filename_active']],
       \   'right':[
-      \             ['lineinfo'], ['fileformat'],['filencode']],
+      \             ['lineinfo'], ['wordcount'], ['fileformat', 'filencoding', 'filetype']],
       \ },
       \ 'inactive': {
       \   'left': [['homemode'], ['filename_active']],
@@ -548,6 +579,7 @@ let g:lightline = {
       \ 'component_function': {
       \   'homemode': 'LightlineMode',
       \   'filencode': 'FileEncoding',
+      \   'wordcount': 'WordCount',
       \   'readonly': 'LightLineReadonly',
       \   'filename_active'  : 'LightlineFilenameActive',
       \   'lineinfo': 'LightlineLineinfo',
