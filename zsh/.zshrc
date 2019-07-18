@@ -186,3 +186,8 @@ function cs() {
   fi
 }
 alias cd='cs'
+
+function math() {
+    args="$@"
+    python3 -c "print($args)"
+}

@@ -1,7 +1,7 @@
 """ Vim-Plug
 call plug#begin()
 " Aesthetics - Main
-"Plug 'morhetz/gruvbox' " Adds gruvbox theme
+Plug 'morhetz/gruvbox' " Adds gruvbox theme
 Plug 'taigacute/gruvbox9'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
@@ -21,6 +21,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer --java-c
 " Adds LateX functionality
 "Plug 'lervag/vimtex'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'mhinz/vim-startify'
 
 "Plug 'zchee/deoplete-jedi'
 "Plug 'ervandew/supertab'
@@ -70,6 +71,7 @@ highlight LineNr guibg=NONE ctermbg=NONE
 filetype plugin indent on
 set incsearch ignorecase smartcase hlsearch
 set ruler laststatus=2 showcmd showmode
+set clipboard^=unnamed
 " wrapping lines when arrows are pressed
 set whichwrap+=<,>,h,l,[,]
 set history=2000
@@ -98,7 +100,7 @@ set nocursorline
 set hidden
 set lazyredraw
 set shortmess=aFc
-set signcolumn=no           " Makes the error vertical column permanent if 1
+"set signcolumn=no           " Makes the error vertical column permanent if 1
 set completefunc=emoji#complete
 set completeopt =longest,menu
 set completeopt-=preview
@@ -228,7 +230,7 @@ nnoremap <leader>ea :e! ~/.aliases<CR>
 " Edit tmux config
 nnoremap <leader>et :e! ~/.tmux.conf<CR>
 " Edit init.vim
-nnoremap <leader>ei :e! +200 ~/.config/nvim/init.vim<CR>
+nnoremap <leader>ei :e! +230 ~/.config/nvim/init.vim<CR>
 " Edit snippet file
 nnoremap <leader>es :UltiSnipsEdit<CR>
 " Edit file
@@ -548,9 +550,49 @@ autocmd FileType tex setlocal textwidth=89 autoindent expandtab
 let g:gruvbox_termcolors=16
 let g:gruvbox_italic=1
 set background=dark
-color gruvbox9
-colorscheme gruvbox9
+"color gruvbox9
+"colorscheme gruvbox9
+color gruvbox
+colorscheme gruvbox
 
+
+" startify
+autocmd User Startified setlocal cursorline
+
+let g:startify_enable_special      = 0
+let g:startify_files_number        = 8
+let g:startify_relative_path       = 1
+let g:startify_change_to_dir       = 1
+let g:startify_update_oldfiles     = 1
+let g:startify_session_autoload    = 1
+let g:startify_session_persistence = 1
+
+let g:startify_skiplist = [
+        \ 'COMMIT_EDITMSG',
+        \ 'bundle/.*/doc',
+        \ '/data/repo/neovim/runtime/doc',
+        \ '/Users/mhi/local/vim/share/vim/vim74/doc',
+        \ ]
+
+let g:startify_bookmarks = [
+        \ { 'c': '~/.config/nvim/init.vim' },
+        \ '~/vimwiki',
+        \ ]
+
+let g:startify_custom_header =
+        \ startify#fortune#cowsay('', '═','║','╔','╗','╝','╚')
+
+let g:startify_custom_footer =
+       \ ['', "   Neovim config created by Apostolos Delis", '']
+
+hi StartifyBracket ctermfg=240
+hi StartifyFile    ctermfg=147
+hi StartifyFooter  ctermfg=240
+hi StartifyHeader  ctermfg=114
+hi StartifyNumber  ctermfg=215
+hi StartifyPath    ctermfg=245
+hi StartifySlash   ctermfg=240
+hi StartifySpecial ctermfg=240
 
 " lightline
 "
