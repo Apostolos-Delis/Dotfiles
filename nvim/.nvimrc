@@ -38,7 +38,7 @@ Plug 'heavenshell/vim-pydocstring'
 Plug 'vim-scripts/loremipsum'
 Plug 'metakirby5/codi.vim'
 Plug 'dkarter/bullets.vim'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 
@@ -333,7 +333,6 @@ nnoremap <silent> <C-/> :TmuxNavigatePrevious<cr>
 """ Plugin Configurations
 
 " Vimtex
-let g:tex_flavor='latex'
 let g:vimtex_compiler_progname = 'nvr'
 let g:tex_flavor='latex'
 let g:vimtex_view_method='skim'
@@ -403,7 +402,9 @@ inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" 
 
 "Settings for TagBar
 "autocmd BufReadPost *.cpp,*.c,*.h,*.go,*.cc,*.py call tagbar#autoopen()
+" TagBar
 let g:tagbar_width=25
+let g:tagbar_iconchars = ['↠', '↡']
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds' : [
@@ -457,10 +458,6 @@ nmap ga <Plug>(EasyAlign)
 " indentLine
 let g:indentLine_char = '▏'
 let g:indentLine_color_gui = '#363949'
-
-" TagBar
-let g:tagbar_width = 30
-let g:tagbar_iconchars = ['↠', '↡']
 
 " NERDCommenter
 " press // for comment using nerd commenter

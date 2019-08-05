@@ -58,7 +58,7 @@ inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" 
 " prevent vim from giving a warning it the swp file is open
 syntax enable " enables syntax highlighting
 set shortmess=A
-set cursorline
+set nocursorline
 set magic " Set magic on, for regex
 scriptencoding utf-8
 set fileencoding=utf-8

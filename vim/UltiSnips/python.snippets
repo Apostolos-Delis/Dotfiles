@@ -42,7 +42,7 @@ ${1:a text}
 ${1/\w+\s*/\u$0/g}
 endsnippet
 
-snippet todo "Insert a todo statement" b
+snippet todo "Insert a todo statement" i
 # TODO (`!v strftime("%c")`): ${1:desc}
 endsnippet
 
@@ -102,8 +102,12 @@ else:
 	${5:pass}
 endsnippet
 
-snippet op "os.path"
+snippet op "os.path" i
 os.path.
+endsnippet
+
+snippet opj "os.path.join" i
+os.path.join($0)
 endsnippet
 
 ####################
