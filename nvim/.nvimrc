@@ -17,7 +17,8 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer --java-completer --ts-completer' }
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer --java-completer --ts-completer' }
+Plug 'zxqfl/tabnine-vim'
 " Adds LateX functionality
 "Plug 'lervag/vimtex'
 Plug 'christoomey/vim-tmux-navigator'
@@ -102,7 +103,7 @@ set lazyredraw
 set shortmess=aFc
 "set signcolumn=no           " Makes the error vertical column permanent if 1
 set completefunc=emoji#complete
-set completeopt =longest,menu
+set completeopt=longest,menu
 set completeopt-=preview
 set list
 set listchars=tab:»·,eol:↲,nbsp:␣,trail:·,extends:→,precedes:←
