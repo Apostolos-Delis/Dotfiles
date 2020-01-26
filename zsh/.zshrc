@@ -40,7 +40,8 @@ POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status dir vcs)
 #POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time background_jobs virtualenv rbenv rvm)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(background_jobs virtualenv rbenv rvm)
+#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(background_jobs virtualenv rbenv rvm)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
@@ -113,7 +114,7 @@ plugins=(
   bundler
   dotenv
   rake
-  rbenv
+  #rbenv
 )
 # TODO: Add TMUX plugin at some point
 
@@ -148,12 +149,9 @@ stty -ixon
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/apostolos/Downloads/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/apostolos/Downloads/google-cloud-sdk/completion.bash.inc'; fi
-
 # Adds syntax highlighting to zsh and autosuggestions
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Add home bin
 export PATH="$HOME/anaconda/bin:$PATH"  # Anaconda Bin
