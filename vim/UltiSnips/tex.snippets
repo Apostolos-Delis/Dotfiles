@@ -88,26 +88,33 @@ endsnippet
 
 snippet eq "Equation" bi
 \begin{equation}
-    ${1:equation}
+${1:equation}
 \end{equation}
+endsnippet
+
+
+snippet mm "math" bi
+\[
+$0
+\]
 endsnippet
 
 snippet bullets "Bullet Points"
 \begin{itemize}
-    \item ${0}
+\item ${0}
 \end{itemize}
 endsnippet
 
 
 snippet list "Unordered List"
 \begin{itemize}
-    \item ${0}
+\item ${0}
 \end{itemize}
 endsnippet
 
 snippet enum "Ordered List"
 \begin{enumerate}
-	\item ${0}
+\item ${0}
 \end{enumerate}
 endsnippet
 
@@ -194,6 +201,12 @@ snippet dxdt "dx/dt"
 \frac{dx}{dt}${0}
 endsnippet
 
+snippet matrix "matrix" ib
+\begin{bmatrix}
+$0
+\end{bmatrix}
+endsnippet
+
 snippet fr "Fraction" i
 \\frac{$1}{$2}$0
 endsnippet
@@ -252,6 +265,11 @@ endsnippet
 priority 10
 snippet "([a-zA-Z])_pr" "prime" riA
 `!p snip.rv=match.group(1)`^{\prime}
+endsnippet
+
+priority 10
+snippet "([a-zA-Z])_tr" "transpose" riA
+`!p snip.rv=match.group(1)`^{T}
 endsnippet
 
 snippet mbl "Math Bold" i

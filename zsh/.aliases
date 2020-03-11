@@ -27,6 +27,15 @@ alias fn='fg nvim'
 alias rmswp='rm -f ~/.local/share/nvim/swap/*.swp'
 alias weather='curl http://wttr.in/'
 
+
+#Tm Aliases
+alias ttl='tm task list'
+alias tta='tm task add'
+alias ttd='tm task done'
+alias tss='tm sess start'
+alias tsa='tm sess add'
+alias tsg='tm stat grad'
+
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"
 
