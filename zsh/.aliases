@@ -36,6 +36,14 @@ alias tss='tm sess start'
 alias tsa='tm sess add'
 alias tsg='tm stat grad'
 
+
+# We only want python3 by default
+alias pip2='pip'
+alias python2='python'
+
+alias pip='pip3'
+alias python='python3'
+
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"
 
