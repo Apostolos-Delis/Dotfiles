@@ -219,6 +219,8 @@ nnoremap Y y$ " Yank to end of the line
 
 " Edit vimrc
 nnoremap <leader>ev :e! ~/.vimrc<CR>
+" Edit gitconfig
+nnoremap <leader>eg :e! ~/.gitconfig<CR>
 " Edit bashrc
 nnoremap <leader>eb :e! ~/.bashrc<CR>
 " Edit zshrc
