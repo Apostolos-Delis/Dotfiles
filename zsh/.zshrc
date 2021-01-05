@@ -154,11 +154,6 @@ defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-#To fix my java env
-export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_265)
-export JRE_HOME=$(/usr/libexec/java_home -v 1.8.0_265)
-export JDK_HOME=$(/usr/libexec/java_home -v 1.8.0_265)
-export PATH=$(/usr/libexec/java_home -v 1.8.0_265)/bin:$PATH
 export PATH=$PATH:/usr/local/mysql/bin
 
 # Add home bin
