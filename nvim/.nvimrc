@@ -88,9 +88,6 @@ set undofile
 set undodir=~/.tmp/undo
 set backspace=2
 set backspace=indent,eol,start
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
 set smarttab
 set autoindent
 set cindent
@@ -513,20 +510,20 @@ set ttimeoutlen=0
 
 """ Filetype-Specific Configurations
 
-" Add support for PEP 8 file formatting
+" Add support for PEP 8 file formatting (With character count set to 100)
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=79 |
+    \ set textwidth=99 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
-    \ set cc=80
+    \ set cc=100
 
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd FileType python nmap <leader>pt :0,$!~/.config/nvim/env/bin/python -m yapf<CR>
-autocmd FileType python noremap <leader>fb :!black -q --line-length 79 %<CR>
+autocmd FileType python noremap <leader>fb :!black -q --line-length 99 %<CR>
 
 
 " HTML, XML, Jinja

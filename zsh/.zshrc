@@ -100,24 +100,24 @@ COMPLETION_WAITING_DOTS="true"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
-
+#
 # Which plugins would you like to load?
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git
-  colorize
-  pip
-  python
-  bundler
-  dotenv
-  rake
-  
-  #rbenv
+  git                       # Adds git aliases like gcc - /git
+  pip                       # Adds autocomplete to pip
+  dotenv                    # Automatically sources .env files
+  colored-man-pages         # Colors man pages
+  zsh-interactive-cd        # Adds fzf cd completion
+  bazel                     # Adds Autocomplete for bazel
+  zsh_reload                # Adds src command to reload zsh
+  wd                        # Adds wd tool
+  ripgrep                   # Adds autocompletion for rg
+  docker                    # Adds autocompletion for docker
 )
-# TODO: Add TMUX plugin at some point
 
 #plugins=(git colored-man colorize pip python brew osx zsh-syntax-highlighting)
 
@@ -186,11 +186,11 @@ function cdd() {
 }
 
 function cs() {
-  if [ $# -eq 0  ]; then
-    cd && ls;
-  else
-    cd "$*" && ls;
-  fi
+    if [ $# -eq 0  ]; then
+        cd && ls;
+    else
+        cd "$*" && ls;
+    fi
 }
 alias cd='cs'
 

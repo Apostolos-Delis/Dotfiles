@@ -27,6 +27,9 @@ alias fn='fg nvim'
 alias rmswp='rm -f ~/.local/share/nvim/swap/*.swp'
 alias weather='curl http://wttr.in/'
 
+# Revert all changes to the previous commit
+alias greset='git reset --hard $(git log | head -n 1 | tr " " "\n" | tail -n 1)'
+
 
 #Tm Aliases
 alias ttl='tm task list'
@@ -36,11 +39,14 @@ alias tss='tm sess start'
 alias tsa='tm sess add'
 alias tsg='tm stat grad'
 
+# Modify mkdir
+alias mkdir='mkdir -pv'
 
 # We only want python3 by default
 alias pip2='pip'
 alias python2='python'
 
+# Use python3 instead of 2
 alias pip='pip3'
 alias python='python3'
 
