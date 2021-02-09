@@ -29,6 +29,7 @@ alias weather='curl http://wttr.in/'
 
 # Revert all changes to the previous commit
 alias greset='git reset --hard $(git log | head -n 1 | tr " " "\n" | tail -n 1)'
+alias gsedit="gss | awk '{\$1=\"\"}1' | xargs $EDITOR"
 
 
 #Tm Aliases

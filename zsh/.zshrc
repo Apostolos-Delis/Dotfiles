@@ -117,6 +117,7 @@ plugins=(
   wd                        # Adds wd tool
   ripgrep                   # Adds autocompletion for rg
   docker                    # Adds autocompletion for docker
+  rails                     # Adds autocompletion for rails as well as aliases
 )
 
 #plugins=(git colored-man colorize pip python brew osx zsh-syntax-highlighting)
