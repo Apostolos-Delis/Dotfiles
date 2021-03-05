@@ -2,7 +2,6 @@
 call plug#begin()
 " Aesthetics - Main
 Plug 'morhetz/gruvbox' " Adds gruvbox theme
-Plug 'taigacute/gruvbox9'
 Plug 'itchyny/lightline.vim'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/limelight.vim'
@@ -17,12 +16,13 @@ Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/nerdcommenter'
 "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clangd-completer --java-completer --ts-completer' }
 Plug 'zxqfl/tabnine-vim'
 " Adds LateX functionality
 "Plug 'lervag/vimtex'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'mhinz/vim-startify'
+
+"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 "Plug 'zchee/deoplete-jedi'
 "Plug 'ervandew/supertab'
@@ -35,11 +35,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'chrisbra/Colorizer'
-Plug 'heavenshell/vim-pydocstring'
 Plug 'vim-scripts/loremipsum'
 Plug 'metakirby5/codi.vim'
 Plug 'dkarter/bullets.vim'
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 
@@ -142,26 +141,12 @@ let did_install_syntax_menu = 1
 set nopaste
 
 
-"Cursor
-"changes cursor color between insert mode and normal mode
-if &term =~ "xterm\\|urxvt"
- " use an orange cursor in insert mode
- let &t_SI = "\<Esc>]12;green\x7"
- " use a red cursor otherwise
- let &t_EI = "\<Esc>]12;red\x7"
- silent !echo -ne "\033]12;red\007"
- " reset cursor when vim exits
- autocmd VimLeave * silent !echo -ne "\033]112\007"
- " use \003]12;gray\007 for gnome-terminal and urxvt up to version 9.21
-endif
-
-
-set guicursor=n-v-sm:block,c-i-ci-ve:ver25-Cursor,r-cr-o:hor20
-if $TERM_PROGRAM =~ "iTerm"
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
-    let &t_EI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in normal mode
-    "let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
-endif
+"set guicursor=n-v-sm:block,c-i-ci-ve:ver25-Cursor,r-cr-o:hor20
+"if $TERM_PROGRAM =~ "iTerm"
+    "let &t_SI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in insert mode
+    "let &t_EI = "\<Esc>]50;CursorShape=1\x7" " Vertical bar in normal mode
+    ""let &t_EI = "\<Esc>]50;CursorShape=0\x7" " Block in normal mode
+"endif
 
 if exists('$TMUX')
   let &t_SI = "\ePtmux;\e\e[5 q\e\\"
@@ -208,9 +193,9 @@ inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 :ab WQ :wq
 :ab Q :q
 
+" set a map leader for more key combos
 let mapleader = ','
 
-" set a map leader for more key combos
 map <Leader> <Plug>(easymotion-prefix)
 
 " Clear search highlight
@@ -232,6 +217,10 @@ nnoremap <leader>ea :e! ~/.aliases<CR>
 nnoremap <leader>et :e! ~/.tmux.conf<CR>
 " Edit init.vim
 nnoremap <leader>ei :e! +230 ~/.config/nvim/init.vim<CR>
+
+" Edit init.vim
+nnoremap <leader>en :e! +230 ~/Documents/notes<CR>
+
 " Edit snippet file
 nnoremap <leader>es :UltiSnipsEdit<CR>
 " Edit file
@@ -244,8 +233,7 @@ nnoremap <leader>rs :so ~/.config/nvim/init.vim<CR>:noh<CR>
 "
 " Set nopaste
 nnoremap <leader>sp :set nopaste<CR>:%s/<Paste>//g<CR>
-" Toggle Spell check
-set spelllang=en
+" Toggle Spell check set spelllang=en
 nnoremap <leader>st :setlocal spell!<CR>
 inoremap <C-T> <c-g>u<Esc>[s1z=`]a<c-g>u
 " Toggle list
@@ -279,9 +267,6 @@ nnoremap <leader>gf :GFiles<CR>
 " Toggle Limelight on and off
 nmap <leader>ll :Limelight!!<CR>
 xmap <leader>ll :Limelight!!<CR>
-
-" Apply Pydocstring
-nmap <leader>ps <Plug>(pydocstring)
 
 nmap <leader>a gaip*
 
@@ -341,10 +326,6 @@ let g:vimtex_quickfix_mode=0
 set conceallevel=1
 let g:tex_conceal='abdmg'
 
-
- "Compile latex file using latexmk with control T
-"autocmd FileType tex nmap <buffer> <C-T> :!latexmk -pdf %<CR>
-
 " Ale Lint
 let g:ale_set_highlights = 0
 let g:ale_change_sign_column_color = 0
@@ -355,7 +336,30 @@ let g:ale_lint_on_text_changed = 'always'
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
 let g:ale_echo_msg_error_str = '✖'
+let g:ale_linters_explicit = 1
+let g:ale_history_log_output = 1
 
+"let g:ale_fixers = {
+"\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+"\   'ruby': ['rubocop', 'remove_trailing_lines', 'trim_whitespace' ],
+"\   'javascript': ['prettier', 'eslint'],
+"\   'typescript': ['eslint'],
+"\   'css': ['prettier']
+"\}
+
+"let g:ale_linters = {
+      "\   'ruby': ['rubocop', 'solargraph'],
+      "\   'python': ['flake8', 'pylint'],
+      "\   'javascript': ['prettier', 'eslint'],
+      "\   'typescript': ['eslint'],
+      "\   'typescriptreact': ['eslint']
+"\}
+
+" Prettier
+"
+" when running at every change you may want to disable quickfix
+"let g:prettier#quickfix_enabled = 0
+"autocmd TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 " NERDTree
 let g:NERDTreeWinSize=35
@@ -435,23 +439,6 @@ let g:tagbar_type_go = {
     \ }
 
 
-" YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '$HOME/.vim/.ycm_extra_conf.py'
-let g:ycm_auto_trigger = 1
-let g:ycm_min_num_of_chars_for_completion = 2
-let g:ycm_confirm_extra_conf = 0
-let g:ycm_autoclose_preview_window_after_insertion = 1
-"let g:ycm_always_populate_location_list = 1 " C-w doesn't work with this on
-
-" Turn off syntax check
-let g:ycm_show_diagnostics_ui = 1
-let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_enable_diagnostic_highlighting = 0
-
-"Make sure the blacklist is empty
-let g:ycm_filetype_blacklist = {}
-
-
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -464,28 +451,6 @@ let g:indentLine_color_gui = '#363949'
 " press // for comment using nerd commenter
 nmap // <leader>c<space>
 vmap // <leader>c<space>
-
-" Rainbow Parentheses
-let g:rbpt_colorpairs = [
-    \ ['brown',       'RoyalBlue3'],
-    \ ['Darkblue',    'SeaGreen3'],
-    \ ['darkgray',    'DarkOrchid3'],
-    \ ['darkgreen',   'firebrick3'],
-    \ ['darkcyan',    'RoyalBlue3'],
-    \ ['darkred',     'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['brown',       'firebrick3'],
-    \ ['gray',        'RoyalBlue3'],
-    \ ['black',       'SeaGreen3'],
-    \ ['darkmagenta', 'DarkOrchid3'],
-    \ ['Darkblue',    'firebrick3'],
-    \ ['darkgreen',   'RoyalBlue3'],
-    \ ['darkcyan',    'SeaGreen3'],
-    \ ['darkred',     'DarkOrchid3'],
-    \ ['red',         'firebrick3'],
-    \ ]
-let g:rbpt_max = 16
-let g:rbpt_loadcmd_toggle = 0
 
 
 " fzf-vim
@@ -513,7 +478,7 @@ set ttimeoutlen=0
 
 """ Filetype-Specific Configurations
 
-" Add support for PEP 8 file formatting (With character count set to 100)
+" Add support for PEP 8 file formatting (With character count set to 80)
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
@@ -522,11 +487,11 @@ au BufNewFile,BufRead *.py
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix |
-    \ set cc=100
+    \ set cc=80
 
 autocmd FileType python setlocal tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 autocmd FileType python nmap <leader>pt :0,$!~/.config/nvim/env/bin/python -m yapf<CR>
-autocmd FileType python noremap <leader>fb :!black -q --line-length 99 %<CR>
+autocmd FileType python noremap <leader>fb :!black -q --line-length 79 %<CR>
 
 
 " HTML, XML, Jinja
@@ -535,8 +500,14 @@ autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType htmldjango inoremap {{ {{  }}<left><left><left>
-autocmd FileType htmldjango inoremap {% {%  %}<left><left><left>
-autocmd FileType htmldjango inoremap {# {#  #}<left><left><left>
+
+" Javascript, React
+autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+" Ruby
+autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " Markdown
 autocmd FileType markdown setlocal textwidth=89 autoindent expandtab
@@ -544,12 +515,13 @@ autocmd FileType markdown setlocal textwidth=89 autoindent expandtab
 " Latex
 autocmd FileType tex setlocal textwidth=89 autoindent expandtab
 
+
 " Coloring
-let g:gruvbox_termcolors=16
+let g:gruvbox_termcolors=256
 let g:gruvbox_italic=1
+let g:gruvbox_improved_warnings=1
 set background=dark
-"color gruvbox9
-"colorscheme gruvbox9
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 color gruvbox
 colorscheme gruvbox
 
@@ -595,7 +567,7 @@ hi StartifySpecial ctermfg=240
 " lightline
 "
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox9',
+      \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ ['homemode'],
       \             ['gitinfo'],['filename_active']],

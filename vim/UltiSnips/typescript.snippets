@@ -1,0 +1,24 @@
+snippet log "console.log"
+c
+nsole.log($1);
+endsnippet
+
+snippet it
+it('$1', () => {
+	$2
+});
+endsnippet
+
+snippet doc "Doc Comment" b
+/**
+ * $1
+ */
+endsnippet
+
+snippet imp "import default from" b
+import $1 from '$2';
+endsnippet
+
+snippet imd "import destructure" b
+import { $1 } from '$2';
+endsnippet

@@ -5,7 +5,13 @@
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
-export TERM=xterm-256color
+# set terminal color if not TMUX
+# Reference: https://unix.stackexchange.com/questions/139082/zsh-set-term-screen-256color-in-tmux-but-xterm-256color-without-tmux
+[[ $TMUX = "" ]] && export TERM="xterm-256color"
+
+# Get rid of duplicate values in path
+typeset -aU path
+
 # Initialize the path
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/usr/local/texlive/2019/2018/bin"
 
@@ -118,10 +124,13 @@ plugins=(
   ripgrep                   # Adds autocompletion for rg
   docker                    # Adds autocompletion for docker
   rails                     # Adds autocompletion for rails as well as aliases
+  zsh-autosuggestions       # Add autosuggestions to Oh My Zsh
+  zsh-syntax-highlighting   # Add syntax highlighting
 )
 
 #plugins=(git colored-man colorize pip python brew osx zsh-syntax-highlighting)
 
+# Source Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -151,16 +160,10 @@ stty -ixon
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
-# Adds syntax highlighting to zsh and autosuggestions
-source ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 export PATH=$PATH:/usr/local/mysql/bin
 
 # Add home bin
-export PATH="$HOME/anaconda/bin:$PATH"  # Anaconda Bin
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-
+export PATH=$HOME/bin:$PATH
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
@@ -194,3 +197,7 @@ function math() {
     args="$@"
     python3 -c "print($args)"
 }
+
+# Secureframe Stuff
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+export NVM_DIR="$HOME/.nvm"

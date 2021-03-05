@@ -6,13 +6,13 @@ alias ls='lsd'
 alias l='ls -l'
 alias la='ls -A'
 alias lla='ls -lA'
+alias lh='ls -Alh'
 alias lt='ls --tree'
 
 alias tlf="tail -f"
 alias ln='ln -v'
 alias mkdir='mkdir -p'
 alias ...='cd ../..'
-alias lh='ls -Alh'
 alias -g G='| grep'
 alias -g M='| less'
 alias -g L='| wc -l'
@@ -22,8 +22,9 @@ alias v="$VISUAL"
 alias skim='open -a "Skim"'
 alias vim='nvim'
 alias c='clear'
-alias chunkrestart='brew services restart chunkwm'
-alias fn='fg nvim'
+alias fedit="fzf | xargs $EDITOR"
+
+# Remove nvim swp files
 alias rmswp='rm -f ~/.local/share/nvim/swap/*.swp'
 alias weather='curl http://wttr.in/'
 
@@ -67,4 +68,8 @@ function expand-alias() {
     zle self-insert
 }
 zle -N expand-alias
+# Expand an alias by typing '+'
 bindkey -M main '+' expand-alias
+
+# sc is somehow aliased to ruby console otherwise
+unalias sc 2>/dev/null
