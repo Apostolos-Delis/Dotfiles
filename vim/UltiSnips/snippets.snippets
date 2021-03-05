@@ -17,3 +17,7 @@ endsnippet
 snippet vis "${VISUAL}" i
 \$\{VISUAL${1:${2:default}${3:/transform/}}\}
 endsnippet
+
+snippet base "basename of file"
+\`!p snip.rv = snip.basename.title().replace('_', '')\`
+endsnippet

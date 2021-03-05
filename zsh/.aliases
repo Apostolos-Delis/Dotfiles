@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh 
+#!/usr/bin/env zsh
 
 # lsd aliases
 # Reference: https://github.com/Peltoche/lsd
@@ -12,10 +12,9 @@ alias lt='ls --tree'
 alias tlf="tail -f"
 alias ln='ln -v'
 alias mkdir='mkdir -p'
-alias ...='cd ../..'
 alias -g G='| grep'
-alias -g M='| less'
-alias -g L='| wc -l'
+alias -g L='| less'
+alias -g W='| wc -l'
 alias -g ONE="| awk '{ print \$1}'"
 alias e="$EDITOR"
 alias v="$VISUAL"
@@ -26,20 +25,17 @@ alias fedit="fzf | xargs $EDITOR"
 
 # Remove nvim swp files
 alias rmswp='rm -f ~/.local/share/nvim/swap/*.swp'
+
+# Curl Aliases
 alias weather='curl http://wttr.in/'
+alias myip='curl http://ipecho.net/plain; echo'.
 
 # Revert all changes to the previous commit
 alias greset='git reset --hard $(git log | head -n 1 | tr " " "\n" | tail -n 1)'
-alias gsedit="gss | awk '{\$1=\"\"}1' | xargs $EDITOR"
+alias gsedit="git status -s | awk '{\$1=\"\"}1' | xargs $EDITOR"
 
-
-#Tm Aliases
-alias ttl='tm task list'
-alias tta='tm task add'
-alias ttd='tm task done'
-alias tss='tm sess start'
-alias tsa='tm sess add'
-alias tsg='tm stat grad'
+# Go to the root of a project (git root)
+alias root='cd $(git rev-parse --show-cdup)'
 
 # Modify mkdir
 alias mkdir='mkdir -pv'
@@ -54,9 +50,6 @@ alias python='python3'
 
 # Pretty print the path
 alias path="echo $PATH | tr -s ':' '\n'"
-
-# Go to the root of a project (git root)
-alias root='cd $(git rev-parse --show-cdup)'
 
 # kill a rogue process running on a specific port
 # usage: `killp 3000`

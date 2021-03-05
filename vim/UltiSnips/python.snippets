@@ -1,26 +1,60 @@
+priority -50
+
+#
+# Global functions
+#
+
+global !p
+def write_instance_vars(arglist, snip):
+    """
+    Function to get a list of arguments from a function,
+    and add it into the docstring
+    """
+    def split_arg(line):
+        line = line.strip().replace(':', ' ')
+        values = line.split(' ', 1)
+        return values if len(values) > 1 else (values[0], None)
+
+    args = str(arglist).split(',')
+    for arg in args:
+        name, arg_type = split_arg(arg)
+        if name and arg_type:
+            arg_type = arg_type.strip()
+            snip += '    :param {}: {}'.format(name, arg_type)
+        elif name:
+            snip += '    :param {}:'.format(name)
+        else:
+            snip += ''
+endglobal
+
+#
+# Snippets
+#
+
+
 snippet sb "Adds shebang to the top of python file" b
 #!/usr/bin/env python3
 # encoding: utf8
 
 endsnippet
 
-snippet df "This creates a function template" b
-def ${1:function_name}():
-	"""
-	Description: ${2:Brief Description}
-	${3::param}
-	"""
-	${4:pass}
+snippet def "This creates a function template" b
+def ${1:function_name}($2):
+    """
+    Description: ${3:Brief Description}
+    `!p write_instance_vars(t[2],snip)`
+    """
+    ${4:pass}
 endsnippet
 
 snippet cl "The creates a class template" b
 class ${1:ClassName}:
-	"""
-	Description: ${2:Brief Description}
-	"""
+    """
+    Description: ${2:Brief Description}
+    """
 
-	def __init__(self):
-		${3:pass}
+    def __init__(self):
+        ${3:pass}
 endsnippet
 
 snippet im "import" b
@@ -43,7 +77,7 @@ ${1/\w+\s*/\u$0/g}
 endsnippet
 
 snippet todo "Insert a todo statement" i
-# TODO (`!v strftime("%c")`): ${1:desc}
+# TODO (`!v strftime("%Y-%m-%d")`): ${1:desc}
 endsnippet
 
 snippet static "@staticmethod" b
@@ -58,24 +92,24 @@ snippet pr "print" i
 print(${0})
 endsnippet
 
-snippet . "self" b
+snippet . "self"
 self.
 endsnippet
 
 snippet ifm "main check"
 if __name__ == "__main__":
-	${1:${VISUAL:main()}}
+    ${1:${VISUAL:main()}}
 endsnippet
 
 snippet with "with" b
 with ${1:expr}`!p snip.rv = " as " if t[2] else ""`${2:var}:
-	${3:${VISUAL:pass}}
+    ${3:${VISUAL:pass}}
 ${0}
 endsnippet
 
 snippet for "for loop" b
 for ${1:item} in ${2:iterable}:
-	${3:${VISUAL:pass}}
+    ${3:${VISUAL:pass}}
 endsnippet
 
 ####################
@@ -83,23 +117,23 @@ endsnippet
 ####################
 snippet if "If" b
 if ${1:condition}:
-	${2:${VISUAL:pass}}
+    ${2:${VISUAL:pass}}
 endsnippet
 
 snippet ife "If / Else" b
 if ${1:condition}:
-	${2:${VISUAL:pass}}
+    ${2:${VISUAL:pass}}
 else:
-	${3:pass}
+    ${3:pass}
 endsnippet
 
 snippet ifee "If / Elif / Else" b
 if ${1:condition}:
-	${2:${VISUAL:pass}}
+    ${2:${VISUAL:pass}}
 elif ${3:condition}:
-	${4:pass}
+    ${4:pass}
 else:
-	${5:pass}
+    ${5:pass}
 endsnippet
 
 snippet op "os.path" i

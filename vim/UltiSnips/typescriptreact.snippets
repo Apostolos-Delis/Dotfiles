@@ -2,12 +2,12 @@ snippet comp "React Component"
 import React from 'react'
 import styled from 'styled-components';
 
-export type $1Props = {
+export type ${1:`!p snip.rv = snip.basename`}Props = {
   value: string[],
 }
 
-const Container = styled.div`
-`
+const Container = styled.div\`
+\`
 
 export default $1 = (props: $1Props) => {
 

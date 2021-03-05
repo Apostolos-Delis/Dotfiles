@@ -3,16 +3,19 @@
 " ---------------------------------------------------------------------------- "
 " Vim-Plug
 call plug#begin()
-" Aesthetics - Main
 
+" ---------------------------------------------------------------------------- "
+" Aesthetics Plugins
 Plug 'joshdick/onedark.vim'
-Plug 'morhetz/gruvbox' " Adds gruvbox theme
+Plug 'morhetz/gruvbox'                    " Adds gruvbox theme
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'itchyny/lightline.vim'
-"Plug 'ryanoasis/vim-devicons'
+Plug 'ryanoasis/vim-devicons'
 "Plug 'ap/vim-buftabline' " To show the tabs at the top of vim
 Plug 'sheerun/vim-polyglot'
+Plug 'Yggdroot/indentLine'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'
 "
 "" Functionalities
 "Plug 'tpope/vim-fugitive'
@@ -20,9 +23,7 @@ Plug 'sheerun/vim-polyglot'
 "Plug 'tpope/vim-surround'
 "Plug 'easymotion/vim-easymotion'
 "Plug 'majutsushi/tagbar'
-"Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'scrooloose/nerdcommenter'
-""Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 "
 Plug 'codota/tabnine-vim'
 "" Adds LateX functionality
@@ -39,7 +40,6 @@ Plug 'mhinz/vim-startify'
 "Plug 'junegunn/vim-easy-align'
 "Plug 'alvan/vim-closetag'
 "Plug 'tpope/vim-abolish'
-""Plug 'Yggdroot/indentLine'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 "
@@ -100,7 +100,7 @@ set mouse=a                         " Enable Mouse
 set scrolloff=10                    " Keep the scroll 10 below/above cursor
 set fillchars+=vert:\               " Changing the styling of vertical borders for windows
 set nopaste
-set rtp+=/usr/local/opt/fzf         " To use fzf
+set runtimepath+=/usr/local/opt/fzf " To use fzf
 
 " Gaster loading, since I don't use GUI
 let did_install_default_menus = 1
@@ -147,8 +147,11 @@ set autoindent
 :ab WQ :wq
 :ab Q :q
 
-" Remap so it quits rather than entering ex mode
-nnoremap Q :q<CR>
+" Map so Q finds the current ctag
+nnoremap Q :Tags <c-r>=expand("<cword>")<cr><CR>
+
+" Expands the file under the cursor
+nnoremap <c-E> :vertical wincmd f<CR>
 
 " Yank to end of the line
 nnoremap Y y$
@@ -212,6 +215,8 @@ nnoremap <leader>tr :RainbowParentheses!!<CR>
 nnoremap <leader>ta :ALEToggle<CR>
 " Toggle  between current and last buffer
 nnoremap <leader>tb <c-^>
+" Toggle IndentLines
+nnoremap <leader>ti :IndentLinesToggle<CR>
 
 " ---------------------------------------------------------------------------- "
 " Delete Related Bindings
@@ -270,10 +275,14 @@ nnoremap <leader>fc :Commits<CR>
 " Find Maps
 nnoremap <leader>fm :Maps<CR>
 
+" Remap ; to fzf commands, will allow for easy command usage
+nnoremap ; :Commands<CR>
+
 " ---------------------------------------------------------------------------- "
-" Navitagion Bindings
-nmap <silent> <leader>ne <Plug>(ale_previous_wrap)
-nmap <silent> <leader>nE <Plug>(ale_next_wrap)
+" Ale Bindings
+nnoremap <silent> <leader>ae <Plug>(ale_previous_wrap)
+nnoremap <silent> <leader>aE <Plug>(ale_fnext_wrap)
+nnoremap <leader>af <Plug>(ale_find_references)
 
 " ---------------------------------------------------------------------------- "
 " Highlight Bindings
@@ -310,7 +319,9 @@ nnoremap <leader>bd :bd!<CR>
 " ---------------------------------------------------------------------------- "
 " Coloring/Theme
 
-syntax enable
+" To fix Devicons with refreshing
+if !exists('g:syntax_on') | syntax enable | endif
+
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
 
@@ -406,7 +417,7 @@ let g:ale_linters = {
     \ 'javascript': ['prettier', 'eslint'],
     \ 'typescript': ['prettier', 'eslint'],
     \ 'typescriptreact': ['prettier', 'eslint'],
-    \ 'ruby': ['rubocop'],
+    \ 'ruby': ['rubocop', 'solargraph'],
     \ }
 
 let g:ale_fix_on_save = 1
@@ -421,13 +432,13 @@ let g:ale_fixers = {
     \ '*': ['remove_trailing_lines', 'trim_whitespace'],
     \ 'css': [ 'prettier' ],
     \ 'html': [ 'prettier' ],
-    \ 'javascript': [ 'prettier' ],
-    \ 'typescript': [ 'prettier' ],
-    \ 'typescriptreact': [ 'prettier' ],
-    \ 'json': [ 'prettier', ],
-    \ 'markdown': [ 'prettier', 'textlint' ],
-    \ 'python': [ 'autopep8', 'isort' ],
-    \ 'ruby': [ 'rubocop' ],
+    \ 'javascript': ['prettier'],
+    \ 'typescript': ['prettier'],
+    \ 'typescriptreact': ['prettier'],
+    \ 'json': ['prettier'],
+    \ 'markdown': ['prettier', 'textlint'],
+    \ 'python': ['autopep8', 'isort'],
+    \ 'ruby': ['rubocop'],
     \ }
 
 " ---------------------------------------------------------------------------- "
@@ -464,7 +475,6 @@ autocmd User Startified setlocal cursorline
 " ---------------------------------------------------------------------------- "
 " UltiSnips
 
-" set runtimepath+=~/.vim/UltiSnips
 let g:UltiSnipsExpandTrigger="<nop>"
 let g:UltiSnipsJumpForwardTrigger="<c-e>"
 let g:UltiSnipsJumpBackwardTrigger="<c-q>"
@@ -476,3 +486,55 @@ let g:UltiSnipsEditSplit="vertical"
 
 " Need this to actually trigger snippets
 inoremap <expr> <CR> pumvisible() ? "<C-R>=UltiSnips#ExpandSnippetOrJump()<CR>" : "\<CR>"
+
+" ---------------------------------------------------------------------------- "
+" Yggdroot/indentLine
+let g:indentLine_char = '│'
+
+" ---------------------------------------------------------------------------- "
+" NerdTree
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeQuitOnOpen=1 " closes upon opening a file in nerdtree
+let g:NERDTreeShowHidden=1 " show hidden files in NERDTree
+let g:NERDTreeWinSize=35
+
+nnoremap <C-f> :NERDTreeToggle<CR>
+
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
+" ---------------------------------------------------------------------------- "
+" File Specific Mappints
+
+" Add support for PEP 8 file formatting (With character count set to 80)
+autocmd FileType python
+    \ setlocal tabstop=4 |
+    \ setlocal softtabstop=4 |
+    \ setlocal shiftwidth=4 |
+    \ setlocal textwidth=79 |
+    \ setlocal expandtab |
+    \ setlocal autoindent |
+    \ setlocal fileformat=unix |
+    \ let g:NERDSpaceDelims = 0 |
+    \ setlocal colorcolumn=80
+
+" HTML, XML, CSS
+autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+" Javascript, React
+autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+" Ruby
+autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+" Markdown
+autocmd FileType markdown setlocal textwidth=89 autoindent expandtab
+
+" Latex
+autocmd FileType tex setlocal textwidth=89 autoindent expandtab
