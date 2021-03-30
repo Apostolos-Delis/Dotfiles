@@ -5,7 +5,7 @@ priority -50
 #
 
 global !p
-def write_instance_vars(arglist, snip):
+def write_docstring(arglist, snip):
     """
     Function to get a list of arguments from a function,
     and add it into the docstring
@@ -25,6 +25,16 @@ def write_instance_vars(arglist, snip):
             snip += '    :param {}:'.format(name)
         else:
             snip += ''
+
+def write_instance_vars(arglist, snip):
+    args = str(arglist).split(',')
+    for arg in args:
+        name = arg.strip().replace(':', ' ').split(' ', 1)[0]
+        if name:
+            spaces = ' ' * 8
+            snip += '{}self.{} = {}'.format(spaces, name, name)
+        else:
+            snip += ''
 endglobal
 
 #
@@ -42,19 +52,19 @@ snippet def "This creates a function template" b
 def ${1:function_name}($2):
     """
     Description: ${3:Brief Description}
-    `!p write_instance_vars(t[2],snip)`
+    `!p write_docstring(t[2],snip)`
     """
     ${4:pass}
 endsnippet
 
-snippet cl "The creates a class template" b
-class ${1:ClassName}:
+snippet class "The creates a class template" b
+class ${1:`!p snip.rv = snip.basename.title().replace('_', '')`}:
     """
-    Description: ${2:Brief Description}
+    Description: ${2:description}
     """
 
-    def __init__(self):
-        ${3:pass}
+    def __init__(self,${3}):
+        `!p write_instance_vars(t[3],snip)`
 endsnippet
 
 snippet im "import" b

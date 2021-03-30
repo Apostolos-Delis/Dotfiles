@@ -28,7 +28,7 @@ alias rmswp='rm -f ~/.local/share/nvim/swap/*.swp'
 
 # Curl Aliases
 alias weather='curl http://wttr.in/'
-alias myip='curl http://ipecho.net/plain; echo'.
+alias myip='curl http://ipecho.net/plain; echo'
 
 # Revert all changes to the previous commit
 alias greset='git reset --hard $(git log | head -n 1 | tr " " "\n" | tail -n 1)'

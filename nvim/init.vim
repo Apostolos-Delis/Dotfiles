@@ -6,52 +6,43 @@ call plug#begin()
 
 " ---------------------------------------------------------------------------- "
 " Aesthetics Plugins
-Plug 'joshdick/onedark.vim'
+Plug 'joshdick/onedark.vim'               " Adds onedark theme
 Plug 'morhetz/gruvbox'                    " Adds gruvbox theme
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons'
-"Plug 'ap/vim-buftabline' " To show the tabs at the top of vim
-Plug 'sheerun/vim-polyglot'
-Plug 'Yggdroot/indentLine'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'vim-airline/vim-airline'            " Adds powerline
+Plug 'vim-airline/vim-airline-themes'     " Allows for onedark line
+Plug 'ryanoasis/vim-devicons'             " Add NERD Icons
+Plug 'sheerun/vim-polyglot'               " Syntax highlighting
+Plug 'Yggdroot/indentLine'                " Indentation display
+Plug 'scrooloose/nerdtree',               " File display
+    \ { 'on': 'NERDTreeToggle' }
+Plug 'Xuyuanp/nerdtree-git-plugin'        " Show Git status of files in NERDTree
 "
 "" Functionalities
-"Plug 'tpope/vim-fugitive'
-"Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
 "Plug 'tpope/vim-surround'
 "Plug 'easymotion/vim-easymotion'
-"Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'                  " Add a bar for ctags
+Plug 'scrooloose/nerdcommenter'           " Easy commenting
+    \ { 'on': '<Plug>NERDCommenterToggle' }
+Plug 'codota/tabnine-vim'                 " AI autocompletion
+Plug 'christoomey/vim-tmux-navigator'     " Navigate Vim buggers like tmux panes
+Plug 'mhinz/vim-startify'                 " Vim start screen
 "
-Plug 'codota/tabnine-vim'
-"" Adds LateX functionality
-""Plug 'lervag/vimtex'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'mhinz/vim-startify'
-"
-""Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-"Plug 'kovisoft/paredit', { 'for': ['clojure', 'scheme'] }
-"
-""Plug 'zchee/deoplete-jedi'
-""Plug 'ervandew/supertab'
 "Plug 'jiangmiao/auto-pairs'
 "Plug 'junegunn/vim-easy-align'
 "Plug 'alvan/vim-closetag'
 "Plug 'tpope/vim-abolish'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf',                     " Fuzzy find functionality
+    \ { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 "
 "Plug 'chrisbra/Colorizer'
-"Plug 'vim-scripts/loremipsum'
 "Plug 'metakirby5/codi.vim'
 "Plug 'dkarter/bullets.vim'
 Plug 'dense-analysis/ale'
 Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 call plug#end()
-
 
 " ---------------------------------------------------------------------------- "
 " Other General Configurations
@@ -65,9 +56,9 @@ filetype plugin indent on
 set ruler
 set laststatus=2
 set showmode                        " If in I, R or V mode put a message on the last line.
-set clipboard^=unnamed
-" wrapping lines when arrows are pressed
-set whichwrap+=<,>,h,l,[,]
+set clipboard^=unnamed              " Make copying work with OS
+set clipboard+=unnamedplus          " Make it so that registers don't get messed up with OS copy
+set whichwrap+=<,>,h,l,[,]          " wrapping lines when arrows are pressed
 set history=2000
 set timeout ttimeout
 set cmdheight=1                     " Height of the command line
@@ -138,14 +129,14 @@ set autoindent
 " Bindings
 
 " scrolling
-:nnoremap k gk
-:nnoremap j gj
+nnoremap k gk
+nnoremap j gj
 
 " Absolute conversions for when mistyping :wq
-:ab Wq :wq
-:ab W :w
-:ab WQ :wq
-:ab Q :q
+ab Wq :wq
+ab W :w
+ab WQ :wq
+ab Q :q
 
 " Map so Q finds the current ctag
 nnoremap Q :Tags <c-r>=expand("<cword>")<cr><CR>
@@ -172,10 +163,17 @@ nnoremap <leader>sp :setlocal spell!<CR>
 " Fix Spelling of previous word
 inoremap <C-T> <c-g>u<Esc>[s1z=`]a<c-g>u
 
+" Go back to Startify Home Screen
 nnoremap <leader>st :Startify<cr>
+
+" ---------------------------------------------------------------------------- "
+" Restart-related bindings
 
 " Restart nvimrc
 nnoremap <leader>rs :source $MYVIMRC<CR>:noh<CR>
+
+" Restart YCM Server
+nnoremap <leader>ry :YcmRestartServer<CR>
 
 " ---------------------------------------------------------------------------- "
 " Edit-related bindings
@@ -192,7 +190,6 @@ nnoremap <leader>ez :e! ~/.zshrc<CR>
 nnoremap <leader>ea :e! ~/.aliases<CR>
 " Edit tmux config
 nnoremap <leader>et :e! ~/.tmux.conf<CR>
-" Edit TabNine config
 " Edit init.vim
 nnoremap <leader>ei :e! +230 ~/.config/nvim/init.vim<CR>
 " Edit Notes
@@ -238,10 +235,10 @@ nnoremap <leader>mt :make<CR>:make test<CR>
 
 " ---------------------------------------------------------------------------- "
 " Git Bindings for Fugitive
-nnoremap <silent> <leader>gs :Gstatus<cr>
+nnoremap <silent> <leader>gs :Git status<cr>
 nnoremap <leader>ge :Gedit<cr>
-nnoremap <silent><leader>gr :Gread<cr>
-nnoremap <silent><leader>gb :Gblame<cr>
+nnoremap <silent><leader>gr :Git read<cr>
+nnoremap <silent><leader>gb :Git blame<cr>
 
 " Git Grep
 nnoremap <leader>gg :GGrep<CR>
@@ -280,9 +277,17 @@ nnoremap ; :Commands<CR>
 
 " ---------------------------------------------------------------------------- "
 " Ale Bindings
-nnoremap <silent> <leader>ae <Plug>(ale_previous_wrap)
-nnoremap <silent> <leader>aE <Plug>(ale_fnext_wrap)
-nnoremap <leader>af <Plug>(ale_find_references)
+
+" Find the previous error
+nnoremap <silent> <leader>ae :ALEPreviousWrap<CR>
+" Find the next error
+nnoremap <silent> <leader>aE :ALENextWrap<CR>
+" Run Linter
+nnoremap <silent> <leader>al :ALELint<CR>
+" Show Detail of Error
+nnoremap <silent> <leader>ad :ALEDetail<CR>
+" Find references under a cursor
+nnoremap <leader>af <leader>af :ALEFindReferences
 
 " ---------------------------------------------------------------------------- "
 " Highlight Bindings
@@ -302,6 +307,7 @@ nnoremap <leader>rt :%s/\t/    /g<CR>:noh<CR>
 
 " ---------------------------------------------------------------------------- "
 " Buffers and Windows
+" Notes: <C-W> o makes a buffer full screen
 
 " Shift between multiple buffers with tab and shift-tab
 nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
@@ -334,17 +340,13 @@ if (has("termguicolors"))
     set termguicolors
 endif
 
-" Gruvbox
+" Gruvbox (Not currently in use due to onedark)
 let g:gruvbox_termcolors=256
 let g:gruvbox_italic=1
 let g:gruvbox_improved_warnings=1
-" colorscheme gruvbox
-colorscheme onedark
 
-let g:airline_theme='gruvbox'
 let g:airline_theme='onedark'
-
-" ---------------------------------------------------------------------------- "
+colorscheme onedark
 " Tmux (including tmux-vim-navigator)
 
 " Tmux vim navigator
@@ -372,7 +374,8 @@ else
 endif
 
 " Added this for pasting in tmux
-" Reference: https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
+" Reference:
+" https://coderwall.com/p/if9mda/automatically-set-paste-mode-in-vim-when-pasting-in-insert-mode
 function! WrapForTmux(s)
   if !exists('$TMUX')
     return a:s
@@ -414,19 +417,11 @@ let g:NERDToggleCheckAllLines = 1
 
 let g:ale_linters = {
     \ 'python3': ['flake8'],
-    \ 'javascript': ['prettier', 'eslint'],
-    \ 'typescript': ['prettier', 'eslint'],
-    \ 'typescriptreact': ['prettier', 'eslint'],
+    \ 'javascript': ['prettier'],
+    \ 'typescript': ['prettier'],
+    \ 'typescriptreact': ['prettier'],
     \ 'ruby': ['rubocop', 'solargraph'],
     \ }
-
-let g:ale_fix_on_save = 1
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
-let g:ale_sign_info = 'ℹ'
-
-" Python
-let g:ale_python_flake8_options = '--max-line-length=80'
 
 let g:ale_fixers = {
     \ '*': ['remove_trailing_lines', 'trim_whitespace'],
@@ -440,6 +435,14 @@ let g:ale_fixers = {
     \ 'python': ['autopep8', 'isort'],
     \ 'ruby': ['rubocop'],
     \ }
+
+let g:ale_fix_on_save = 1
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+let g:ale_sign_info = 'ℹ'
+
+" Python
+let g:ale_python_flake8_options = '--max-line-length=80'
 
 " ---------------------------------------------------------------------------- "
 " Airline / Airline-Themes
@@ -459,6 +462,7 @@ let g:startify_relative_path = 1
 let g:startify_use_env = 1
 
 let g:startify_commands = [
+\   { 'ip': [ 'Install Plugins', ':PlugInstall' ] },
 \   { 'uc': [ 'Clean Plugins', ':PlugClean' ] },
 \   { 'up': [ 'Update Plugins', ':PlugUpdate' ] },
 \   { 'ug': [ 'Upgrade Plugin Manager', ':PlugUpgrade' ] },
@@ -466,7 +470,7 @@ let g:startify_commands = [
 
 let g:startify_bookmarks = [
     \ { 'c': '~/.config/nvim/init.vim' },
-    \ { 'g': '~/.gitconfig' },
+    \ { 'a': '~/.aliases' },
     \ { 'z': '~/.zshrc' }
 \ ]
 
@@ -506,6 +510,13 @@ autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_
     \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
 
 " ---------------------------------------------------------------------------- "
+" Tagbar
+" Important note: * opens a fold = closes it
+
+let g:tagbar_width=35
+let g:tagbar_iconchars = ['↠', '↡']
+
+" ---------------------------------------------------------------------------- "
 " File Specific Mappints
 
 " Add support for PEP 8 file formatting (With character count set to 80)
@@ -531,7 +542,14 @@ autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " Ruby
-autocmd FileType ruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType ruby
+    \ setlocal shiftwidth=2 |
+    \ setlocal tabstop=2 |
+    \ setlocal shiftwidth=2 |
+    \ let g:NERDSpaceDelims = 1 |
+    \ setlocal softtabstop=2 |
+    \ setlocal colorcolumn=120 |
+    \ setlocal textwidth=119 |
 
 " Markdown
 autocmd FileType markdown setlocal textwidth=89 autoindent expandtab
