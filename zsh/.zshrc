@@ -201,3 +201,4 @@ function math() {
 # Secureframe Stuff
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export NVM_DIR="$HOME/.nvm"
+eval "$(direnv hook zsh)"

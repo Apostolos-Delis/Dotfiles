@@ -27,6 +27,7 @@ Plug 'scrooloose/nerdcommenter'           " Easy commenting
 Plug 'codota/tabnine-vim'                 " AI autocompletion
 Plug 'christoomey/vim-tmux-navigator'     " Navigate Vim buggers like tmux panes
 Plug 'mhinz/vim-startify'                 " Vim start screen
+
 "
 "Plug 'jiangmiao/auto-pairs'
 "Plug 'junegunn/vim-easy-align'
@@ -427,9 +428,9 @@ let g:ale_fixers = {
     \ '*': ['remove_trailing_lines', 'trim_whitespace'],
     \ 'css': [ 'prettier' ],
     \ 'html': [ 'prettier' ],
-    \ 'javascript': ['prettier'],
-    \ 'typescript': ['prettier'],
-    \ 'typescriptreact': ['prettier'],
+    \ 'javascript': ['prettier', 'eslint'],
+    \ 'typescript': ['prettier', 'eslint'],
+    \ 'typescriptreact': ['prettier', 'eslint'],
     \ 'json': ['prettier'],
     \ 'markdown': ['prettier', 'textlint'],
     \ 'python': ['autopep8', 'isort'],
@@ -540,6 +541,9 @@ autocmd FileType xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+
+" For some reason typescript files were not being colored
+autocmd FileType *.ts set filetype=typescript
 
 " Ruby
 autocmd FileType ruby
