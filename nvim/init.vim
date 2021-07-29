@@ -428,6 +428,7 @@ let g:ale_fixers = {
     \ '*': ['remove_trailing_lines', 'trim_whitespace'],
     \ 'css': [ 'prettier' ],
     \ 'html': [ 'prettier' ],
+    \ 'c++': [ 'prettier' ],
     \ 'javascript': ['prettier', 'eslint'],
     \ 'typescript': ['prettier', 'eslint'],
     \ 'typescriptreact': ['prettier', 'eslint'],
@@ -540,10 +541,14 @@ autocmd FileType xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
 " Javascript, React
 autocmd FileType typescriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType typescript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType javascriptreact setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " For some reason typescript files were not being colored
 autocmd FileType *.ts set filetype=typescript
+autocmd FileType *.js set filetype=javascript
+autocmd FileType *.jsx set filetype=javascriptreact
+autocmd FileType *.tsx set filetype=typescriptreact
 
 " Ruby
 autocmd FileType ruby
