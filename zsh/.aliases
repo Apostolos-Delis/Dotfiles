@@ -23,6 +23,9 @@ alias vim='nvim'
 alias c='clear'
 alias fedit="fzf | xargs $EDITOR"
 
+# fzf the directory and cd to it
+alias fd='cd $(dirname $(fzf))'
+
 # Remove nvim swp files
 alias rmswp='rm -f ~/.local/share/nvim/swap/*.swp'
 
