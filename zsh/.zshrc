@@ -119,7 +119,6 @@ plugins=(
   colored-man-pages         # Colors man pages
   zsh-interactive-cd        # Adds fzf cd completion
   bazel                     # Adds Autocomplete for bazel
-  zsh_reload                # Adds src command to reload zsh
   wd                        # Adds wd tool
   ripgrep                   # Adds autocompletion for rg
   docker                    # Adds autocompletion for docker
