@@ -27,7 +27,7 @@ alias fedit="fzf | xargs $EDITOR"
 alias fd='cd $(dirname $(fzf))'
 
 # Remove nvim swp files
-alias rmswp='rm -f ~/.local/share/nvim/swap/*.swp'
+alias rmswp='rm -vf ~/.local/share/nvim/swap/*.swp'
 
 # Curl Aliases
 alias weather='curl http://wttr.in/'

@@ -201,3 +201,7 @@ function math() {
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export NVM_DIR="$HOME/.nvm"
 eval "$(direnv hook zsh)"
+
+# Autocorrect Disabling
+alias bundle="nocorrect bundle"
+alias doppler="nocorrect doppler"
