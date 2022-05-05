@@ -13,7 +13,7 @@ bindkey '^[[B' down-line-or-search
 typeset -aU path
 
 # Initialize the path
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/TeX/texbin:/opt/X11/bin:/usr/local/texlive/2019/2018/bin"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -159,8 +159,6 @@ stty -ixon
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
-export PATH=$PATH:/usr/local/mysql/bin
-
 # Add home bin
 export PATH=$HOME/bin:$PATH
 
@@ -201,7 +199,12 @@ function math() {
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 export NVM_DIR="$HOME/.nvm"
 eval "$(direnv hook zsh)"
+eval "$(nodenv init -)"
 
 # Autocorrect Disabling
 alias bundle="nocorrect bundle"
 alias doppler="nocorrect doppler"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

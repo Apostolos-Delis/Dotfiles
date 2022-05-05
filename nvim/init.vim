@@ -25,6 +25,8 @@ Plug 'majutsushi/tagbar'                  " Add a bar for ctags
 Plug 'scrooloose/nerdcommenter'           " Easy commenting
     \ { 'on': '<Plug>NERDCommenterToggle' }
 Plug 'codota/tabnine-vim'                 " AI autocompletion
+" https://github.com/github/copilot.vim#getting-started
+" Plug 'github/copilot.vim'                 " AI autocompletion
 Plug 'christoomey/vim-tmux-navigator'     " Navigate Vim buggers like tmux panes
 Plug 'mhinz/vim-startify'                 " Vim start screen
 
@@ -304,7 +306,10 @@ nnoremap <leader>hn /[^\x00-\x7F]<CR>
 nnoremap <leader>rc :s/\<\(\w\)\(\w*\)\>/\u\1\L\2/g<CR>:noh<CR>
 
 " Replaces all tabs to 4 spaces
-nnoremap <leader>rt :%s/\t/    /g<CR>:noh<CR>
+nnoremap <leader>r4 :%s/\t/    /g<CR>:noh<CR>
+
+" Replaces all tabs to 2 spaces
+nnoremap <leader>r2 :%s/\t/  /g<CR>:noh<CR>
 
 " ---------------------------------------------------------------------------- "
 " Buffers and Windows
@@ -444,7 +449,10 @@ let g:ale_sign_warning = '⚠'
 let g:ale_sign_info = 'ℹ'
 
 " Python
-let g:ale_python_flake8_options = '--max-line-length=80'
+let g:ale_python_flake8_options = '--max-line-length=120'
+
+" Ruby
+let g:ale_ruby_rubocop_executable = 'bundle'
 
 " ---------------------------------------------------------------------------- "
 " Airline / Airline-Themes
@@ -521,17 +529,17 @@ let g:tagbar_iconchars = ['↠', '↡']
 " ---------------------------------------------------------------------------- "
 " File Specific Mappints
 
-" Add support for PEP 8 file formatting (With character count set to 80)
+" Add support for PEP 8 file formatting (With character count set to 120)
 autocmd FileType python
     \ setlocal tabstop=4 |
     \ setlocal softtabstop=4 |
     \ setlocal shiftwidth=4 |
-    \ setlocal textwidth=79 |
+    \ setlocal textwidth=119 |
     \ setlocal expandtab |
     \ setlocal autoindent |
     \ setlocal fileformat=unix |
     \ let g:NERDSpaceDelims = 0 |
-    \ setlocal colorcolumn=80
+    \ setlocal colorcolumn=120
 
 " HTML, XML, CSS
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
