@@ -43,10 +43,6 @@ alias root='cd $(git rev-parse --show-cdup)'
 # Modify mkdir
 alias mkdir='mkdir -pv'
 
-# We only want python3 by default
-alias pip2='pip'
-alias python2='python'
-
 # Use python3 instead of 2
 alias pip='pip3'
 alias python='python3'
@@ -69,3 +65,40 @@ bindkey -M main '+' expand-alias
 
 # sc is somehow aliased to ruby console otherwise
 unalias sc 2>/dev/null
+
+
+# Functions
+
+# Lazy Load NVM
+lazynvm() {
+  unset -f nvm node npm
+  export NVM_DIR=~/.nvm
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  eval "$(nodenv init -)"
+}
+
+nvm() {
+  lazynvm
+  nvm $@
+}
+
+node() {
+  lazynvm
+  node $@
+}
+
+npm() {
+  lazynvm
+  npm $@
+}
+
+# Run ls after cd
+function cs() {
+    if [ $# -eq 0  ]; then
+        cd && ls;
+    else
+        cd "$*" && ls;
+    fi
+}
+alias cd='cs'

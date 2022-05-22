@@ -118,7 +118,6 @@ plugins=(
   dotenv                    # Automatically sources .env files
   colored-man-pages         # Colors man pages
   zsh-interactive-cd        # Adds fzf cd completion
-  bazel                     # Adds Autocomplete for bazel
   wd                        # Adds wd tool
   ripgrep                   # Adds autocompletion for rg
   docker                    # Adds autocompletion for docker
@@ -126,8 +125,6 @@ plugins=(
   zsh-autosuggestions       # Add autosuggestions to Oh My Zsh
   zsh-syntax-highlighting   # Add syntax highlighting
 )
-
-#plugins=(git colored-man colorize pip python brew osx zsh-syntax-highlighting)
 
 # Source Oh My Zsh
 source $ZSH/oh-my-zsh.sh
@@ -165,46 +162,10 @@ export PATH=$HOME/bin:$PATH
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
-# Functions
-#function cdd() {
-    #if [ $# -eq 0 ]; then
-        #cdd-helper --help;
-    #elif [ ${1:0:1} != "-" ] && [ $1 != "add" ] && [ $1 != "rm" ];
-    #then
-        #DIR=`cdd-helper $@ -p`;
-        #if [[ ! -z $DIR ]]
-        #then
-            #cd "$DIR";
-        #fi
-    #else
-        #cdd-helper $@;
-    #fi
-#}
-
-function cs() {
-    if [ $# -eq 0  ]; then
-        cd && ls;
-    else
-        cd "$*" && ls;
-    fi
-}
-alias cd='cs'
-
-function math() {
-    args="$@"
-    python3 -c "print($args)"
-}
-
 # Secureframe Stuff
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-export NVM_DIR="$HOME/.nvm"
 eval "$(direnv hook zsh)"
-eval "$(nodenv init -)"
 
 # Autocorrect Disabling
 alias bundle="nocorrect bundle"
 alias doppler="nocorrect doppler"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
