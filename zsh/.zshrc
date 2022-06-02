@@ -29,7 +29,6 @@ SAVEHIST=4096
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="robbyrussell"
 #DISABLE_AUTO_TITLE="true"
 
 #powerline-daemon -q
@@ -46,7 +45,7 @@ POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='yellow'
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(status dir vcs)
 #POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(time background_jobs virtualenv rbenv rvm)
-#POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(background_jobs virtualenv rbenv rvm)
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(background_jobs virtualenv rbenv rvm)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=()
 
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
@@ -119,11 +118,11 @@ plugins=(
   colored-man-pages         # Colors man pages
   zsh-interactive-cd        # Adds fzf cd completion
   wd                        # Adds wd tool
-  ripgrep                   # Adds autocompletion for rg
   docker                    # Adds autocompletion for docker
   rails                     # Adds autocompletion for rails as well as aliases
   zsh-autosuggestions       # Add autosuggestions to Oh My Zsh
   zsh-syntax-highlighting   # Add syntax highlighting
+  evalcache                 # Custom startup to cache eval operations to speed up loading
 )
 
 # Source Oh My Zsh
@@ -163,8 +162,9 @@ export PATH=$HOME/bin:$PATH
 [[ -f ~/.aliases ]] && source ~/.aliases
 
 # Secureframe Stuff
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-eval "$(direnv hook zsh)"
+_evalcache rbenv init -
+_evalcache nodenv init -
+_evalcache direnv hook zsh
 
 # Autocorrect Disabling
 alias bundle="nocorrect bundle"
