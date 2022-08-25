@@ -145,15 +145,10 @@ stty -ixon
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
+
+# To allow repeating keys in vim
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
 # Add home bin
 export PATH=$HOME/bin:$PATH
@@ -166,6 +161,11 @@ _evalcache rbenv init -
 _evalcache nodenv init -
 _evalcache direnv hook zsh
 
+export DISABLE_SPRING=true
+
 # Autocorrect Disabling
 alias bundle="nocorrect bundle"
 alias doppler="nocorrect doppler"
+
+alias server="node --version && ./bin/server"
+alias sc-comments='ruby bin/development/shortcut_deploy_comments.rb \"6201a246-1c7f-4642-8cb6-1bb331c0b32d\"'

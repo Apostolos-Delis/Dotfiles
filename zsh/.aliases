@@ -35,7 +35,7 @@ alias myip='curl http://ipecho.net/plain; echo'
 
 # Revert all changes to the previous commit
 alias greset='git reset --hard $(git log | head -n 1 | tr " " "\n" | tail -n 1)'
-alias gsedit="git status -s | awk '{\$1=\"\"}1' | xargs $EDITOR"
+alias gsedit="git status -s | awk '{\$1=\"\"}1' | grep -v '\->' | xargs $EDITOR"
 
 # Go to the root of a project (git root)
 alias root='cd $(git rev-parse --show-toplevel)'
@@ -74,7 +74,7 @@ unalias sc 2>/dev/null
 
 # Lazy Load NVM
 lazynvm() {
-  unset -f nvm node npm
+  unset -f nvm node npm yarn cdk
   export NVM_DIR=~/.nvm
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -93,6 +93,16 @@ node() {
 npm() {
   lazynvm
   npm $@
+}
+
+yarn() {
+  lazynvm
+  yarn $@
+}
+
+cdk() {
+  lazynvm
+  cdk $@
 }
 
 # Run ls after cd

@@ -1,0 +1,18 @@
+inherit_from:
+  - .rubocop-airbnb.yml
+
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/cloudquery_schema.rb'
+    - 'bin/bundle'
+  # Enables newly added cops
+  # NOTE: could be problematic and break PRs
+  NewCops: enable
+
+Layout/LineLength:
+  Max: 120
+
+Layout/DotPosition:
+  Enabled: true
+  EnforcedStyle: leading
