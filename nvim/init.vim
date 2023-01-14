@@ -7,7 +7,6 @@ call plug#begin()
 " ---------------------------------------------------------------------------- "
 " Aesthetics Plugins
 Plug 'joshdick/onedark.vim'               " Adds onedark theme
-Plug 'morhetz/gruvbox'                    " Adds gruvbox theme
 Plug 'vim-airline/vim-airline'            " Adds powerline
 Plug 'vim-airline/vim-airline-themes'     " Allows for onedark line
 Plug 'ryanoasis/vim-devicons'             " Add NERD Icons
@@ -24,9 +23,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'majutsushi/tagbar'                  " Add a bar for ctags
 Plug 'scrooloose/nerdcommenter'           " Easy commenting
     \ { 'on': '<Plug>NERDCommenterToggle' }
-Plug 'codota/tabnine-vim'                 " AI autocompletion
-" https://github.com/github/copilot.vim#getting-started
-" Plug 'github/copilot.vim'                 " AI autocompletion
+" Plug 'codota/tabnine-vim'                 " AI autocompletion
+Plug 'github/copilot.vim'                 " AI autocompletion
 Plug 'christoomey/vim-tmux-navigator'     " Navigate Vim buggers like tmux panes
 Plug 'mhinz/vim-startify'                 " Vim start screen
 
@@ -439,7 +437,7 @@ let g:ale_fixers = {
     \ 'typescriptreact': ['prettier', 'eslint'],
     \ 'json': ['prettier'],
     \ 'markdown': ['prettier', 'textlint'],
-    \ 'python': ['autopep8', 'isort'],
+    \ 'python': ['black', 'isort'],
     \ 'ruby': ['rubocop'],
     \ }
 
