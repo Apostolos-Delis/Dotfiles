@@ -41,7 +41,7 @@ Plug 'junegunn/fzf.vim'
 "Plug 'metakirby5/codi.vim'
 "Plug 'dkarter/bullets.vim'
 Plug 'dense-analysis/ale'
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 "Plug 'honza/vim-snippets'
 call plug#end()
 
@@ -424,7 +424,7 @@ let g:ale_linters = {
     \ 'javascript': ['prettier'],
     \ 'typescript': ['prettier'],
     \ 'typescriptreact': ['prettier'],
-    \ 'ruby': ['rubocop', 'solargraph'],
+    \ 'ruby': ['standardrb', 'solargraph'],
     \ }
 
 let g:ale_fixers = {
@@ -438,7 +438,7 @@ let g:ale_fixers = {
     \ 'json': ['prettier'],
     \ 'markdown': ['prettier', 'textlint'],
     \ 'python': ['black', 'isort'],
-    \ 'ruby': ['rubocop'],
+    \ 'ruby': ['standardrb'],
     \ }
 
 let g:ale_fix_on_save = 1
@@ -451,6 +451,7 @@ let g:ale_python_flake8_options = '--max-line-length=120'
 
 " Ruby
 let g:ale_ruby_rubocop_executable = 'bundle'
+let g:ale_ruby_standardrb_executable = 'bundle'
 
 " ---------------------------------------------------------------------------- "
 " Airline / Airline-Themes

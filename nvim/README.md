@@ -17,7 +17,7 @@ Then make sure to create the directory structure for nvim
 ```bash
 mkdir -p ~/.config/nvim
 curl -f -s -o ~/.config/nvim/init.vim \
-https://raw.githubusercontent.com/Apostolos-Delis/Dotfiles/master/nvim/.nvimrc
+https://raw.githubusercontent.com/Apostolos-Delis/Dotfiles/master/nvim/init.vim
 ```
 Then to make sure the that all the python environments are setup:
 ```bash

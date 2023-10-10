@@ -19,15 +19,15 @@ alias -g ONE="| awk '{ print \$1}'"
 alias e="$EDITOR"
 alias v="$VISUAL"
 alias skim='open -a "Skim"'
-alias vim='nvim'
+alias vim='nvm -v &>/dev/null && nvim'
 alias c='clear'
 alias fedit="fzf | xargs $EDITOR"
 
 # fzf the directory and cd to it
-alias fd='cd $(dirname $(fzf))'
+alias fd='dir=$(fzf); [ -z "$dir" ] && echo "-" || cd "$(dirname "$dir")"'
 
 # Remove nvim swp files
-alias rmswp='rm -vf ~/.local/share/nvim/swap/*.swp'
+alias rmswp='rm -vf ~/.local/state/nvim/swap/*.sw?'
 
 # Curl Aliases
 alias weather='curl http://wttr.in/'
@@ -35,7 +35,7 @@ alias myip='curl http://ipecho.net/plain; echo'
 
 # Revert all changes to the previous commit
 alias greset='git reset --hard $(git log | head -n 1 | tr " " "\n" | tail -n 1)'
-alias gsedit="git status -s | awk '{\$1=\"\"}1' | grep -v '\->' | xargs $EDITOR"
+alias gsedit="git status -s | awk '{print \$NF}' | xargs $EDITOR"
 
 # Go to the root of a project (git root)
 alias root='cd $(git rev-parse --show-toplevel)'

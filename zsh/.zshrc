@@ -1,3 +1,10 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 #!/usr/bin/env zsh
 
 # Bind Up and down arrow to searching upwards with the matching content
@@ -14,6 +21,13 @@ typeset -aU path
 
 # Initialize the path
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
+
+# Add home bin
+export PATH=$HOME/bin:$PATH
+export PATH=$HOME/.local/bin:$PATH
+
+# Add poetry bin
+export PATH="$PATH:$HOME/.poetry/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -139,7 +153,7 @@ export LANG=en_US.UTF-8
 # Preferred editor for local and remote sessions
 export EDITOR='nvim'
 
-stty -ixon
+# stty -ixon
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -151,9 +165,8 @@ defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 # To allow repeating keys in vim
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
-# Add home bin
-export PATH=$HOME/bin:$PATH
-export PATH=$HOME/.local/bin:$PATH
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
@@ -170,4 +183,9 @@ alias bundle="nocorrect bundle"
 alias doppler="nocorrect doppler"
 
 alias server="node --version && ./bin/server"
-alias sc-comments='ruby bin/development/shortcut_deploy_comments.rb \"6201a246-1c7f-4642-8cb6-1bb331c0b32d\"'
+
+export PYENV_ROOT="$HOME/.pyenv"
+command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+
+[[ ! -f ~/.config/op/plugins.sh ]] || source ~/.config/op/plugins.sh
