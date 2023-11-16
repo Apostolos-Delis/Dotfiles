@@ -35,7 +35,7 @@ alias myip='curl http://ipecho.net/plain; echo'
 
 # Revert all changes to the previous commit
 alias greset='git reset --hard $(git log | head -n 1 | tr " " "\n" | tail -n 1)'
-alias gsedit="git status -s | awk '{print \$NF}' | xargs $EDITOR"
+alias gsedit="git status -s | awk '\$1 != \"D\"' | awk '{print \$NF}' | xargs $EDITOR"
 
 # Go to the root of a project (git root)
 alias root='cd $(git rev-parse --show-toplevel)'
