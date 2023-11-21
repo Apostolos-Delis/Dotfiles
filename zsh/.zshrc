@@ -29,6 +29,9 @@ export PATH=$HOME/.local/bin:$PATH
 # Add poetry bin
 export PATH="$PATH:$HOME/.poetry/bin"
 
+# Add Docker
+export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export TIMEFMT=$'\t%E real,\t%U user,\t%S sys'
@@ -145,7 +148,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
@@ -154,6 +157,10 @@ export LANG=en_US.UTF-8
 export EDITOR='nvim'
 
 # stty -ixon
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
