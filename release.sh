@@ -41,6 +41,7 @@ brew install node
 brew install lsd
 brew install ripgrep
 brew install tmux
+brew install git-delta
 
 brew install fzf
 # To install useful key bindings and fuzzy completion:

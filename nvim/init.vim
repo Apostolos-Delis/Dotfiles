@@ -189,6 +189,8 @@ nnoremap <leader>eb :e! ~/.bashrc<CR>
 nnoremap <leader>ez :e! ~/.zshrc<CR>
 " Edit aliases
 nnoremap <leader>ea :e! ~/.aliases<CR>
+" Edit powerline
+nnoremap <leader>ep :e! ~/.p10k.zsh<CR>
 " Edit tmux config
 nnoremap <leader>et :e! ~/.tmux.conf<CR>
 " Edit init.vim
