@@ -42,6 +42,7 @@ brew install lsd
 brew install ripgrep
 brew install tmux
 brew install git-delta
+brew install --cask amethyst
 
 brew install fzf
 # To install useful key bindings and fuzzy completion:
@@ -49,6 +50,9 @@ $(brew --prefix)/opt/fzf/install
 
 brew tap homebrew/cask-fonts
 brew install font-hack-nerd-font
+
+# Install yarn
+npm install --global yarn
 
 # Neovim config
 

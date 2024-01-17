@@ -178,11 +178,6 @@ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
-# Secureframe Stuff
-_evalcache rbenv init -
-_evalcache nodenv init -
-_evalcache direnv hook zsh
-
 export DISABLE_SPRING=true
 
 # Autocorrect Disabling
@@ -193,6 +188,6 @@ alias server="node --version && ./bin/server"
 
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
 
 [[ ! -f ~/.config/op/plugins.sh ]] || source ~/.config/op/plugins.sh
+source /Users/apostolos/Documents/repos/secureframe/.secureframe.shellrc
