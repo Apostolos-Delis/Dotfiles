@@ -53,9 +53,6 @@ alias path="echo $PATH | tr -s ':' '\n'"
 # MacOS specific things
 alias afk="open -a /System/Library/CoreServices/ScreenSaverEngine.app"
 
-# For Secureframe while node is EOL
-alias noderun="nvm use 16 && !! && nvm use 20"
-
 # kill a rogue process running on a specific port
 # usage: `killp 3000`
 killp() { lsof -n "-i4TCP:${1:-3002}" | grep LISTEN | tr -s ' ' | cut -f 2 -d ' ' | xargs kill -9}

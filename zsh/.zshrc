@@ -190,4 +190,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 
 [[ ! -f ~/.config/op/plugins.sh ]] || source ~/.config/op/plugins.sh
-source /Users/apostolos/Documents/repos/secureframe/.secureframe.shellrc
+if [ -f ~/Documents/repos/secureframe/.secureframe.shellrc ]; then
+  source ~/Documents/repos/secureframe/.secureframe.shellrc
+fi
