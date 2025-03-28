@@ -19,7 +19,7 @@ alias -g ONE="| awk '{ print \$1}'"
 alias e="$EDITOR"
 alias v="$VISUAL"
 alias skim='open -a "Skim"'
-alias vim='nvm -v &>/dev/null && nvim'
+alias vim='nvim'
 alias c='clear'
 alias fedit="fzf | xargs $EDITOR"
 

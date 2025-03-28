@@ -69,7 +69,6 @@ set updatetime=100                  " Default is 4000, can lead to delays
 set undofile
 set undodir=~/.tmp/undo
 set backspace=indent,eol,start      " Make more versetile backspace
-set guitablabel=%t                  " show only the file name an not the path
 set showcmd                         " Show the command run on bottom line of screen
 set nocursorline                    " Get rid of Cursorline
 set hidden                          " Deals with hiding unsaved buffers
