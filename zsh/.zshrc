@@ -172,6 +172,9 @@ defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 # To allow repeating keys in vim
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 
+# Allow repeating keys in all apps
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
@@ -193,3 +196,8 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 if [ -f ~/Documents/repos/secureframe/.secureframe.shellrc ]; then
   source ~/Documents/repos/secureframe/.secureframe.shellrc
 fi
+
+# Load completion system
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
