@@ -51,6 +51,12 @@ SAVEHIST=4096
 #powerline-daemon -q
 ZSH_THEME=powerlevel10k/powerlevel10k
 
+if [[ -n $CURSOR_TRACE_ID ]]; then
+  ZSH_THEME=robbyrussell  # Use a simpler theme in Cursor
+else
+  ZSH_THEME=powerlevel10k/powerlevel10k
+fi
+
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
 POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX='\uf0da'
 POWERLEVEL9K_VCS_GIT_ICON='\ue60a'
@@ -176,7 +182,9 @@ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+if [[ ! -n $CURSOR_TRACE_ID ]]; then
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
