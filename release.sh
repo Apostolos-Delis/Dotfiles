@@ -18,6 +18,10 @@ ln -s $(pwd)/tmux/.tmux.conf ~/.tmux.conf
 mkdir -p ~/.config/nvim
 ln -s $(pwd)/nvim/init.vim ~/.config/nvim/init.vim
 
+# Symlink Ghostty Config
+mkdir -p ~/.config/ghostty
+ln -s $(pwd)/ghostty/config ~/.config/ghostty/config
+
 # Install Oh My Zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
@@ -49,9 +53,7 @@ brew install fzf
 # To install useful key bindings and fuzzy completion:
 $(brew --prefix)/opt/fzf/install
 
-brew tap homebrew/cask-fonts
 brew install font-hack-nerd-font
-
 # Install yarn
 npm install --global yarn
 

@@ -32,6 +32,9 @@ export PATH="$PATH:$HOME/.poetry/bin"
 # Add Docker
 export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
 
+# Add Ghostty CLI
+export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export TIMEFMT=$'\t%E real,\t%U user,\t%S sys'
@@ -209,3 +212,15 @@ fi
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
+export VAULT_ADDR=https://vault.services.opendoor.com:8200
+
+eval "$(direnv hook zsh)"
+eval "$(rbenv init -)"
+
+######### od shell tooling #########
+# these lines added by `code/scripts/development/maybe_install_od_shell_tooling.sh`
+OD_CODE_ROOT="/Users/Apostolos.Delis@opendoor.com/Documents/repos/code"
+OD_TOOL_SOURCE_SCRIPT="$OD_CODE_ROOT/scripts/infra/sourced_on_shell_load.sh"
+[ -f "$OD_TOOL_SOURCE_SCRIPT" ] && source "$OD_TOOL_SOURCE_SCRIPT"
+######### end of od shell tooling #########
+export GOPATH="$HOME/go"
