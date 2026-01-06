@@ -24,19 +24,15 @@ cd ~/Dotfiles
 The install script symlinks configs to their expected locations:
 
 ```
-~/.zshrc         -> zsh/.zshrc
-~/.p10k.zsh      -> zsh/.p10k.zsh
-~/.aliases       -> zsh/.aliases
-~/.workrc        -> zsh/.workrc
-~/.gitconfig     -> git/.gitconfig
-~/.tmux.conf     -> tmux/.tmux.conf
-~/.config/nvim/  -> nvim/init.vim
-```
-
-**Note:** Ghostty config should be manually symlinked or copied:
-```bash
-mkdir -p ~/.config/ghostty
-ln -s $(pwd)/ghostty/config ~/.config/ghostty/config
+~/.zshrc              -> zsh/.zshrc
+~/.p10k.zsh           -> zsh/.p10k.zsh
+~/.aliases            -> zsh/.aliases
+~/.workrc             -> zsh/.workrc
+~/.gitconfig          -> git/.gitconfig
+~/.tmux.conf          -> tmux/.tmux.conf
+~/.config/nvim/       -> nvim/init.vim
+~/.config/ghostty/    -> ghostty/config
+~/.tmux/plugins/tpm/  -> Tmux Plugin Manager (cloned)
 ```
 
 ## Dependencies
@@ -46,6 +42,7 @@ ln -s $(pwd)/ghostty/config ~/.config/ghostty/config
 - [Homebrew](https://brew.sh/) - Package manager
 - [Neovim](https://neovim.io/) - `brew install neovim`
 - [Tmux](https://github.com/tmux/tmux) - `brew install tmux`
+- [TPM](https://github.com/tmux-plugins/tpm) - Tmux Plugin Manager (auto-installed)
 - [Ghostty](https://ghostty.org/) - Terminal emulator
 - [Oh-My-Zsh](https://ohmyz.sh/) - Zsh framework
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh theme
@@ -84,8 +81,21 @@ Prefix: `Ctrl+a`
 | `c` | New window |
 | `x` | Kill pane |
 | `R` | Reload config |
+| `S` | Sync panes (toggle) |
+| `C-c` | New session |
+| `C-f` | Find session |
+| `prefix + I` | Install plugins |
 
-Status bar styled with Atom One Dark colors.
+#### Plugins (via TPM)
+
+| Plugin | What it does |
+|--------|--------------|
+| tmux-sensible | Universal sane defaults |
+| tmux-resurrect | Save/restore sessions across restarts |
+| tmux-continuum | Auto-save every 15min, auto-restore on start |
+| tmux-yank | Better clipboard integration |
+
+Status bar styled with Atom One Dark colors. Includes undercurl support for Neovim LSP diagnostics.
 
 ### Zsh
 

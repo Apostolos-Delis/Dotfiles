@@ -144,7 +144,19 @@ fi
 pip3 install --user neovim
 
 # =============================================================================
-# 7. Node.js packages
+# 7. Tmux Plugin Manager (TPM)
+# =============================================================================
+echo "==> Setting up Tmux Plugin Manager..."
+
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
+    echo "    TPM installed. Press prefix + I in tmux to install plugins."
+else
+    echo "    TPM already installed"
+fi
+
+# =============================================================================
+# 8. Node.js packages
 # =============================================================================
 echo "==> Installing global npm packages..."
 npm install --global yarn
@@ -158,5 +170,5 @@ echo ""
 echo "Next steps:"
 echo "  1. Restart your terminal or run: exec zsh"
 echo "  2. Open Neovim and run: :PlugInstall"
-echo "  3. Reload tmux config: tmux source-file ~/.tmux.conf"
+echo "  3. Start tmux and press: prefix + I (to install tmux plugins)"
 echo ""
