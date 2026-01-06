@@ -1,4 +1,85 @@
+# =============================================================================
+# Theme
+# =============================================================================
+# Color theme - use `ghostty +list-themes` to see all available themes
 theme = Atom One Dark
 
+# =============================================================================
+# Background / Transparency
+# =============================================================================
+# Background opacity (0.0 = fully transparent, 1.0 = fully opaque)
 background-opacity = 0.85
+
+# Blur radius for the transparent background (macOS only)
 background-blur-radius = 20
+
+# =============================================================================
+# Font Settings
+# =============================================================================
+# Primary font family - JetBrains Mono is the default and has great ligatures
+font-family = "JetBrains Mono"
+
+# Font size in points
+font-size = 14
+
+# Makes fonts appear bolder/thicker - helpful on high-DPI displays
+font-thicken = true
+
+# =============================================================================
+# Window / UI
+# =============================================================================
+# Extend background color to fill any extra space at window edges
+window-padding-color = extend
+
+# Hidden titlebar for a cleaner, more modern look (macOS only)
+# Options: native, hidden, tabs
+macos-titlebar-style = hidden
+
+# =============================================================================
+# macOS Specific
+# =============================================================================
+# Treats Option key as Alt for terminal shortcuts (vim, tmux, etc.)
+# Without this, Option acts as macOS compose key for special characters
+macos-option-as-alt = true
+
+# =============================================================================
+# Cursor
+# =============================================================================
+# Cursor shape: block, bar, underline, or block_hollow
+cursor-style = block
+
+# Disable cursor blinking
+cursor-style-blink = false
+
+# =============================================================================
+# Shell Integration
+# =============================================================================
+# Automatically detect and integrate with your shell (bash, zsh, fish)
+# Enables features like working directory tracking and prompt marking
+shell-integration = detect
+
+# Shell integration features to enable:
+# - cursor: jump to prompt with option+click
+# - sudo: preserve shell integration when using sudo
+# - title: set window title based on current command/directory
+shell-integration-features = cursor,sudo,title
+
+# =============================================================================
+# Quick Terminal (Quake-style dropdown)
+# =============================================================================
+# Global hotkey to toggle a dropdown terminal from anywhere
+# Press Ctrl+` (backtick) to toggle
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+
+# Position of the quick terminal: top, bottom, left, right, center
+quick-terminal-position = top
+
+# Animation speed in seconds (lower = faster)
+quick-terminal-animation-duration = 0.1
+
+# =============================================================================
+# Scrollback
+# =============================================================================
+# Number of lines to keep in scrollback buffer
+# Higher values use more memory but let you scroll back further
+scrollback-limit = 100000
