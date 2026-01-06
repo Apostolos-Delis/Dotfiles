@@ -75,6 +75,9 @@ unalias sc 2>/dev/null
 # Functions
 
 # Lazy Load NVM
+# First unalias any existing aliases (from oh-my-zsh plugins, etc.)
+unalias nvm node npm yarn cdk 2>/dev/null
+
 lazynvm() {
   unset -f nvm node npm yarn cdk
   export NVM_DIR=~/.nvm
@@ -84,27 +87,27 @@ lazynvm() {
 
 nvm() {
   lazynvm
-  nvm $@
+  nvm "$@"
 }
 
 node() {
   lazynvm
-  node $@
+  node "$@"
 }
 
 npm() {
   lazynvm
-  npm $@
+  npm "$@"
 }
 
 yarn() {
   lazynvm
-  yarn $@
+  yarn "$@"
 }
 
 cdk() {
   lazynvm
-  cdk $@
+  cdk "$@"
 }
 
 # Run ls after cd

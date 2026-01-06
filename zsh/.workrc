@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+# Work-related configuration (Opendoor)
+# This file is sourced from .zshrc to keep work config separate
+
+# Opendoor Vault
+export VAULT_ADDR=https://vault.services.opendoor.com:8200
+
+# Opendoor code repo
+export OD_CODE_ROOT="/Users/Apostolos.Delis@opendoor.com/Documents/repos/code"
+
+# Server alias for local development
+alias server="node --version && ./bin/server"
+
+# Secureframe shell integration
+if [ -f ~/Documents/repos/secureframe/.secureframe.shellrc ]; then
+  source ~/Documents/repos/secureframe/.secureframe.shellrc
+fi
+
+# OD shell tooling
+# These lines added by `code/scripts/development/maybe_install_od_shell_tooling.sh`
+OD_TOOL_SOURCE_SCRIPT="$OD_CODE_ROOT/scripts/infra/sourced_on_shell_load.sh"
+[ -f "$OD_TOOL_SOURCE_SCRIPT" ] && source "$OD_TOOL_SOURCE_SCRIPT"
+
+# Go path (used for OD tooling)
+export GOPATH="$HOME/go"

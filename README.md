@@ -27,6 +27,7 @@ The install script symlinks configs to their expected locations:
 ~/.zshrc         -> zsh/.zshrc
 ~/.p10k.zsh      -> zsh/.p10k.zsh
 ~/.aliases       -> zsh/.aliases
+~/.workrc        -> zsh/.workrc
 ~/.gitconfig     -> git/.gitconfig
 ~/.tmux.conf     -> tmux/.tmux.conf
 ~/.config/nvim/  -> nvim/init.vim
@@ -183,7 +184,8 @@ Dotfiles/
 ├── zsh/               # Shell configuration
 │   ├── .zshrc
 │   ├── .p10k.zsh
-│   └── .aliases
+│   ├── .aliases
+│   └── .workrc        # Work-specific config (sourced separately)
 ├── nvim/              # Neovim editor
 │   ├── init.vim
 │   └── UltiSnips/     # Code snippets

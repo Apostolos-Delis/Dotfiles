@@ -198,29 +198,18 @@ export DISABLE_SPRING=true
 alias bundle="nocorrect bundle"
 alias doppler="nocorrect doppler"
 
-alias server="node --version && ./bin/server"
-
 export PYENV_ROOT="$HOME/.pyenv"
 command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 
 [[ ! -f ~/.config/op/plugins.sh ]] || source ~/.config/op/plugins.sh
-if [ -f ~/Documents/repos/secureframe/.secureframe.shellrc ]; then
-  source ~/Documents/repos/secureframe/.secureframe.shellrc
-fi
 
 # Load completion system
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
-export VAULT_ADDR=https://vault.services.opendoor.com:8200
 
 eval "$(direnv hook zsh)"
 eval "$(rbenv init -)"
 
-######### od shell tooling #########
-# these lines added by `code/scripts/development/maybe_install_od_shell_tooling.sh`
-OD_CODE_ROOT="/Users/Apostolos.Delis@opendoor.com/Documents/repos/code"
-OD_TOOL_SOURCE_SCRIPT="$OD_CODE_ROOT/scripts/infra/sourced_on_shell_load.sh"
-[ -f "$OD_TOOL_SOURCE_SCRIPT" ] && source "$OD_TOOL_SOURCE_SCRIPT"
-######### end of od shell tooling #########
-export GOPATH="$HOME/go"
+# Work config (Opendoor) - keep work stuff separate
+[[ -f ~/.workrc ]] && source ~/.workrc
