@@ -152,6 +152,9 @@ plugins=(
   evalcache                 # Custom startup to cache eval operations to speed up loading
 )
 
+# Skip compinit security check for faster startup
+ZSH_DISABLE_COMPFIX=true
+
 # Source Oh My Zsh
 source $ZSH/oh-my-zsh.sh
 
@@ -167,9 +170,9 @@ export EDITOR='nvim'
 
 # stty -ixon
 
+# NVM is lazy-loaded in .aliases for faster shell startup
+# The lazynvm() function loads NVM on first use of node/npm/yarn/nvm
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -203,13 +206,13 @@ command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
 
 [[ ! -f ~/.config/op/plugins.sh ]] || source ~/.config/op/plugins.sh
 
-# Load completion system
-autoload -Uz compinit
+# Completion settings (compinit is called by oh-my-zsh)
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
-eval "$(direnv hook zsh)"
-eval "$(rbenv init -)"
+# Use evalcache to speed up shell startup (caches eval output)
+_evalcache direnv hook zsh
+_evalcache rbenv init -
 
 # Work config (Opendoor) - keep work stuff separate
 [[ -f ~/.workrc ]] && source ~/.workrc
