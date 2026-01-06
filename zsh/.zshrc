@@ -12,6 +12,11 @@ fi
 bindkey '^[[A' up-line-or-search
 bindkey '^[[B' down-line-or-search
 
+# Edit current command in $EDITOR with Ctrl+G (like Claude Code)
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey '^G' edit-command-line
+
 # set terminal color if not TMUX
 # Reference: https://unix.stackexchange.com/questions/139082/zsh-set-term-screen-256color-in-tmux-but-xterm-256color-without-tmux
 [[ $TMUX = "" ]] && export TERM="xterm-256color"
@@ -44,6 +49,13 @@ setopt hist_ignore_all_dups inc_append_history
 HISTFILE=~/.zhistory
 HISTSIZE=4096
 SAVEHIST=4096
+
+# Shell options
+setopt AUTO_PUSHD           # Push directories onto stack on cd
+setopt PUSHD_IGNORE_DUPS    # Don't push duplicate directories
+setopt PUSHD_SILENT         # Don't print stack after pushd/popd
+setopt EXTENDED_GLOB        # Advanced globbing (^, ~, #)
+setopt NO_BEEP              # Disable terminal beep
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
