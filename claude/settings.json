@@ -1,7 +1,25 @@
 {
   "permissions": {
     "allow": [
-      "Bash"
+      "Bash",
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "WebSearch",
+      "WebFetch",
+      "Task",
+      "TodoWrite",
+      "Skill"
+    ],
+    "deny": [
+      "Bash(rm -rf /:*)",
+      "Bash(sudo rm:*)",
+      "Bash(chmod 777:*)",
+      "Bash(> /dev/sda:*)",
+      "Bash(mkfs:*)",
+      "Bash(dd if:*)"
     ]
   },
   "model": "opus",
