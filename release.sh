@@ -128,6 +128,13 @@ link_file "$DOTFILES_DIR/nvim/init.vim" "$HOME/.config/nvim/init.vim"
 mkdir -p "$HOME/.config/ghostty"
 link_file "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
 
+# Claude Code config
+mkdir -p "$HOME/.claude"
+link_file "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
+link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+link_file "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands"
+link_file "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents"
+
 # =============================================================================
 # 6. Neovim setup
 # =============================================================================
@@ -156,7 +163,20 @@ else
 fi
 
 # =============================================================================
-# 8. Node.js packages
+# 8. Claude Code plugins
+# =============================================================================
+echo "==> Installing Claude Code plugins..."
+
+if command -v claude &> /dev/null; then
+    claude plugin install claude-hud@claude-hud || true
+    claude plugin install pyright-lsp@claude-plugins-official || true
+    claude plugin install ralph-loop@claude-plugins-official || true
+else
+    echo "    Claude Code not installed, skipping plugins"
+fi
+
+# =============================================================================
+# 9. Node.js packages
 # =============================================================================
 echo "==> Installing global npm packages..."
 npm install --global yarn

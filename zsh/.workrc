@@ -11,11 +11,6 @@ export OD_CODE_ROOT="/Users/Apostolos.Delis@opendoor.com/Documents/repos/code"
 # Server alias for local development
 alias server="node --version && ./bin/server"
 
-# Secureframe shell integration
-if [ -f ~/Documents/repos/secureframe/.secureframe.shellrc ]; then
-  source ~/Documents/repos/secureframe/.secureframe.shellrc
-fi
-
 # OD shell tooling
 # These lines added by `code/scripts/development/maybe_install_od_shell_tooling.sh`
 OD_TOOL_SOURCE_SCRIPT="$OD_CODE_ROOT/scripts/infra/sourced_on_shell_load.sh"

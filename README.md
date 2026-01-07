@@ -11,6 +11,7 @@ Personal dotfiles for a macOS development environment. Optimized for full-stack 
 | [Zsh](zsh/) | Shell with Powerlevel10k prompt and plugins |
 | [Neovim](nvim/) | Editor with LSP, linting, and snippets |
 | [Git](git/) | Git config with delta for beautiful diffs |
+| [Claude Code](claude/) | AI coding assistant configuration |
 | [Rubocop](rubocop/) | Ruby linting with Airbnb style guide |
 
 ## Installation
@@ -32,6 +33,9 @@ The install script symlinks configs to their expected locations:
 ~/.tmux.conf          -> tmux/.tmux.conf
 ~/.config/nvim/       -> nvim/init.vim
 ~/.config/ghostty/    -> ghostty/config
+~/.claude/settings.json -> claude/settings.json
+~/.claude/CLAUDE.md   -> claude/CLAUDE.md
+~/.claude/commands/   -> claude/commands/*.md
 ~/.tmux/plugins/tpm/  -> Tmux Plugin Manager (cloned)
 ```
 
@@ -44,6 +48,7 @@ The install script symlinks configs to their expected locations:
 - [Tmux](https://github.com/tmux/tmux) - `brew install tmux`
 - [TPM](https://github.com/tmux-plugins/tpm) - Tmux Plugin Manager (auto-installed)
 - [Ghostty](https://ghostty.org/) - Terminal emulator
+- [Claude Code](https://claude.ai/code) - AI coding assistant
 - [Oh-My-Zsh](https://ohmyz.sh/) - Zsh framework
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh theme
 - [FZF](https://github.com/junegunn/fzf) - `brew install fzf`
@@ -167,6 +172,29 @@ Leader: `,`
 - **Pager:** Delta with side-by-side diffs
 - **Pull strategy:** Rebase
 
+### Claude Code
+
+AI coding assistant with global settings and custom commands.
+
+- **Model:** Opus
+- **Plugins:** claude-hud (status line), pyright-lsp
+
+#### Permissions
+
+Pre-configured to allow common dev tools (git, npm, python, docker, etc.) and deny access to sensitive files (.env, secrets, private keys).
+
+#### Custom Commands
+
+| Command | Description |
+|---------|-------------|
+| `/review` | Review git changes for issues |
+| `/explain` | Explain how code works |
+| `/test` | Generate tests for a file |
+
+#### Global Memory
+
+`CLAUDE.md` contains coding preferences, environment info, and workflow guidelines that apply to all projects.
+
 ## Color Scheme
 
 Atom One Dark is used consistently across all tools:
@@ -201,6 +229,10 @@ Dotfiles/
 │   └── UltiSnips/     # Code snippets
 ├── git/               # Git configuration
 │   └── .gitconfig
+├── claude/            # Claude Code AI assistant
+│   ├── settings.json  # Global settings and permissions
+│   ├── CLAUDE.md      # Global memory/context
+│   └── commands/      # Custom slash commands
 ├── rubocop/           # Ruby linting
 │   └── .rubocop.yml
 └── release.sh         # Installation script
