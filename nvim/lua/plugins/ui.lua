@@ -1,6 +1,33 @@
--- UI plugins: theme, statusline, icons, indent guides
+-- UI plugins: theme, statusline, icons, indent guides, bufferline
 
 return {
+  -- Bufferline: tabs for open buffers at the top
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
+    opts = {
+      options = {
+        mode = "buffers",
+        separator_style = "thin",
+        show_buffer_close_icons = false,
+        show_close_icon = false,
+        diagnostics = "nvim_lsp",
+        always_show_bufferline = true,
+        offsets = {
+          { filetype = "oil", text = "File Explorer", highlight = "Directory" },
+        },
+      },
+    },
+    keys = {
+      { "<leader>bp", "<cmd>BufferLinePick<cr>", desc = "Pick buffer" },
+      { "<leader>bc", "<cmd>BufferLinePickClose<cr>", desc = "Pick buffer to close" },
+      { "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Previous buffer" },
+      { "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer" },
+    },
+  },
+
   -- Colorscheme: OneDark (Lua version)
   {
     "navarasu/onedark.nvim",
@@ -27,6 +54,9 @@ return {
           darker = true,
           undercurl = true,
           background = true,
+        },
+        colors = {
+          grey = "#7a818e", -- Brighter comments (default is #5c6370)
         },
       })
       require("onedark").load()
@@ -147,13 +177,18 @@ return {
             { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
             { icon = " ", key = "g", desc = "Find Text", action = ":Telescope live_grep" },
             { icon = " ", key = "r", desc = "Recent Files", action = ":Telescope oldfiles" },
-            { icon = " ", key = "c", desc = "Config", action = ":e ~/.config/nvim/lua/init.lua" },
+            { icon = " ", key = "c", desc = "Config", action = ":e ~/.config/nvim/init.lua" },
             { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
           },
+          -- Compact header
+          header = [[
+╔═╗╔═╗╔═╗╔═╗╔╦╗╔═╗╦  ╔═╗╔═╗'╔═╗  ╦  ╦╦╔╦╗
+╠═╣╠═╝║ ║╚═╗ ║ ║ ║║  ║ ║╚═╗ ╚═╗  ╚╗╔╝║║║║
+╩ ╩╩  ╚═╝╚═╝ ╩ ╚═╝╩═╝╚═╝╚═╝ ╚═╝   ╚╝ ╩╩ ╩]],
         },
         sections = {
-          { section = "header" },
+          { section = "header", padding = 1 },
           { section = "keys", gap = 1, padding = 1 },
           { section = "startup" },
         },

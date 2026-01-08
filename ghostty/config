@@ -8,7 +8,7 @@ theme = Atom One Dark
 # Background / Transparency
 # =============================================================================
 # Background opacity (0.0 = fully transparent, 1.0 = fully opaque)
-background-opacity = 0.85
+background-opacity = 0.92
 
 # Blur radius for the transparent background (macOS only)
 background-blur-radius = 20
