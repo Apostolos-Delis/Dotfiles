@@ -45,9 +45,41 @@ return {
         "yaml",
       },
       auto_install = true,
-      highlight = { enable = true },
+      highlight = {
+        enable = true,
+        -- Enable additional vim regex highlighting for richer colors
+        additional_vim_regex_highlighting = { "ruby", "python" },
+      },
       indent = { enable = true },
     },
+  },
+
+  -- Rainbow delimiters: colorful brackets/parentheses
+  {
+    "HiPhish/rainbow-delimiters.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      local rainbow = require("rainbow-delimiters")
+      vim.g.rainbow_delimiters = {
+        strategy = {
+          [""] = rainbow.strategy["global"],
+          vim = rainbow.strategy["local"],
+        },
+        query = {
+          [""] = "rainbow-delimiters",
+          lua = "rainbow-blocks",
+        },
+        highlight = {
+          "RainbowDelimiterRed",
+          "RainbowDelimiterYellow",
+          "RainbowDelimiterBlue",
+          "RainbowDelimiterOrange",
+          "RainbowDelimiterGreen",
+          "RainbowDelimiterViolet",
+          "RainbowDelimiterCyan",
+        },
+      }
+    end,
   },
 
   -- mini.ai for function/class text objects (daf, dif, etc.)
