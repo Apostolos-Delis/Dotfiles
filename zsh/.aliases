@@ -124,3 +124,9 @@ timezsh() {
   shell=${1-$SHELL}
   for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }
+
+# Wrapper for lwt to cd into the created worktree
+lwt() {
+  local dir
+  dir="$(command lwt "$@")" && [[ -n "$dir" ]] && cd "$dir"
+}
