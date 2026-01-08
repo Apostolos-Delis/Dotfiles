@@ -31,7 +31,7 @@ The install script symlinks configs to their expected locations:
 ~/.workrc             -> zsh/.workrc
 ~/.gitconfig          -> git/.gitconfig
 ~/.tmux.conf          -> tmux/.tmux.conf
-~/.config/nvim/       -> nvim/init.vim
+~/.config/nvim/       -> nvim/ (entire directory)
 ~/.config/ghostty/    -> ghostty/config
 ~/.claude/settings.json -> claude/settings.json
 ~/.claude/CLAUDE.md   -> claude/CLAUDE.md
@@ -123,49 +123,113 @@ Status bar styled with Atom One Dark colors. Includes undercurl support for Neov
 
 ### Neovim
 
+Modern Lua-based configuration using **lazy.nvim** plugin manager. Plugins auto-install on first launch.
+
 Leader: `,`
 
-#### File Navigation (FZF)
+#### Plugin Manager
+
+- **lazy.nvim** - Fast, lazy-loading plugin manager (bootstraps itself)
+- Run `:Lazy` to manage plugins
+- Run `:Mason` to install LSP servers, linters, formatters
+
+#### File Navigation (Telescope)
 
 | Key | Action |
 |-----|--------|
-| `<leader>ff` | Find files |
-| `<leader>fg` | Find git files |
-| `<leader>fm` | Find modified files |
-| `<leader>fb` | Find buffers |
+| `,ff` | Find files |
+| `,fg` | Find git files |
+| `,gf` | Live grep (search in files) |
+| `,fm` | Find modified files |
+| `,fb` | Find buffers |
+| `,fh` | Recent files |
+| `,fr` | Resume last search |
 | `;` | Command palette |
 
-#### Git (Fugitive)
+#### Git
 
 | Key | Action |
 |-----|--------|
-| `<leader>gs` | Git status |
-| `<leader>gb` | Git blame |
-| `<leader>gg` | Git grep |
+| `,gs` | Git status (Fugitive) |
+| `,gb` | Git blame |
+| `,gd` | Git diff split |
+| `,gg` | Live grep |
+| `]c` / `[c` | Next/prev git hunk |
+| `,hs` | Stage hunk |
+| `,hr` | Reset hunk |
+| `,hp` | Preview hunk |
+| `,tB` | Toggle inline blame |
+
+#### LSP
+
+| Key | Action |
+|-----|--------|
+| `gd` | Go to definition |
+| `gr` | Go to references |
+| `gi` | Go to implementation |
+| `K` | Hover documentation |
+| `,rn` | Rename symbol |
+| `,ca` | Code action |
+| `,cf` | Format buffer |
+| `,ae` / `,aE` | Next/prev diagnostic |
+| `,ad` | Show diagnostic |
+
+#### Buffers & Windows
+
+| Key | Action |
+|-----|--------|
+| `Tab` / `S-Tab` | Next/prev buffer |
+| `[b` / `]b` | Cycle buffers |
+| `,bp` | Pick buffer by letter |
+| `,bd` | Delete buffer |
+| `Ctrl+h/j/k/l` | Navigate splits (tmux-aware) |
 
 #### Quick Edits
 
 | Key | Action |
 |-----|--------|
-| `<leader>ev` | Edit vimrc |
-| `<leader>ez` | Edit zshrc |
-| `<leader>et` | Edit tmux.conf |
-| `<leader>ea` | Edit aliases |
+| `,ei` | Edit init.lua |
+| `,ek` | Edit keymaps.lua |
+| `,ez` | Edit zshrc |
+| `,et` | Edit tmux.conf |
+| `,ea` | Edit aliases |
 
-#### Linting (ALE)
+#### Text Objects (Treesitter)
 
-- Auto-fix on save enabled
-- Per-language formatters: black (Python), prettier (JS/TS), standardrb (Ruby)
-- `<leader>ae` / `<leader>aE` - Navigate errors
+| Key | Action |
+|-----|--------|
+| `daf` / `dif` | Delete around/inside function |
+| `dac` / `dic` | Delete around/inside class |
+| `daa` / `dia` | Delete around/inside argument |
+| `dal` / `dil` | Delete around/inside loop |
 
 #### Other
 
 | Key | Action |
 |-----|--------|
-| `Ctrl+f` | Toggle NERDTree |
-| `Ctrl+t` | Toggle Tagbar |
-| `<leader>dw` | Delete trailing whitespace |
-| `<leader>sp` | Toggle spell check |
+| `-` | Open file explorer (Oil) |
+| `,dw` | Delete trailing whitespace |
+| `,sp` | Toggle spell check |
+| `,tc` | Toggle treesitter context |
+| `Space` | Toggle search highlight |
+
+#### Plugins
+
+| Plugin | Purpose |
+|--------|---------|
+| telescope.nvim | Fuzzy finder |
+| nvim-treesitter | Syntax highlighting, text objects |
+| nvim-lspconfig | LSP configuration |
+| mason.nvim | LSP/linter/formatter installer |
+| blink.cmp | Autocompletion |
+| gitsigns.nvim | Git signs, inline blame |
+| vim-fugitive | Git commands |
+| bufferline.nvim | Buffer tabs |
+| lualine.nvim | Statusline |
+| onedark.nvim | Colorscheme (with transparency) |
+| oil.nvim | File explorer |
+| which-key.nvim | Keybinding hints |
+| rainbow-delimiters | Colorful brackets |
 
 ### Git
 
@@ -203,7 +267,7 @@ Atom One Dark is used consistently across all tools:
 |-------|-----|-------|
 | Background | `#282c34` | Terminal, status bars |
 | Foreground | `#abb2bf` | Primary text |
-| Comment | `#5c6370` | Inactive elements |
+| Comment | `#7a818e` | Inactive elements (brightened) |
 | Red | `#e06c75` | Errors, deletions |
 | Green | `#98c379` | Success, additions |
 | Yellow | `#e5c07b` | Warnings |
@@ -224,9 +288,21 @@ Dotfiles/
 │   ├── .p10k.zsh
 │   ├── .aliases
 │   └── .workrc        # Work-specific config (sourced separately)
-├── nvim/              # Neovim editor
-│   ├── init.vim
-│   └── UltiSnips/     # Code snippets
+├── nvim/              # Neovim editor (Lua-based)
+│   ├── init.lua       # Entry point, lazy.nvim bootstrap
+│   └── lua/
+│       ├── config/    # Core settings
+│       │   ├── options.lua
+│       │   ├── keymaps.lua
+│       │   └── autocmds.lua
+│       └── plugins/   # Plugin specs (lazy.nvim)
+│           ├── ui.lua
+│           ├── editor.lua
+│           ├── telescope.lua
+│           ├── treesitter.lua
+│           ├── lsp.lua
+│           ├── completion.lua
+│           └── git.lua
 ├── git/               # Git configuration
 │   └── .gitconfig
 ├── claude/            # Claude Code AI assistant

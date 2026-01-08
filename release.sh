@@ -120,9 +120,15 @@ link_file "$DOTFILES_DIR/git/.gitconfig" "$HOME/.gitconfig"
 # Tmux config
 link_file "$DOTFILES_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
 
-# Neovim config
-mkdir -p "$HOME/.config/nvim"
-link_file "$DOTFILES_DIR/nvim/init.vim" "$HOME/.config/nvim/init.vim"
+# Neovim config (entire directory)
+if [ -L "$HOME/.config/nvim" ]; then
+    rm "$HOME/.config/nvim"
+elif [ -d "$HOME/.config/nvim" ]; then
+    mv "$HOME/.config/nvim" "$HOME/.config/nvim.backup"
+    echo "    Backed up existing nvim config to ~/.config/nvim.backup"
+fi
+ln -s "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
+echo "    Linked ~/.config/nvim"
 
 # Ghostty config
 mkdir -p "$HOME/.config/ghostty"
@@ -140,15 +146,14 @@ link_file "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents"
 # =============================================================================
 echo "==> Setting up Neovim..."
 
-# Install vim-plug
-if [ ! -f "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
-    echo "    Installing vim-plug..."
-    curl -fLo "$HOME/.local/share/nvim/site/autoload/plug.vim" --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
+# lazy.nvim bootstraps itself on first run, no manual installation needed
+echo "    lazy.nvim will auto-install on first Neovim launch"
 
 # Install Python support for Neovim
-pip3 install --user neovim
+pip3 install --user pynvim
+
+# Create undo directory
+mkdir -p "$HOME/.tmp/undo"
 
 # =============================================================================
 # 7. Tmux Plugin Manager (TPM)
@@ -189,6 +194,7 @@ echo "==> Installation complete!"
 echo ""
 echo "Next steps:"
 echo "  1. Restart your terminal or run: exec zsh"
-echo "  2. Open Neovim and run: :PlugInstall"
-echo "  3. Start tmux and press: prefix + I (to install tmux plugins)"
+echo "  2. Open Neovim - plugins will auto-install via lazy.nvim"
+echo "  3. Run :Mason in Neovim to install LSP servers"
+echo "  4. Start tmux and press: prefix + I (to install tmux plugins)"
 echo ""
