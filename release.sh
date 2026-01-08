@@ -36,6 +36,7 @@ brew install ripgrep
 brew install fzf
 brew install git-delta
 brew install direnv
+brew install btop
 brew install rbenv
 brew install nodenv
 brew install pyenv
@@ -92,14 +93,14 @@ fi
 # =============================================================================
 echo "==> Creating symlinks..."
 
-# Helper function to create symlinks safely
+# Helper function to create symlinks safely (works for files and directories)
 link_file() {
     local src="$1"
     local dest="$2"
 
     if [ -L "$dest" ]; then
         rm "$dest"
-    elif [ -f "$dest" ]; then
+    elif [ -e "$dest" ]; then
         mv "$dest" "$dest.backup"
         echo "    Backed up existing $dest to $dest.backup"
     fi
@@ -121,18 +122,14 @@ link_file "$DOTFILES_DIR/git/.gitconfig" "$HOME/.gitconfig"
 link_file "$DOTFILES_DIR/tmux/.tmux.conf" "$HOME/.tmux.conf"
 
 # Neovim config (entire directory)
-if [ -L "$HOME/.config/nvim" ]; then
-    rm "$HOME/.config/nvim"
-elif [ -d "$HOME/.config/nvim" ]; then
-    mv "$HOME/.config/nvim" "$HOME/.config/nvim.backup"
-    echo "    Backed up existing nvim config to ~/.config/nvim.backup"
-fi
-ln -s "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
-echo "    Linked ~/.config/nvim"
+link_file "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 
 # Ghostty config
 mkdir -p "$HOME/.config/ghostty"
 link_file "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
+
+# btop config (entire directory)
+link_file "$DOTFILES_DIR/btop" "$HOME/.config/btop"
 
 # Claude Code config
 mkdir -p "$HOME/.claude"
