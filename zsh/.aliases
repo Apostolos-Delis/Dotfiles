@@ -128,11 +128,10 @@ timezsh() {
 # Worktrunk (git worktree manager) - https://worktrunk.dev
 # Workflow:
 #   1. Copy branch name from Linear
-#   2. wscx apostolosdelis/mrtg-91-fix-ci -- "Fix the CI failures"
+#   2. wsc apostolosdelis/mrtg-91-fix-ci -- "Fix the CI failures"
 #   3. Work, push, merge PR on GitHub
 #   4. wsr (removes worktree + branch)
-alias wsc='wt switch -c'                    # Create and switch to new worktree
-alias wscx='wt switch -c -x claude'         # Create worktree and launch Claude
+alias wsc='wt switch --create --execute=claude'  # Create worktree and launch Claude
 alias wsl='wt list'                         # List worktrees with status
 alias wsr='wt remove'                       # Remove current worktree
 
