@@ -40,6 +40,7 @@ brew install btop
 brew install rbenv
 brew install nodenv
 brew install pyenv
+brew install max-sixty/worktrunk/wt
 brew install --cask amethyst
 
 # Install FZF key bindings and completion
@@ -130,6 +131,10 @@ link_file "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
 
 # btop config (entire directory)
 link_file "$DOTFILES_DIR/btop" "$HOME/.config/btop"
+
+# Worktrunk config
+mkdir -p "$HOME/.config/worktrunk"
+link_file "$DOTFILES_DIR/worktrunk/config.toml" "$HOME/.config/worktrunk/config.toml"
 
 # Claude Code config
 mkdir -p "$HOME/.claude"

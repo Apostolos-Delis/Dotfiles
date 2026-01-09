@@ -125,8 +125,28 @@ timezsh() {
   for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }
 
-# Wrapper for lwt to cd into the created worktree
-lwt() {
-  local dir
-  dir="$(command lwt "$@")" && [[ -n "$dir" ]] && cd "$dir"
+# Worktrunk (git worktree manager) - https://worktrunk.dev
+# Workflow:
+#   1. Copy branch name from Linear
+#   2. wscx apostolosdelis/mrtg-91-fix-ci -- "Fix the CI failures"
+#   3. Work, push, merge PR on GitHub
+#   4. wsr (removes worktree + branch)
+alias wsc='wt switch -c'                    # Create and switch to new worktree
+alias wscx='wt switch -c -x claude'         # Create worktree and launch Claude
+alias wsl='wt list'                         # List worktrees with status
+alias wsr='wt remove'                       # Remove current worktree
+
+# Multi-agent worktree creation (replicates lwt --agents behavior)
+# Usage: wt-agents feat-branch api ui tests
+wt-agents() {
+  local base="$1"; shift
+  if [[ -z "$base" ]]; then
+    echo "Usage: wt-agents BRANCH [agent1 agent2 ...]" >&2
+    return 1
+  fi
+  wt switch -c "$base"
+  for agent in "$@"; do
+    wt switch -c -b "$base" "${base}-${agent}"
+  done
+  wt switch "$base"
 }

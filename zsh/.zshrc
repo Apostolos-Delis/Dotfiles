@@ -225,6 +225,7 @@ fpath+=~/.zfunc
 # Use evalcache to speed up shell startup (caches eval output)
 _evalcache direnv hook zsh
 _evalcache rbenv init -
+_evalcache wt config shell init zsh  # Worktrunk: enables cd on switch + completions
 
 # Work config (Opendoor) - keep work stuff separate
 [[ -f ~/.workrc ]] && source ~/.workrc

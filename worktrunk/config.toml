@@ -1,0 +1,15 @@
+# Worktrunk user config
+# Docs: https://worktrunk.dev/hook/
+
+# Path template for worktrees
+# {{ branch | sanitize }} replaces slashes with dashes
+worktree-path = "../{{ repo }}-{{ branch | sanitize }}"
+
+# Auto-install deps after creating a worktree
+[post-create]
+deps = """
+if [ -f Gemfile.lock ]; then bundle install --quiet; fi
+if [ -f package-lock.json ]; then npm install --silent; fi
+if [ -f yarn.lock ]; then yarn install --silent; fi
+if [ -f pnpm-lock.yaml ]; then pnpm install --silent; fi
+"""
