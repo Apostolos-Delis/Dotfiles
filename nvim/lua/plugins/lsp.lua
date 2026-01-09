@@ -169,10 +169,16 @@ return {
       formatters_by_ft = {
         python = { "black", "isort" },
         lua = { "stylua" },
+        ruby = function(bufnr)
+          local root = vim.fs.root(bufnr, ".git") or vim.fn.getcwd()
+          if vim.fn.filereadable(root .. "/.rubocop.yml") == 1 then
+            return { "rubocop" }
+          end
+          return { "standardrb" }
+        end,
         -- Add more as you install them:
         -- javascript = { "prettier" },
         -- typescript = { "prettier" },
-        -- ruby = { "standardrb" },
       },
       -- Only format on save if a formatter is available (no warnings)
       format_on_save = function(bufnr)
@@ -204,15 +210,24 @@ return {
         -- Add more as you install them:
         -- javascript = { "eslint" },
         -- typescript = { "eslint" },
-        -- ruby = { "standardrb" },
       }
+
+      -- Helper to get ruby linter based on project config
+      local function get_ruby_linter()
+        local root = vim.fs.root(0, ".git") or vim.fn.getcwd()
+        if vim.fn.filereadable(root .. "/.rubocop.yml") == 1 then
+          return { "rubocop" }
+        end
+        return { "standardrb" }
+      end
 
       -- Auto-lint on save (silently skip if no linter)
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         callback = function()
-          -- Only try to lint if there are linters for this filetype
           local ft = vim.bo.filetype
-          if lint.linters_by_ft[ft] then
+          if ft == "ruby" then
+            lint.try_lint(get_ruby_linter())
+          elseif lint.linters_by_ft[ft] then
             lint.try_lint()
           end
         end,
