@@ -2,8 +2,37 @@
 # Work-related configuration (Opendoor)
 # This file is sourced from .zshrc to keep work config separate
 
-# Opendoor Vault
-export VAULT_ADDR=https://vault.services.opendoor.com:8200
+#=====  setup vault
+VAULT_PRD_ADDR=https://vault.services.opendoor.com:8200
+VAULT_STG_ADDR=https://vault-staging.services.opendoor.com:8200
+VAULT_DEV_ADDR=https://vault-dev.services.opendoor.com:8200
+
+VAULT_CMD=/opt/homebrew/bin/vault
+
+alias vault_auth="VAULT_ADDR=${VAULT_PRD_ADDR} ${VAULT_CMD} login -method=oidc role=power-user"
+alias vault_auth_stg="VAULT_ADDR=${VAULT_STG_ADDR} ${VAULT_CMD} login -method=oidc role=power-user"
+alias vault_auth_dev="VAULT_ADDR=${VAULT_DEV_ADDR} ${VAULT_CMD} login -method=oidc role=power-user"
+
+# bulk login to vaults
+alias vault_login_all="rm -rf ~/.vault-token_*; \
+               vault_auth_stg && cp ~/.vault-token ~/.vault-token_stg; \
+               vault_auth_dev && cp ~/.vault-token ~/.vault-token_dev; \
+               vault_auth     && cp ~/.vault-token ~/.vault-token_prod;"
+
+vlt_prod() {
+    VAULT_ADDR=${VAULT_PRD_ADDR} VAULT_TOKEN=$(< ~/.vault-token_prod) ${VAULT_CMD} "$@"
+}
+
+vlt_stg() {
+    VAULT_ADDR=${VAULT_STG_ADDR} VAULT_TOKEN=$(< ~/.vault-token_stg) ${VAULT_CMD} "$@"
+}
+
+vlt_dev() {
+    VAULT_ADDR=${VAULT_DEV_ADDR} VAULT_TOKEN=$(< ~/.vault-token_dev) ${VAULT_CMD} "$@"
+}
+
+#set default vault addr to prouction, so usual vault command default to prod intance
+export VAULT_ADDR=${VAULT_PRD_ADDR}
 
 # Opendoor code repo
 export OD_CODE_ROOT="/Users/Apostolos.Delis@opendoor.com/Documents/repos/code"

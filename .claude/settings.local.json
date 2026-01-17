@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(cat:*)",
+      "WebSearch",
+      "WebFetch(domain:ghostty.org)",
+      "Bash(git -C /Users/Apostolos.Delis@opendoor.com/Documents/repos/Dotfiles log --oneline)",
+      "Bash(git -C /Users/Apostolos.Delis@opendoor.com/Documents/repos/Dotfiles diff HEAD ghostty/config)",
+      "Bash(zsh -i -c 'zmodload zsh/zprof; source ~/.zshrc; zprof')",
+      "WebFetch(domain:www.humanlayer.dev)",
+      "WebFetch(domain:www.anthropic.com)",
+      "WebFetch(domain:arize.com)",
+      "Bash(claude plugin --help:*)",
+      "Bash(claude plugin marketplace list)",
+      "Bash(claude plugin marketplace update:*)",
+      "Skill(ralph-loop:help)",
+      "Bash(\"/Users/Apostolos.Delis@opendoor.com/.claude/plugins/cache/claude-plugins-official/ralph-loop/b97f6eadd929/scripts/setup-ralph-loop.sh\" \"Test task\" --max-iterations 3)",
+      "Bash(if [ -f .claude/ralph-loop.local.md ])",
+      "Bash(then rm .claude/ralph-loop.local.md)",
+      "Bash(else echo \"No active Ralph loop found\")",
+      "Bash(fi:*)",
+      "Bash(\"/Users/Apostolos.Delis@opendoor.com/.claude/plugins/cache/claude-plugins-official/ralph-loop/b97f6eadd929/scripts/setup-ralph-loop.sh\" \"Your task here\" --max-iterations 5)",
+      "Bash(test:*)",
+      "Skill(ralph-wiggum:ralph-loop)",
+      "mcp__Linear__get_issue"
+    ]
+  }
+}

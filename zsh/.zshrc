@@ -229,3 +229,5 @@ _evalcache wt config shell init zsh 2>/dev/null
 
 # Work config (Opendoor) - keep work stuff separate
 [[ -f ~/.workrc ]] && source ~/.workrc
+
+alias claude-mem='bun "/Users/Apostolos.Delis@opendoor.com/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
