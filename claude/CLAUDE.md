@@ -22,6 +22,24 @@ Full-stack developer on macOS. Primary languages: Python, TypeScript, Ruby.
 - `root` - cd to git repo root
 - `killp <port>` - Kill process on port
 
+## Development Environment
+
+- **Terminal**: Ghostty (primary), not VS Code integrated terminal
+- **Editor**: Cursor (VS Code fork) for code editing
+- **OS**: macOS with terminal-notifier for system notifications
+- **Notification preferences**: Visual-only (no sounds), clicking should focus terminal not editor
+
+## Infrastructure & Deployment
+
+- **Kubernetes/Helm**: When modifying Helm charts, ALWAYS check for environment-specific overlay files (staging.yaml, production.yaml, etc.) that may override base values.yaml
+- **Multi-environment changes**: Read ALL environment overlay files before proposing configuration changes
+
+## Agent Usage Guidelines
+
+- **Exploration tasks**: For targeted exploration of a single repo/directory, use direct Read/Grep/Glob instead of spawning Explore agents
+- **Use Explore agents only for**: Unbounded searches across large codebases, or when searching for patterns across multiple repos
+- **Avoid parallel agent spam**: Don't spawn multiple agents to explore the same repository from different angles - do comprehensive single-pass exploration
+
 
 <claude-mem-context>
 # Recent Activity
