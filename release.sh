@@ -138,11 +138,13 @@ mkdir -p "$HOME/.config/worktrunk"
 link_file "$DOTFILES_DIR/worktrunk/config.toml" "$HOME/.config/worktrunk/config.toml"
 
 # Claude Code config
-mkdir -p "$HOME/.claude"
+mkdir -p "$HOME/.claude" "$HOME/.claude/analysis"
 link_file "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 link_file "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands"
 link_file "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents"
+link_file "$DOTFILES_DIR/claude/scripts" "$HOME/.claude/scripts"
+link_file "$DOTFILES_DIR/claude/hooks" "$HOME/.claude/hooks"
 
 # =============================================================================
 # 6. Neovim setup
@@ -193,6 +195,18 @@ curl -sL -o "$HOME/.claude/ccnotify/ccnotify.py" https://raw.githubusercontent.c
 chmod +x "$HOME/.claude/ccnotify/ccnotify.py"
 
 echo "    CCNotify installed"
+
+# =============================================================================
+# 8.6. Session Analyzer for Claude Code
+# =============================================================================
+echo "==> Setting up Session Analyzer..."
+
+mkdir -p "$HOME/.claude/scripts" "$HOME/.claude/analysis"
+# anthropic is installed on-demand via uv inline script dependencies
+
+echo "    Session Analyzer ready"
+echo "    Run: ~/.claude/scripts/analyze-sessions.py --days 7"
+echo "    For weekly cron: 0 9 * * 0 ~/.claude/scripts/analyze-sessions.py"
 
 # =============================================================================
 # 9. Node.js packages

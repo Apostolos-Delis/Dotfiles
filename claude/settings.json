@@ -98,6 +98,16 @@
           }
         ]
       }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/scripts/show-analysis-summary.sh"
+          }
+        ]
+      }
     ]
   }
 }
