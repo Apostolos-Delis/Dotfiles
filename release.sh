@@ -42,6 +42,7 @@ brew install nodenv
 brew install pyenv
 brew install max-sixty/worktrunk/wt
 brew install --cask amethyst
+brew install terminal-notifier  # For Claude Code notifications
 
 # Install FZF key bindings and completion
 echo "==> Configuring FZF..."
@@ -181,6 +182,17 @@ if command -v claude &> /dev/null; then
 else
     echo "    Claude Code not installed, skipping plugins"
 fi
+
+# =============================================================================
+# 8.5. CCNotify for Claude Code notifications
+# =============================================================================
+echo "==> Setting up CCNotify..."
+
+mkdir -p "$HOME/.claude/ccnotify"
+curl -sL -o "$HOME/.claude/ccnotify/ccnotify.py" https://raw.githubusercontent.com/dazuiba/CCNotify/main/ccnotify.py
+chmod +x "$HOME/.claude/ccnotify/ccnotify.py"
+
+echo "    CCNotify installed"
 
 # =============================================================================
 # 9. Node.js packages
