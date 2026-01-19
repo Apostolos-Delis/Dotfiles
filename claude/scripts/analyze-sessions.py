@@ -224,6 +224,21 @@ Analyze these conversations and identify:
 4. **Agent Effectiveness** - Which agents were used? Which weren't? How did they perform?
 5. **Hook Opportunities** - What manual actions could be automated with hooks?
 6. **Workflow Friction** - What patterns suggest inefficiency?
+7. **External Resources** - What plugins, skills, or tools from the ecosystem would help?
+
+## Known External Resources (suggest these when relevant)
+
+**Plugins:**
+- `context7` - Live documentation lookup (useful if user frequently asks about API docs)
+- `hookify` - Create hooks conversationally (useful if user creates hooks often)
+- `pr-review-toolkit` - PR automation (useful for PR-heavy workflows)
+- `mgrep` - Semantic code search (useful for large codebases)
+
+**Skills/Agents (from github):**
+- `obra/superpowers` - SDLC bundle: planning, reviewing, testing, debugging
+- `glittercowboy/taches-cc-resources` - Meta-skills: skill-auditor, hook creation
+- `fcakyon/claude-codex-settings` - Hooks for code quality and tool regulation
+- `affaan-m/everything-claude-code` - security-reviewer, e2e-runner, tdd-guide agents
 
 Provide your response as JSON with this structure:
 {{
@@ -235,7 +250,7 @@ Provide your response as JSON with this structure:
     "findings": [
         {{
             "severity": "critical|medium|low|positive",
-            "category": "repeated_requests|pain_points|missing_context|agent_effectiveness|hook_opportunities|workflow_friction",
+            "category": "repeated_requests|pain_points|missing_context|agent_effectiveness|hook_opportunities|workflow_friction|external_resources",
             "title": "<short title>",
             "evidence": "<specific examples from conversations>",
             "impact": "<how this affects productivity>",
@@ -244,10 +259,10 @@ Provide your response as JSON with this structure:
     ],
     "proposed_changes": [
         {{
-            "file": "<exact file path>",
-            "action": "CREATE|EDIT|DELETE",
+            "file": "<exact file path or 'INSTALL_PLUGIN' or 'INSTALL_SKILL'>",
+            "action": "CREATE|EDIT|DELETE|INSTALL",
             "reason": "<why this change helps>",
-            "content": "<the actual content or diff to apply>"
+            "content": "<the actual content, diff, or install command>"
         }}
     ]
 }}
