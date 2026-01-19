@@ -1,33 +1,26 @@
-#!/usr/bin/env -S uv run --script
-# /// script
-# requires-python = ">=3.10"
-# dependencies = ["anthropic"]
-# ///
+#!/usr/bin/env python3
 """
 Claude Code Session Analyzer
 
-Analyzes past Claude Code conversations using LLM to propose
+Analyzes past Claude Code conversations using the Claude Code CLI to propose
 improvements to your configuration (hooks, agents, CLAUDE.md, etc.)
 
 Usage:
     ./analyze-sessions.py [--days N] [--dry-run]
-    uv run analyze-sessions.py [--days N] [--dry-run]
 """
 
 import argparse
 import json
-import os
 import re
+import subprocess
+import tempfile
 from datetime import datetime, timedelta
 from pathlib import Path
-
-import anthropic
 
 
 # Configuration
 CONFIG = {
     "days_to_analyze": 7,
-    "model": "claude-sonnet-4-20250514",
     "max_tokens_per_message": 500,
     "max_messages_per_session": 50,
     "projects_to_exclude": [],
@@ -264,9 +257,9 @@ Focus on the most impactful improvements (limit to top 5 findings and 3 proposed
 
 
 def analyze_with_claude(prompt: str, dry_run: bool = False) -> dict:
-    """Send prompt to Claude API and parse response."""
+    """Send prompt to Claude Code CLI and parse response."""
     if dry_run:
-        print("\n[DRY RUN] Would send prompt to Claude API")
+        print("\n[DRY RUN] Would send prompt to Claude CLI")
         print(f"Prompt length: {len(prompt)} chars")
         return {
             "statistics": {"sessions_analyzed": 0, "dry_run": True},
@@ -274,16 +267,39 @@ def analyze_with_claude(prompt: str, dry_run: bool = False) -> dict:
             "proposed_changes": [],
         }
 
-    client = anthropic.Anthropic()
+    # Write prompt to temp file (too large for command line)
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
+        f.write(prompt)
+        prompt_file = f.name
 
-    response = client.messages.create(
-        model=CONFIG["model"],
-        max_tokens=4000,
-        messages=[{"role": "user", "content": prompt}],
-    )
+    try:
+        # Use claude CLI in print mode with sonnet for cost efficiency
+        result = subprocess.run(
+            [
+                "claude",
+                "-p",  # Print mode (non-interactive)
+                "--model", "sonnet",
+                "--output-format", "text",
+            ],
+            stdin=open(prompt_file),
+            capture_output=True,
+            text=True,
+            timeout=300,  # 5 minute timeout
+        )
 
-    # Extract JSON from response
-    response_text = response.content[0].text
+        if result.returncode != 0:
+            print(f"Warning: Claude CLI returned non-zero: {result.returncode}")
+            print(f"Stderr: {result.stderr[:500]}")
+            return {
+                "statistics": {"error": "cli_error"},
+                "findings": [],
+                "proposed_changes": [],
+                "raw_response": result.stderr[:500],
+            }
+
+        response_text = result.stdout
+    finally:
+        Path(prompt_file).unlink()  # Clean up temp file
 
     # Try to parse JSON (handle markdown code blocks)
     json_match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", response_text, re.DOTALL)
@@ -306,7 +322,7 @@ def analyze_with_claude(prompt: str, dry_run: bool = False) -> dict:
             "statistics": {"error": "parse_failed"},
             "findings": [],
             "proposed_changes": [],
-            "raw_response": response.content[0].text[:1000],
+            "raw_response": result.stdout[:1000],
         }
 
 

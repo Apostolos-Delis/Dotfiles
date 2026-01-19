@@ -202,7 +202,7 @@ echo "    CCNotify installed"
 echo "==> Setting up Session Analyzer..."
 
 mkdir -p "$HOME/.claude/scripts" "$HOME/.claude/analysis"
-# anthropic is installed on-demand via uv inline script dependencies
+# Uses Claude Code CLI directly - no additional dependencies needed
 
 echo "    Session Analyzer ready"
 echo "    Run: ~/.claude/scripts/analyze-sessions.py --days 7"
