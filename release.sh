@@ -204,9 +204,17 @@ echo "==> Setting up Session Analyzer..."
 mkdir -p "$HOME/.claude/scripts" "$HOME/.claude/analysis"
 # Uses Claude Code CLI directly - no additional dependencies needed
 
+# Add weekly cron job (Sunday 9am) if not already present
+CRON_CMD="0 9 * * 0 ~/.claude/scripts/analyze-sessions.py >> ~/.claude/analysis/cron.log 2>&1"
+if ! crontab -l 2>/dev/null | grep -q "analyze-sessions.py"; then
+    (crontab -l 2>/dev/null; echo "$CRON_CMD") | crontab -
+    echo "    Added weekly cron job (Sunday 9am)"
+else
+    echo "    Cron job already exists"
+fi
+
 echo "    Session Analyzer ready"
-echo "    Run: ~/.claude/scripts/analyze-sessions.py --days 7"
-echo "    For weekly cron: 0 9 * * 0 ~/.claude/scripts/analyze-sessions.py"
+echo "    Run manually: ~/.claude/scripts/analyze-sessions.py --days 7"
 
 # =============================================================================
 # 9. Node.js packages
