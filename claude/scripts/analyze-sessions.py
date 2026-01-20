@@ -219,11 +219,33 @@ def build_analysis_prompt(sessions_text: str, config: dict) -> str:
 Analyze these conversations and identify:
 
 1. **Repeated Requests** - What does the user ask for frequently that could become a command or agent?
+
 2. **Pain Points** - Where did things take multiple turns or go wrong?
+   Look for frustration signals in user messages:
+   - Explicit corrections: "Don't use X", "Stop doing Y", "Please don't Z", "Avoid...", "Never..."
+   - Frustrated reactions: "Why did you do X?", "I didn't ask for that", "That's not what I meant"
+   - User reverting changes Claude made or fixing issues Claude created
+   - Same type of mistake repeated multiple times
+
 3. **Missing Context** - What did the user have to re-explain that should be in CLAUDE.md?
+
 4. **Agent Effectiveness** - Which agents were used? Which weren't? How did they perform?
-5. **Hook Opportunities** - What manual actions could be automated with hooks?
+
+5. **Hook Opportunities** - What behaviors could be prevented/automated with hooks?
+   For each opportunity, identify:
+   - **Tool**: Which tool caused the issue (Bash, Edit, Write, Read)
+   - **Pattern**: A regex that would match the problematic behavior
+   - **Event**: PreToolUse (block before) or PostToolUse (check after)
+   - **Example**: The actual command or code pattern from the conversation
+
+   Common preventable patterns:
+   - Dangerous Bash commands (rm -rf, chmod 777, sudo)
+   - Unwanted code additions (console.log, debugger statements)
+   - Editing wrong files (node_modules, dist/, .env)
+   - Missing verification steps before destructive actions
+
 6. **Workflow Friction** - What patterns suggest inefficiency?
+
 7. **External Resources** - What plugins, skills, or tools from the ecosystem would help?
 
 ## Known External Resources (suggest these when relevant)
@@ -252,17 +274,18 @@ Provide your response as JSON with this structure:
             "severity": "critical|medium|low|positive",
             "category": "repeated_requests|pain_points|missing_context|agent_effectiveness|hook_opportunities|workflow_friction|external_resources",
             "title": "<short title>",
-            "evidence": "<specific examples from conversations>",
+            "evidence": "<specific quotes or examples from conversations>",
             "impact": "<how this affects productivity>",
             "recommendation": "<what to do about it>"
         }}
     ],
     "proposed_changes": [
         {{
-            "file": "<exact file path or 'INSTALL_PLUGIN' or 'INSTALL_SKILL'>",
-            "action": "CREATE|EDIT|DELETE|INSTALL",
-            "reason": "<why this change helps>",
-            "content": "<the actual content, diff, or install command>"
+            "type": "hook|plugin|skill|config|agent|command",
+            "name": "<name of the thing to add/change>",
+            "action": "CREATE|EDIT|INSTALL",
+            "reason": "<why this change helps based on conversation evidence>",
+            "content": "<the actual content, config, or install command>"
         }}
     ]
 }}
@@ -366,17 +389,10 @@ def generate_report(analysis: dict, sessions_count: int, days: int) -> str:
         report.append("## Key Findings")
         report.append("")
 
-        severity_emoji = {
-            "critical": "\U0001F534",  # red circle
-            "medium": "\U0001F7E1",    # yellow circle
-            "low": "\U0001F535",       # blue circle
-            "positive": "\U0001F7E2",  # green circle
-        }
-
         for finding in findings:
-            emoji = severity_emoji.get(finding.get("severity", "low"), "\u2022")
+            severity = finding.get("severity", "low").upper()
             report.extend([
-                f"### {emoji} {finding.get('title', 'Finding')}",
+                f"### [{severity}] {finding.get('title', 'Finding')}",
                 f"**Category**: {finding.get('category', 'general')}",
                 f"- **Evidence**: {finding.get('evidence', 'N/A')}",
                 f"- **Impact**: {finding.get('impact', 'N/A')}",
@@ -391,8 +407,9 @@ def generate_report(analysis: dict, sessions_count: int, days: int) -> str:
         report.append("")
 
         for i, change in enumerate(changes, 1):
+            change_type = change.get("type", "config")
             report.extend([
-                f"### {i}. {change.get('action', 'EDIT')}: `{change.get('file', 'unknown')}`",
+                f"### {i}. [{change_type}] {change.get('action', 'CREATE')}: `{change.get('name', 'unknown')}`",
                 f"**Reason**: {change.get('reason', 'N/A')}",
                 "",
                 "```",
@@ -413,13 +430,13 @@ def generate_report(analysis: dict, sessions_count: int, days: int) -> str:
     changes_count = len(changes)
 
     if critical_count > 0:
-        report.append(f"- \U0001F534 {critical_count} critical finding(s)")
+        report.append(f"- {critical_count} critical finding(s)")
     if medium_count > 0:
-        report.append(f"- \U0001F7E1 {medium_count} medium finding(s)")
+        report.append(f"- {medium_count} medium finding(s)")
     if changes_count > 0:
-        report.append(f"- \U0001F4DD {changes_count} proposed change(s)")
+        report.append(f"- {changes_count} proposed change(s)")
     if not findings and not changes:
-        report.append("- \u2705 No significant issues found")
+        report.append("- No significant issues found")
 
     return "\n".join(report)
 
