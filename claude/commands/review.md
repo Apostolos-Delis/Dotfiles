@@ -115,7 +115,22 @@ Check for security vulnerabilities:
 - Secrets properly externalized?
 - Backward compatibility?
 
-### Step 6: Classify and Report Findings
+### Step 6: Integration Impact Check
+
+When changes touch certain file types, check for related files that may also need updates:
+
+| Changed | Also Check |
+|---------|------------|
+| Routes/endpoints | CORS config, API docs, client code |
+| Auth/permissions | All entry points, middleware, role definitions |
+| Env vars | Deployment configs, CI/CD, documentation |
+| API paths/contracts | Frontend clients, API docs, integration tests |
+| Database schema | Migrations, seeds, related models |
+| Config files | Environment overlays (staging.yaml, production.yaml) |
+
+**Process**: For each category of change detected, grep/glob for related files and verify they're consistent. Report any files that reference the old values but weren't updated.
+
+### Step 7: Classify and Report Findings
 
 Report findings using severity classification:
 

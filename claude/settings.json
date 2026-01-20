@@ -3,6 +3,9 @@
     "commit": "",
     "pr": ""
   },
+  "trustedDirectories": [
+    "~/Documents/repos"
+  ],
   "permissions": {
     "allow": [
       "Bash",
