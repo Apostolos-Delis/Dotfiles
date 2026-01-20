@@ -91,6 +91,10 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/check-console-log.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/validate-settings.sh"
           }
         ]
       }
