@@ -1,0 +1,27 @@
+# Codex CLI Configuration
+# Docs: https://developers.openai.com/codex/config-basic/
+
+model = "gpt-5.2-codex"
+
+# Approval policy: "untrusted" | "on-failure" | "on-request" | "never"
+# - untrusted: ask before everything
+# - on-failure: auto-approve until something fails, then ask
+# - on-request: ask before edits and commands
+# - never: never ask (fully autonomous)
+approval_policy = "on-failure"
+
+# Sandbox mode: "workspace-write" | "read-only" | "danger-full-access"
+sandbox_mode = "workspace-write"
+
+[sandbox_workspace_write]
+# Network is blocked by default for security
+# Enable when needed for npm install, API calls, etc.
+network_access = false
+
+[features]
+# Enable features as needed
+# example_feature = true
+
+# Project-specific trust levels
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/mortgages"]
+trust_level = "trusted"

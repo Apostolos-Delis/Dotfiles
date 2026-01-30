@@ -141,10 +141,16 @@ link_file "$DOTFILES_DIR/worktrunk/config.toml" "$HOME/.config/worktrunk/config.
 mkdir -p "$HOME/.claude" "$HOME/.claude/analysis"
 link_file "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+link_file "$DOTFILES_DIR/codex/AGENTS.md" "$HOME/.claude/AGENTS.md"
 link_file "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands"
 link_file "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents"
 link_file "$DOTFILES_DIR/claude/scripts" "$HOME/.claude/scripts"
 link_file "$DOTFILES_DIR/claude/hooks" "$HOME/.claude/hooks"
+
+# Codex CLI config
+mkdir -p "$HOME/.codex"
+link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"
+link_file "$DOTFILES_DIR/codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
 
 # =============================================================================
 # 6. Neovim setup
