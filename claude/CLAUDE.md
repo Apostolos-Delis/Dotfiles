@@ -6,6 +6,19 @@
 
 - **Notification preferences**: Visual-only (no sounds), clicking should focus terminal not editor
 
+## Plan Mode Techniques
+
+- **Plan mode by default**: Enter plan mode for any non-trivial task (3+ steps or architectural decisions). Use it for verification steps, not just building.
+- **Stop and re-plan**: If something goes sideways, stop and re-plan immediately — don't keep pushing down a broken path.
+- **ASCII architecture diagrams**: When planning features or refactors, diagram the current architecture and then the proposed changes. Mark new/changed components.
+- **Screenshot diagramming**: When given a UI screenshot, create an ASCII diagram identifying functional areas, map them to code components/partials, and use those names as shared vocabulary for the rest of the conversation.
+
+## Workflow
+
+- **Verify before done**: Never mark a task complete without proving it works. Run tests, check logs, demonstrate correctness. Ask: "Would a staff engineer approve this?"
+- **Autonomous bug fixing**: When given a bug report, just fix it — point at logs, errors, failing tests, then resolve them. Zero context switching required from the user.
+- **Self-improvement**: After any correction from the user, record the pattern in MEMORY.md so the same mistake isn't repeated.
+
 <claude-mem-context>
 # Recent Activity
 

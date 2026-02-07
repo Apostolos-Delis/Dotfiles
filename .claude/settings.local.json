@@ -23,7 +23,8 @@
       "Bash(\"/Users/Apostolos.Delis@opendoor.com/.claude/plugins/cache/claude-plugins-official/ralph-loop/b97f6eadd929/scripts/setup-ralph-loop.sh\" \"Your task here\" --max-iterations 5)",
       "Bash(test:*)",
       "Skill(ralph-wiggum:ralph-loop)",
-      "mcp__Linear__get_issue"
+      "mcp__Linear__get_issue",
+      "mcp__sequential-thinking__sequentialthinking"
     ]
   }
 }

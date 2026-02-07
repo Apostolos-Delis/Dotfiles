@@ -6,9 +6,13 @@ Full-stack developer on macOS. Primary languages: Python, TypeScript, Ruby.
 
 - **No comment pollution**: Don't add comments, docstrings, or type annotations to code you didn't write
 - **Minimal diffs**: Only change what's directly needed - no drive-by refactors or "improvements"
-- **No premature abstraction**: Three similar lines > unnecessary helper function
+- **No premature abstraction in new code**: Three similar lines > unnecessary helper function
+- **Flag DRY opportunities in reviews**: When reviewing or refactoring existing code, identify repetition worth consolidating
+- **"Engineered enough"**: Solution should fit problem size — not under-engineered (fragile) and not over-engineered (unnecessary complexity)
+- **Demand elegance (balanced)**: For non-trivial changes, pause and ask "is there a more elegant way?" Skip this for simple, obvious fixes. Challenge your own work before presenting it.
+- **Handle edge cases**: Consider nulls, empties, boundaries, and error states
 - **Let tooling handle style**: Don't manually format - run the project's linter/formatter
-- **Understand before fixing**: Read surrounding code and find root cause before changing anything
+- **Understand before fixing**: Read surrounding code and find root cause before changing anything. No temporary fixes — find and fix the real problem.
 
 ## Git Commits
 
