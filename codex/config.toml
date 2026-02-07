@@ -12,6 +12,8 @@ approval_policy = "on-failure"
 
 # Sandbox mode: "workspace-write" | "read-only" | "danger-full-access"
 sandbox_mode = "workspace-write"
+model_reasoning_effort = "high"
+personality = "pragmatic"
 
 [sandbox_workspace_write]
 # Network is blocked by default for security

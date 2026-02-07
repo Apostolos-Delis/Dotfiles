@@ -147,6 +147,10 @@ link_file "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents"
 link_file "$DOTFILES_DIR/claude/scripts" "$HOME/.claude/scripts"
 link_file "$DOTFILES_DIR/claude/hooks" "$HOME/.claude/hooks"
 
+# Claude HUD config
+mkdir -p "$HOME/.claude/plugins/claude-hud"
+link_file "$DOTFILES_DIR/claude/claude-hud-config.json" "$HOME/.claude/plugins/claude-hud/config.json"
+
 # Codex CLI config
 mkdir -p "$HOME/.codex"
 link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"
