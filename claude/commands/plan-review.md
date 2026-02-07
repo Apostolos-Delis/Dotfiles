@@ -1,6 +1,6 @@
 ---
 description: Interactive 4-section review for features and architecture decisions in plan mode
-allowed-tools: Read, Bash, Glob, Grep
+allowed-tools: Read, Bash, Glob, Grep, AskUserQuestion
 ---
 
 # Plan Review
@@ -15,16 +15,16 @@ Interactive, section-by-section review for feature branches and architecture cha
 
 ### Step 0: Scope the Review
 
-Ask the user what kind of change this is using AskUserQuestion:
-
-- **BIG CHANGE**: Full 4-section review, up to 4 issues per section
-- **SMALL CHANGE**: Quick pass, 1 question per section
-
 If the user doesn't specify a branch or set of files, use `git diff main...HEAD --name-only` (or `master`) to identify what's changed.
+
+Auto-detect scope based on the diff: count changed files and total lines changed. Suggest the appropriate depth, then confirm with the user via AskUserQuestion:
+
+- **BIG CHANGE** (10+ files or 200+ lines): Full 4-section review, up to 4 issues per section
+- **SMALL CHANGE** (under those thresholds): Quick pass, 1 question per section
 
 ### Step 1: Architecture Review
 
-Read the changed files and their surrounding context. Evaluate:
+Read the changed files and their surrounding context. For each changed file, also read its callers/importers, related test files, and sibling modules to understand the full impact. Evaluate:
 
 1. **Component boundaries** — Are responsibilities clearly separated? Any god objects or tangled dependencies?
 2. **Data flow** — Is data flowing in a clear direction? Any circular dependencies or unnecessary coupling?
@@ -53,7 +53,8 @@ Read implementation details. Evaluate:
 1. **Readability** — Can a new developer follow this? Are names descriptive?
 2. **DRY** — Is there repetition worth consolidating? (Threshold: 3+ occurrences or complex duplicated logic)
 3. **Complexity** — Any deeply nested logic, long functions, or clever tricks that should be simplified?
-4. **Error handling** — Are failure modes covered? Are errors informative?
+4. **Elegance check** — For non-trivial changes: "is there a more elegant way?" If a fix feels hacky, flag it.
+5. **Error handling** — Are failure modes covered? Are errors informative?
 
 **Present findings the same way** — numbered issues with lettered options. Use AskUserQuestion and wait.
 
@@ -101,6 +102,8 @@ After all sections are complete, present a summary:
 2. [Next action]
 3. [...]
 ```
+
+Then ask: "Want me to start working through these?" via AskUserQuestion.
 
 ## Output Guidelines
 
