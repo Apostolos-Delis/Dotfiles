@@ -133,7 +133,15 @@ timezsh() {
 #   4. wsr (removes worktree + branch)
 alias wsc='wt switch --create --execute=claude'  # Create worktree and launch Claude
 alias wsl='wt list'                         # List worktrees with status
+alias wtl='wt list --format=json | jq -r "to_entries[] | \"\(.key + 1)) \(.value.branch)\"" '  # Numbered list
 alias wsr='wt remove'                       # Remove current worktree
+
+# Switch to worktree by index (1-based): wts 2
+wts() {
+  local branch
+  branch=$(wt list --format=json | jq -r ".[$((${1} - 1))].branch")
+  [ -n "$branch" ] && wt switch "$branch"
+}
 
 # Multi-agent worktree creation (replicates lwt --agents behavior)
 # Usage: wt-agents feat-branch api ui tests

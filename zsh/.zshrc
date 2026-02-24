@@ -31,6 +31,10 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin"
 export PATH=$HOME/bin:$PATH
 export PATH=$HOME/.local/bin:$PATH
 
+# Bun path
+export PATH="$HOME/.bun/bin:$PATH"
+
+
 # Add poetry bin
 export PATH="$PATH:$HOME/.poetry/bin"
 
@@ -231,3 +235,14 @@ _evalcache wt config shell init zsh 2>/dev/null
 [[ -f ~/.workrc ]] && source ~/.workrc
 
 alias claude-mem='bun "/Users/Apostolos.Delis@opendoor.com/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs"'
+
+######### od shell tooling #########
+# these lines added by `code/scripts/development/maybe_install_od_shell_tooling.sh`
+OD_CODE_ROOT="/Users/Apostolos.Delis@opendoor.com/Documents/repos/code"
+OD_TOOL_SOURCE_SCRIPT="$OD_CODE_ROOT/scripts/infra/sourced_on_shell_load.sh"
+[ -f "$OD_TOOL_SOURCE_SCRIPT" ] && source "$OD_TOOL_SOURCE_SCRIPT"
+######### end of od shell tooling #########
+
+
+# bun completions
+[ -s "/Users/Apostolos.Delis@opendoor.com/.bun/_bun" ] && source "/Users/Apostolos.Delis@opendoor.com/.bun/_bun"
