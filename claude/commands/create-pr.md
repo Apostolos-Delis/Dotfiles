@@ -1,6 +1,6 @@
 ---
 description: Stage, commit (with intelligent splitting), push, and open a GitHub PR with auto-filled description
-allowed-tools: Read, Bash, Glob, Grep
+allowed-tools: Read, Bash, Glob, Grep, AskUserQuestion
 ---
 
 # Create PR Command
@@ -23,7 +23,7 @@ If this fails, tell the user: "ERROR: This is not a git repository" and stop.
 git symbolic-ref --short -q HEAD
 ```
 
-**CRITICAL**: If the branch is `main`, tell the user: "ERROR: You are on the main branch. Please create a feature branch first." and stop.
+**If the branch is `main` or `master`**: You need a feature branch before proceeding. Run the `/branch` skill inline — this will generate a descriptive branch name from conversation context (prefixed with `apostolos/`) and check it out. After `/branch` completes, continue to Step 3 on the new branch.
 
 ### Step 3: Check for Changes
 

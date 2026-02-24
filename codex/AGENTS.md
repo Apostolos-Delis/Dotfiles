@@ -13,6 +13,7 @@ Full-stack developer on macOS. Primary languages: Python, TypeScript, Ruby.
 - **Handle edge cases**: Consider nulls, empties, boundaries, and error states
 - **Let tooling handle style**: Don't manually format - run the project's linter/formatter
 - **Understand before fixing**: Read surrounding code and find root cause before changing anything. No temporary fixes — find and fix the real problem.
+- **Hard cutover, no backwards compatibility**: Always use a hard cutover approach. Never implement backwards-compatibility shims, deprecated aliases, or migration paths — just change the code directly.
 
 ## Git Commits
 
