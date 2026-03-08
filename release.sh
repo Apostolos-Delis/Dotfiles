@@ -143,7 +143,7 @@ link_file "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 link_file "$DOTFILES_DIR/codex/AGENTS.md" "$HOME/.claude/AGENTS.md"
 link_file "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands"
-link_file "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills"
+link_file "$DOTFILES_DIR/.agents/skills" "$HOME/.claude/skills"
 link_file "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents"
 link_file "$DOTFILES_DIR/claude/scripts" "$HOME/.claude/scripts"
 link_file "$DOTFILES_DIR/claude/hooks" "$HOME/.claude/hooks"
@@ -153,9 +153,15 @@ mkdir -p "$HOME/.claude/plugins/claude-hud"
 link_file "$DOTFILES_DIR/claude/claude-hud-config.json" "$HOME/.claude/plugins/claude-hud/config.json"
 
 # Codex CLI config
-mkdir -p "$HOME/.codex"
+mkdir -p "$HOME/.codex" "$HOME/.codex/skills"
 link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"
 link_file "$DOTFILES_DIR/codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
+for skill_dir in "$DOTFILES_DIR"/.agents/skills/*; do
+    if [ -d "$skill_dir" ]; then
+        skill_name="$(basename "$skill_dir")"
+        link_file "$skill_dir" "$HOME/.codex/skills/$skill_name"
+    fi
+done
 
 # =============================================================================
 # 6. Neovim setup

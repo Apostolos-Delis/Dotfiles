@@ -12,6 +12,7 @@ Personal dotfiles for a macOS development environment. Optimized for full-stack 
 | [Neovim](nvim/) | Editor with LSP, linting, and snippets |
 | [Git](git/) | Git config with delta for beautiful diffs |
 | [Claude Code](claude/) | AI coding assistant configuration |
+| [Codex CLI](codex/) | OpenAI coding assistant configuration |
 | [Rubocop](rubocop/) | Ruby linting with Airbnb style guide |
 
 ## Installation
@@ -36,6 +37,10 @@ The install script symlinks configs to their expected locations:
 ~/.claude/settings.json -> claude/settings.json
 ~/.claude/CLAUDE.md   -> claude/CLAUDE.md
 ~/.claude/commands/   -> claude/commands/*.md
+~/.claude/skills/     -> .agents/skills/*
+~/.codex/config.toml  -> codex/config.toml
+~/.codex/AGENTS.md    -> codex/AGENTS.md
+~/.codex/skills/*     -> .agents/skills/*
 ~/.tmux/plugins/tpm/  -> Tmux Plugin Manager (cloned)
 ```
 
@@ -49,6 +54,7 @@ The install script symlinks configs to their expected locations:
 - [TPM](https://github.com/tmux-plugins/tpm) - Tmux Plugin Manager (auto-installed)
 - [Ghostty](https://ghostty.org/) - Terminal emulator
 - [Claude Code](https://claude.ai/code) - AI coding assistant
+- [Codex CLI](https://developers.openai.com/codex/) - AI coding assistant
 - [Oh-My-Zsh](https://ohmyz.sh/) - Zsh framework
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh theme
 - [FZF](https://github.com/junegunn/fzf) - `brew install fzf`
@@ -259,6 +265,28 @@ Pre-configured to allow common dev tools (git, npm, python, docker, etc.) and de
 
 `CLAUDE.md` contains coding preferences, environment info, and workflow guidelines that apply to all projects.
 
+#### Shared Skills
+
+Reusable skills are stored once in `.agents/skills/` and linked into both Claude and Codex.
+
+Command-equivalent skills for Codex include:
+- `$review`, `$test`, `$explain`
+- `$branch`, `$create-pr`, `$rebase`
+- `$plan-review`, `$create-hook`, `$explore-repo`
+
+Run parity check:
+
+```bash
+./claude/scripts/check-command-skill-parity.sh
+```
+
+### Codex CLI
+
+Codex uses:
+- `codex/config.toml` for runtime settings
+- `codex/AGENTS.md` for global behavior/context
+- Shared skills from `.agents/skills/`
+
 ## Color Scheme
 
 Atom One Dark is used consistently across all tools:
@@ -305,10 +333,15 @@ Dotfiles/
 │           └── git.lua
 ├── git/               # Git configuration
 │   └── .gitconfig
+├── .agents/
+│   └── skills/        # Shared skills for Claude + Codex
 ├── claude/            # Claude Code AI assistant
 │   ├── settings.json  # Global settings and permissions
 │   ├── CLAUDE.md      # Global memory/context
 │   └── commands/      # Custom slash commands
+├── codex/             # Codex CLI assistant
+│   ├── config.toml
+│   └── AGENTS.md
 ├── rubocop/           # Ruby linting
 │   └── .rubocop.yml
 └── release.sh         # Installation script

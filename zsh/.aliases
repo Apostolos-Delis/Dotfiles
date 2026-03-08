@@ -57,7 +57,7 @@ alias afk="open -a /System/Library/CoreServices/ScreenSaverEngine.app"
 
 # kill a rogue process running on a specific port
 # usage: `killp 3000`
-killp() { lsof -n "-i4TCP:${1:-3002}" | grep LISTEN | tr -s ' ' | cut -f 2 -d ' ' | xargs kill -9}
+killp() { lsof -n "-i4TCP:${1:-3002}" | grep LISTEN | tr -s ' ' | cut -f 2 -d ' ' | xargs kill -9; }
 
 # Auto expand aliases
 function expand-alias() {

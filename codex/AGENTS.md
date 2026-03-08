@@ -43,3 +43,8 @@ Full-stack developer on macOS. Primary languages: Python, TypeScript, Ruby.
 - **Exploration tasks**: For targeted exploration of a single repo/directory, use direct file reads/searches instead of spawning sub-agents
 - **Use sub-agents only for**: Unbounded searches across large codebases, or when searching for patterns across multiple repos
 - **Avoid parallel agent spam**: Don't spawn multiple agents to explore the same repository from different angles - do comprehensive single-pass exploration
+
+## Shared Skills
+
+- Shared local skills live at `.agents/skills/`
+- Command-equivalent skills: `review`, `test`, `explain`, `branch`, `create-hook`, `create-pr`, `plan-review`, `rebase`, `explore-repo`

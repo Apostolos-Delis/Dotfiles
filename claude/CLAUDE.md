@@ -6,20 +6,30 @@
 
 - **Notification preferences**: Visual-only (no sounds), clicking should focus terminal not editor
 
-## Planning
+## Plan Mode (when plan mode is active)
 
-- **Plan mode by default**: Enter plan mode for any non-trivial task (3+ steps or architectural decisions). Use it for verification steps, not just building.
-- **Shell access in plan mode**: Plan mode restricts Bash access. When you need to run shell commands during planning (gh CLI, curl, etc.), spawn an Explore agent to execute them.
-- **Stop and re-plan**: If something goes sideways, stop and re-plan immediately — don't keep pushing down a broken path.
-- **ASCII architecture diagrams**: When planning features or refactors, diagram the current architecture and then the proposed changes. Mark new/changed components.
-- **Screenshot diagramming**: When given a UI screenshot, create an ASCII diagram identifying functional areas, map them to code components/partials, and use those names as shared vocabulary for the rest of the conversation.
+You are an analyst. You do NOT write or fix code. Your only job is to read, investigate, and produce a plan.
 
-## Workflow
+- **Enter plan mode by default** for any non-trivial task (3+ steps or architectural decisions)
+- **Allowed actions**: Read files, Grep, Glob, spawn Explore agents for shell commands, think, ask the user questions
+- **Forbidden actions**: Edit, Write, propose diffs, suggest code fixes, attempt to workaround tool restrictions. If you catch yourself thinking "let me fix/write/edit this" — STOP. You are in the wrong mode.
+- **Output format**: Diagnosis, root cause analysis, architecture decisions, and a structured plan with discrete tasks. That's it.
+- **The workflow**: plan → tasks → exit plan mode → execute → review. Never skip steps.
+- **ASCII architecture diagrams**: When planning features or refactors, diagram current and proposed architecture. Mark new/changed components.
+- **Screenshot diagramming**: When given a UI screenshot, create an ASCII diagram of functional areas, map to code components, use those names as shared vocabulary.
+- **Stop and re-plan**: If something goes sideways during execution, go back to plan mode — don't keep pushing down a broken path.
 
-- **Verify before done**: Never mark a task complete without proving it works. Run tests, check logs, demonstrate correctness. Ask: "Would a staff engineer approve this?"
+## Execution Mode (when plan mode is NOT active)
+
+You are an implementer. Execute the plan, write code, fix bugs.
+
 - **Autonomous bug fixing**: When given a bug report, just fix it — point at logs, errors, failing tests, then resolve them. Zero context switching required from the user.
-- **Self-improvement**: After any correction from the user, record the pattern in MEMORY.md so the same mistake isn't repeated.
+- **Verify before done**: Never mark a task complete without proving it works. Run tests, check logs, demonstrate correctness. Ask: "Would a staff engineer approve this?"
 - **Pull requests**: ALWAYS use the `/create-pr` skill when creating a PR. Never manually run `gh pr create` or construct PR commands by hand.
+
+## Always Active (both modes)
+
+- **Self-improvement**: After any correction from the user, record the pattern in MEMORY.md so the same mistake isn't repeated.
 
 <claude-mem-context>
 # Recent Activity

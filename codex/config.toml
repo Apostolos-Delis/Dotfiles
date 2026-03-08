@@ -1,7 +1,7 @@
 # Codex CLI Configuration
 # Docs: https://developers.openai.com/codex/config-basic/
 
-model = "gpt-5.2-codex"
+model = "gpt-5.3-codex"
 
 # Approval policy: "untrusted" | "on-failure" | "on-request" | "never"
 # - untrusted: ask before everything
@@ -12,8 +12,9 @@ approval_policy = "on-failure"
 
 # Sandbox mode: "workspace-write" | "read-only" | "danger-full-access"
 sandbox_mode = "workspace-write"
-model_reasoning_effort = "high"
+model_reasoning_effort = "xhigh"
 personality = "pragmatic"
+plan_mode_reasoning_effort = "high"
 
 [sandbox_workspace_write]
 # Network is blocked by default for security
@@ -27,3 +28,6 @@ network_access = false
 # Project-specific trust levels
 [projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/mortgages"]
 trust_level = "trusted"
+
+[notice.model_migrations]
+"gpt-5.2-codex" = "gpt-5.3-codex"
