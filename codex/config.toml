@@ -1,7 +1,7 @@
 # Codex CLI Configuration
 # Docs: https://developers.openai.com/codex/config-basic/
 
-model = "gpt-5.3-codex"
+model = "gpt-5.4"
 
 # Approval policy: "untrusted" | "on-failure" | "on-request" | "never"
 # - untrusted: ask before everything
@@ -31,3 +31,4 @@ trust_level = "trusted"
 
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
+"gpt-5.3-codex" = "gpt-5.4"
