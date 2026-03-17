@@ -1,134 +1,62 @@
 ---
 name: rebase
-description: Rebase the current branch onto main/master, resolve conflicts, and push safely.
+description: "Use when a feature branch needs to be updated with the latest main/master, or when asked to rebase."
 ---
 
 # Rebase
 
 Rebase the current branch onto the latest main branch and handle conflicts safely.
 
-## Pre-flight Checks
+## Pre-flight
 
-### Step 1: Verify Git Repository
-
-```bash
-git rev-parse --git-dir > /dev/null 2>&1
-```
-
-If this fails, tell the user: "ERROR: This is not a git repository" and stop.
-
-### Step 2: Check Current Branch
-
-```bash
-git symbolic-ref --short -q HEAD
-```
-
-If branch is `main` or `master`, tell user: "ERROR: You are already on the main branch. Nothing to rebase." and stop.
-
-### Step 3: Check Clean Working Tree
-
-```bash
-git status --porcelain
-```
-
-If there are uncommitted changes, stop and ask user to commit or stash first.
-
-### Step 4: Detect Base Branch
-
-```bash
-git rev-parse --verify main 2>/dev/null && echo "main" || git rev-parse --verify master 2>/dev/null && echo "master"
-```
-
-If neither exists locally, check remote:
-
-```bash
-git ls-remote --heads origin main 2>/dev/null | grep -q main && echo "main" || git ls-remote --heads origin master 2>/dev/null | grep -q master && echo "master"
-```
-
-If no base is found, report error and stop.
-
-### Step 5: Fetch Latest
-
-```bash
-git fetch origin
-```
+Verify: in a git repo, not on main/master, clean working tree. Detect the base branch (main or master) and fetch latest.
 
 ## Rebase Workflow
 
-### Step 6: Start Rebase
+### 1. Start Rebase
+
+Rebase onto `origin/<base>`. If no conflicts, skip to verification.
+
+### 2. Resolve Conflicts
+
+For each conflicted file, inspect all three stages to understand intent:
 
 ```bash
-git rebase origin/<BASE_BRANCH>
+git show :1:<file>   # common ancestor
+git show :2:<file>   # ours (current branch)
+git show :3:<file>   # theirs (base branch)
 ```
 
-If no conflicts, continue to Step 8.
+Resolve with merged intent, stage, and continue. If a conflict requires product judgment, ask the user.
 
-### Step 7: Resolve Conflicts Loop
+### 3. Verify Result
 
-List unresolved files:
+Confirm the branch is clean and based on latest main/master. Review the log.
 
-```bash
-git diff --name-only --diff-filter=U
-```
-
-For each conflicted file:
-1. Inspect stages:
-
-```bash
-git show :1:<file>
-git show :2:<file>
-git show :3:<file>
-```
-
-2. Resolve conflict with merged intent.
-3. Remove conflict markers.
-4. Stage file:
-
-```bash
-git add <file>
-```
-
-Continue rebase:
-
-```bash
-git rebase --continue
-```
-
-Repeat until complete.
-
-If semantic conflict needs product judgment, ask user to choose direction.
-
-### Step 8: Verify Result
-
-```bash
-git log --oneline -5
-git status
-```
-
-Confirm branch is out of rebase state and based on latest main/master.
-
-### Step 9: Optional Test Validation
+### 4. Test Validation
 
 If project test command is known, offer to run it and report outcome.
 
-### Step 10: Push Safely
+### 5. Push Safely
 
 ```bash
 git push --force-with-lease
 ```
 
-If lease is rejected, report that remote changed and user should coordinate before forcing.
+If rejected, report that the remote changed — user should coordinate before forcing.
 
-### Step 11: Output Summary
+### 6. Output Summary
 
-Report:
-- Number of commits rebased
-- Number of conflicts resolved
-- Files with conflicts
-- Push status
+Report: commits rebased, conflicts resolved, files affected, push status.
 
 ## Safety
 
-- This rewrites history and force-pushes
-- Prefer `--force-with-lease` only (never `--force`)
-- If needed, abort with `git rebase --abort`
+- **Always** `--force-with-lease`, **never** `--force`
+- If things go wrong: `git rebase --abort`
+
+## Gotchas
+
+- **Rebasing with uncommitted work**: Always check for a clean working tree first. Stashing "just to rebase" often leads to stash-pop conflicts on top of rebase conflicts.
+- **Losing commits during conflict resolution**: When resolving conflicts, `git rebase --continue` with an empty diff silently drops that commit. Always verify commit count before and after.
+- **Rebasing shared/public branches**: If others have based work on this branch, rebasing rewrites their history too. Ask before rebasing branches with open PRs that have reviewers' comments.
+- **Conflict resolution amnesia**: After resolving 5+ conflicts, it's easy to introduce bugs. Run tests after rebase, not just before pushing.

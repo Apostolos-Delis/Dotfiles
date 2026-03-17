@@ -1,6 +1,6 @@
 ---
 name: create-hook
-description: Analyze project tooling, suggest practical Claude hooks, create them, and validate behavior.
+description: "Use when asked to create, suggest, or set up Claude Code hooks for a project."
 ---
 
 # Create Hook
@@ -91,3 +91,11 @@ If problems occur:
 
 - Official docs: `https://docs.claude.com/en/docs/claude-code/hooks.md`
 - Examples: `https://docs.claude.com/en/docs/claude-code/hooks#examples`
+
+## Gotchas
+
+- **Slow hooks block everything**: A hook that runs `tsc` on the entire project after every file edit will make Claude unusable. Scope to changed files only, and keep execution under 2-3 seconds.
+- **stdin JSON parsing failures**: Hooks receive JSON on stdin. If your script doesn't read stdin (or reads it wrong), it silently gets empty input. Always test with `echo '{"tool":"Write"}' | ./hook.sh`.
+- **Permission issues**: Forgetting `chmod +x` on the hook script is the #1 cause of "hook not working." Always verify.
+- **Hooks that break in CI**: Hooks that depend on global tools (`prettier` not in devDependencies, `rubocop` not in Gemfile) will fail in CI or on other machines. Use project-local binaries (`npx`, `bundle exec`).
+- **Infinite loops**: A PostToolUse hook that modifies files can trigger itself if not filtered properly. Always check the tool name and file path before acting.

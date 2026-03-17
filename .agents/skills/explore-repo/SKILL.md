@@ -1,6 +1,6 @@
 ---
 name: explore-repo
-description: Perform comprehensive single-pass repository exploration and produce a structured report.
+description: "Use when first entering an unfamiliar codebase, or when asked to map out, survey, or understand a repository's structure."
 ---
 
 # Explore Repository

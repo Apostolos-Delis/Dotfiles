@@ -1,6 +1,6 @@
 ---
 name: branch
-description: Create a descriptive git branch name from context and check it out.
+description: "Use when starting new work and need a properly named feature branch, or when on main/master and about to make changes."
 ---
 
 # Branch
@@ -9,36 +9,18 @@ Create a descriptive git branch prefixed with `apostolos/` based on conversation
 
 ## Workflow
 
-### Step 1: Verify Git Repository
+### 1. Pre-flight
 
-```bash
-git rev-parse --git-dir > /dev/null 2>&1
-```
+Verify you're in a git repo. Check the current branch.
 
-If this fails, tell the user: "ERROR: This is not a git repository" and stop.
+- If on `main`/`master`: continue — this is the expected starting point.
+- If on another branch: ask whether to branch off it or switch to main/master first.
 
-### Step 2: Check Current Branch
-
-```bash
-git symbolic-ref --short -q HEAD
-```
-
-Store this as `CURRENT_BRANCH`.
-
-If current branch is `main` or `master`, continue.
-
-If current branch is not `main`/`master`, ask the user whether to branch off `CURRENT_BRANCH` or switch to main/master first.
-- If switching is chosen, detect `main` or `master`, then run:
-
-```bash
-git checkout <main-branch> && git pull
-```
-
-### Step 3: Generate Branch Name
+### 2. Generate Branch Name
 
 Infer the branch name from work context (files changed, task type, key terms).
 
-Branch rules:
+**Naming rules:**
 - Prefix: `apostolos/`
 - Lowercase snake_case
 - Concise but descriptive (3-5 words after prefix)
@@ -50,19 +32,11 @@ Examples:
 - `apostolos/refactor_helm_values`
 - `apostolos/update_zsh_aliases`
 
-### Step 4: Create and Checkout
+### 3. Create and Checkout
 
-```bash
-git checkout -b <branch-name>
-```
+Create and switch to the new branch. If the name already exists, append `_2`.
 
-If the branch already exists, append a suffix:
-
-```bash
-git checkout -b <branch-name>_2
-```
-
-### Step 5: Output Result
+### 4. Output Result
 
 Display:
 - Created branch name
