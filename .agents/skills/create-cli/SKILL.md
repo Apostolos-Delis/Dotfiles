@@ -1,11 +1,6 @@
 ---
 name: create-cli
-description: >
-  Design command-line interface parameters and UX: arguments, flags, subcommands,
-  help text, output formats, error messages, exit codes, prompts, config/env
-  precedence, and safe/dry-run behavior. Use when you're designing a CLI spec
-  (before implementation) or refactoring an existing CLI's surface area for
-  consistency, composability, and discoverability.
+description: "Use when designing CLI parameters, flags, subcommands, or UX — before implementation, not during."
 ---
 
 # Create CLI
@@ -40,8 +35,10 @@ When designing a CLI, produce a compact spec the user can implement:
 - Error + exit code map (top failure modes).
 - Safety rules: `--dry-run`, confirmations, `--force`, `--no-input`.
 - Config/env rules + precedence (flags > env > project config > user config > system).
-- Shell completion story (if relevant): install/discoverability; generation command or bundled scripts.
+- Shell completion story (if relevant).
 - 5-10 example invocations (common flows; include piped/stdin examples).
+
+See `references/cli-spec-template.md` for the full spec template.
 
 ## Default Conventions (unless user says otherwise)
 
@@ -53,38 +50,6 @@ When designing a CLI, produce a compact spec the user can implement:
 - Destructive operations: interactive confirmation + non-interactive requires `--force` or explicit `--confirm=...`.
 - Respect `NO_COLOR`, `TERM=dumb`; provide `--no-color`.
 - Handle Ctrl-C: exit fast; bounded cleanup; be crash-only when possible.
-
-## Templates (copy into your answer)
-
-### CLI spec skeleton
-
-Fill these sections, drop anything irrelevant:
-
-1. **Name**: `mycmd`
-2. **One-liner**: `...`
-3. **USAGE**:
-   - `mycmd [global flags] <subcommand> [args]`
-4. **Subcommands**:
-   - `mycmd init ...`
-   - `mycmd run ...`
-5. **Global flags**:
-   - `-h, --help`
-   - `--version`
-   - `-q, --quiet` / `-v, --verbose` (define exactly)
-   - `--json` / `--plain` (if applicable)
-6. **I/O contract**:
-   - stdout:
-   - stderr:
-7. **Exit codes**:
-   - `0` success
-   - `1` generic failure
-   - `2` invalid usage (parse/validation)
-   - (add command-specific codes only when actually useful)
-8. **Env/config**:
-   - env vars:
-   - config file path + precedence:
-9. **Examples**:
-   - ...
 
 ## Notes
 

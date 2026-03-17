@@ -1,6 +1,6 @@
 ---
 name: create-pr
-description: Stage, commit (with optional logical splitting), push, and create a GitHub PR with a filled description.
+description: "Use when work is ready to push and open a pull request, or when asked to create/submit a PR."
 ---
 
 # Create PR
@@ -9,134 +9,40 @@ Automate staging, formatting, commit creation, push, and GitHub PR creation.
 
 ## Pre-flight Checks
 
-### Step 1: Verify Git Repository
-
-```bash
-git rev-parse --git-dir > /dev/null 2>&1
-```
-
-If this fails, tell the user: "ERROR: This is not a git repository" and stop.
-
-### Step 2: Check Current Branch
-
-```bash
-git symbolic-ref --short -q HEAD
-```
-
-If the branch is `main` or `master`, run the `branch` skill first to create a feature branch, then continue.
-
-### Step 3: Check for Changes
-
-```bash
-git status --porcelain
-```
-
-If there are no changes, tell the user: "No changes to commit." and stop.
+1. Verify git repo and check current branch.
+2. If on `main`/`master`, run the `branch` skill first.
+3. If no changes exist, stop.
 
 ## Main Workflow
 
-### Step 4: Stage All Changes
+### 1. Stage and Format
 
-```bash
-git add --all
-```
+Stage all changes. Detect and run project formatter (prettier, black, rubocop, etc.) on changed files, then re-stage.
 
-### Step 5: Analyze Diffs and Context
+### 2. Decide Commit Strategy
 
-```bash
-git diff --cached --stat
-git diff --cached
-git log main..HEAD --oneline 2>/dev/null || echo "No prior commits on this branch"
-```
-
-### Step 5.1: Auto-format Changed Files
-
-Detect formatter/language tooling and run formatter on changed files:
-- JS/TS: `npx prettier --write ...`
-- Python: `black ... && isort ...`
-- Ruby: `bundle exec rubocop -a ...`
-
-Then re-stage:
-
-```bash
-git add --all
-```
-
-If no formatter is detected, skip.
-
-### Step 5.5: Decide Commit Strategy
-
-Decide if changes should be split into multiple commits based on logical units.
-
-If split is needed:
-1. Explain split plan to user
-2. Unstage all:
-
-```bash
-git reset
-```
-
-3. For each logical unit:
-- `git add <related-files>`
-- Commit with focused message
+If changes span multiple logical units, split into focused commits. Otherwise, single commit.
 
 Commit type guidance: `feat`, `fix`, `refactor`, `test`, `docs`, `style`, `chore`.
 
-If single logical unit, continue to Step 6.
+### 3. Generate Commit Message
 
-### Step 6: Generate Commit Message
+- Subject: imperative mood, ideally <= 50 chars
+- Body only if needed for why/context
+- No AI attribution or co-author lines
 
-Create concise, imperative commit message.
-- Subject ideally <= 50 chars
-- Add body only if needed for why/context
-- Do not add AI attribution or co-author lines
+### 4. Self Review
 
-### Step 7: Commit
-
-```bash
-git commit -m "$(cat <<'EOFMSG'
-<subject>
-
-<optional body>
-EOFMSG
-)"
-```
-
-If commit fails:
-
-```bash
-git reset
-```
-
-Then stop.
-
-### Step 7.5: Self Review
-
-Review branch diff before PR:
-
-```bash
-git diff main..HEAD
-```
-
-Check:
-- Developer quality/readability
+Review `git diff main..HEAD` before creating PR:
+- Quality/readability
 - Security risks (secrets, validation, unsafe handling)
-- Test coverage and edge cases
+- Test coverage gaps
 
-If issues found, present options:
-1. Fix now
-2. Note in PR
-3. Proceed anyway
+If issues found: offer to fix now, note in PR, or proceed anyway.
 
-### Step 8: Push Branch
+### 5. Push and Create PR
 
-```bash
-git push --set-upstream origin $(git symbolic-ref --short HEAD)
-```
-
-### Step 9: Create GitHub PR
-
-Create PR with structured body:
+Push with `--set-upstream`, then create PR:
 
 ```bash
 gh pr create --title "<title>" --body "$(cat <<'EOFPR'
@@ -162,9 +68,14 @@ EOFPR
 )"
 ```
 
-### Step 10: Output Result
+### 6. Output Result
 
-After success, show:
-- PR URL
-- Commit summary
-- Any unresolved review risks noted during self-review
+Show: PR URL, commit summary, any unresolved review risks.
+
+## Gotchas
+
+- **Verbose commit messages**: Claude tends to write essay-length commit messages. Keep the subject under 50 chars. The body should be 1-3 lines max, not a changelog.
+- **PR description hallucination**: Don't invent test results or claim testing that didn't happen. Only describe what was actually done.
+- **Force-push on shared branches**: Never force-push without checking if others have pushed to the branch. Use `--force-with-lease` if rebasing was involved.
+- **gh auth issues**: If `gh pr create` fails with auth errors, check `gh auth status` before retrying. Don't retry in a loop.
+- **Forgetting to pull before push**: If the branch already exists on remote (e.g., from a previous push), pull or check for divergence first.

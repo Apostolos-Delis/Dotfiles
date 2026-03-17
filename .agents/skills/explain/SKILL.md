@@ -1,6 +1,6 @@
 ---
 name: explain
-description: Explain how a file or code section works with concise structure and code references.
+description: "Use when asked to explain, walk through, or break down how code works — a file, function, class, or code section."
 ---
 
 # Explain Code

@@ -1,6 +1,6 @@
 ---
 name: plan-review
-description: Run an interactive architecture-first review for planned or in-progress feature work.
+description: "Use when reviewing in-progress feature work, architecture decisions, or branch diffs — deeper than a pre-commit review."
 ---
 
 # Plan Review
