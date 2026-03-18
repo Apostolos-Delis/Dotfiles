@@ -14,7 +14,7 @@ approval_policy = "on-failure"
 sandbox_mode = "workspace-write"
 model_reasoning_effort = "xhigh"
 personality = "pragmatic"
-plan_mode_reasoning_effort = "high"
+plan_mode_reasoning_effort = "xhigh"
 
 [sandbox_workspace_write]
 # Network is blocked by default for security
@@ -27,6 +27,15 @@ network_access = false
 
 # Project-specific trust levels
 [projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/mortgages"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/personal_claw"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/PersonalClaw"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/Dotfiles"]
 trust_level = "trusted"
 
 [notice.model_migrations]
