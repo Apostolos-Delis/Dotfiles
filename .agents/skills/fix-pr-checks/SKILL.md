@@ -51,6 +51,7 @@ If `$ARGUMENTS` is present, pass it as the helper's single argument. If not, omi
 - If the failure is external or environmental, say so clearly instead of pretending it is fixable in the repo.
 - Never force-push unless the user explicitly asks.
 - Do not create an empty commit.
+- Do not declare success just because a narrow local command passed. If the fresh SHA has not passed CI yet, say that explicitly.
 
 ## Step 1: Collect Normalized Check Data
 
@@ -122,6 +123,10 @@ Before changing anything, read:
 - the code or tests involved in the failure
 - project tooling files like `package.json`, `Makefile`, `pyproject.toml`, or equivalent if they define the failing command
 
+If the failing log names a file and line, read that exact location first.
+
+If the failure involves a specific symbol, column, file path, script name, or environment assumption, grep for all related references before editing. Do not stop after the first hit if the same pattern can exist in specs, helpers, support code, or workflow scripts.
+
 ## Step 5: Reproduce Locally
 
 Reproduce the narrowest failing target locally when possible:
@@ -133,6 +138,13 @@ Reproduce the narrowest failing target locally when possible:
 - workflow script failure: run the script locally with the same arguments when possible
 
 If the failure is clearly caused by missing secrets, permissions, runner issues, or external outages, do not invent a local repro. Mark it as blocked and explain why.
+
+If the CI error suggests local environment drift, validate in a cleaner environment before trusting a green result. Examples:
+- undefined column, missing table, or schema mismatch: recreate or reset the test database from the repository state
+- missing file or generated artifact: clean untracked/generated files and rerun
+- dependency mismatch: reinstall from the lockfile or CI-equivalent command
+
+If a narrow repro passes locally but the CI failure indicates a broader shared pattern, expand immediately to the full affected suite or family instead of pushing.
 
 ## Step 6: Fix the Root Cause
 
@@ -152,6 +164,8 @@ Invalid fixes unless explicitly justified:
 - disabling checks
 - replacing assertions with trivial truths
 
+After the first fix, search for sibling occurrences of the same broken pattern and address them in the same pass when they are part of the same root cause. Example: if one `position` reference is invalid because the column is unavailable on the branch, check the app code, specs, helpers, and support code for every remaining `position` reference before pushing.
+
 ## Step 7: Validate Locally
 
 After each fix:
@@ -160,6 +174,8 @@ After each fix:
 3. run broader validation only if needed
 
 Be efficient, but do not claim success without actual validation.
+
+When the failure came from a shared helper, schema assumption, test support code, or repeated pattern, broader validation is needed. Run the whole affected suite, directory, or CI-equivalent command before pushing.
 
 ## Step 8: Decide Whether to Rerun CI
 
@@ -186,6 +202,20 @@ git push
 
 Use a more specific commit message if the cause is obvious.
 
+## Step 10: Confirm Post-Push Status
+
+After pushing, check the new SHA's PR checks.
+
+If the relevant checks finish in a reasonable time, wait for them:
+
+```bash
+gh pr checks --watch --fail-fast
+```
+
+If they are still running when you need to stop, do not say the issue is fixed. Say the fix was pushed and CI is still pending for the new SHA.
+
+If the same check fails again, inspect the new failing log before summarizing. Treat that as the previous fix being incomplete, not as success.
+
 ## Final Response
 
 Return a compact summary with:
@@ -195,5 +225,6 @@ Return a compact summary with:
 - root cause for each addressed failure
 - what changed
 - local validation run
+- whether the new SHA's CI passed, failed again, or is still pending
 - whether CI was rerun diagnostically
 - anything still blocked or unresolved
