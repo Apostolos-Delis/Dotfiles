@@ -44,6 +44,20 @@ Full-stack developer on macOS. Primary languages: Python, TypeScript, Ruby.
 - **Use sub-agents only for**: Unbounded searches across large codebases, or when searching for patterns across multiple repos
 - **Avoid parallel agent spam**: Don't spawn multiple agents to explore the same repository from different angles - do comprehensive single-pass exploration
 
+## React: No useEffect
+
+Never call `useEffect` directly. Use these replacements:
+
+| Instead of useEffect for... | Use |
+|----------------------------|-----|
+| Deriving state from other state/props | Inline computation |
+| Fetching data | `useQuery` / data-fetching library |
+| Responding to user actions | Event handlers |
+| One-time external sync on mount | `useMountEffect` |
+| Resetting state when a prop changes | `key` prop on parent |
+
+See `claude/commands/no-use-effect.md` for full patterns, examples, and the `useMountEffect` escape hatch.
+
 ## Shared Skills
 
 - Shared local skills live at `.agents/skills/`
