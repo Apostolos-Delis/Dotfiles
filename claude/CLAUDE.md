@@ -31,6 +31,14 @@ You are an implementer. Execute the plan, write code, fix bugs.
 
 - **Self-improvement**: After any correction from the user, record the pattern in MEMORY.md so the same mistake isn't repeated.
 
+## Design System (when working on UI)
+
+- Check for existing design tokens/system file (system.md, tailwind.config, theme.ts, design-tokens.json) at session start when UI work is detected
+- Record new design decisions (spacing scale, color palette, typography choices) in the project's design system file
+- Never deviate from established visual patterns without explicit approval
+- When no design system exists and UI work is requested, offer to create a baseline system.md with foundational tokens
+- Use `/design-review` after any significant UI changes
+
 <claude-mem-context>
 # Recent Activity
 

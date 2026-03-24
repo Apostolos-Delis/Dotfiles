@@ -115,7 +115,20 @@ Check for security vulnerabilities:
 - Secrets properly externalized?
 - Backward compatibility?
 
-### Step 6: Integration Impact Check
+### Step 6: UI/Design Review (When Frontend Changes Detected)
+
+If the diff contains changes to CSS/SCSS/Tailwind files, React/Vue/Svelte components, or HTML templates, run a lightweight design check:
+
+1. **Design Anti-Patterns**: Scan for pure blacks, nested cards, inconsistent spacing values, missing interaction states, random font sizes without a scale
+2. **Design System Consistency**: If a design system file exists (system.md, tailwind.config theme, tokens file), check that changes are consistent with established tokens
+3. **Accessibility Basics**: Color contrast on new text, focus indicators on new interactive elements, semantic HTML (buttons vs divs), form label associations
+4. **Responsive Consideration**: Hardcoded widths on layout elements, fixed font sizes, missing breakpoints
+
+**Severity**: Accessibility issues are 🟠 WARNING. Anti-patterns and inconsistencies are 🟡 SUGGESTION. For a full design audit, use `/design-review` instead.
+
+Skip this step entirely if no frontend files are in the diff.
+
+### Step 7: Integration Impact Check
 
 When changes touch certain file types, check for related files that may also need updates:
 
@@ -130,7 +143,7 @@ When changes touch certain file types, check for related files that may also nee
 
 **Process**: For each category of change detected, grep/glob for related files and verify they're consistent. Report any files that reference the old values but weren't updated.
 
-### Step 7: Classify and Report Findings
+### Step 8: Classify and Report Findings
 
 Report findings using severity classification:
 
