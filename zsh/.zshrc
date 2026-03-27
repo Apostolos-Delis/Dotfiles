@@ -44,6 +44,9 @@ export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
 # Add Ghostty CLI
 export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
 
+# Rust/Cargo
+. "$HOME/.cargo/env"
+
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export TIMEFMT=$'\t%E real,\t%U user,\t%S sys'

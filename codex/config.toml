@@ -22,6 +22,7 @@ plan_mode_reasoning_effort = "xhigh"
 network_access = false
 
 [features]
+multi_agent = true
 # Enable features as needed
 # example_feature = true
 
@@ -42,6 +43,9 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/trace"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/synth"]
 trust_level = "trusted"
 
 [notice.model_migrations]
