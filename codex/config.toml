@@ -51,9 +51,12 @@ trust_level = "trusted"
 [projects."/Users/apostolosdelis/Documents/repos/Dotfiles"]
 trust_level = "trusted"
 
+[projects."/Users/apostolosdelis/Documents/repos/personal-os"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
 
 [tui.model_availability_nux]
-"gpt-5.5" = 3
+"gpt-5.5" = 4
