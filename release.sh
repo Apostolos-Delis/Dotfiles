@@ -43,6 +43,7 @@ brew install pyenv
 brew install max-sixty/worktrunk/wt
 brew install --cask amethyst
 brew install terminal-notifier  # For Claude Code notifications
+brew install --cask ghostty
 
 # Install FZF key bindings and completion
 echo "==> Configuring FZF..."
