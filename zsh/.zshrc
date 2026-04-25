@@ -45,7 +45,7 @@ export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/"
 export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
 
 # Rust/Cargo
-. "$HOME/.cargo/env"
+[[ -r "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
