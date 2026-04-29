@@ -40,7 +40,7 @@ The install script symlinks configs to their expected locations:
 ~/.claude/skills/     -> .agents/skills/*
 ~/.codex/config.toml  -> codex/config.toml
 ~/.codex/AGENTS.md    -> codex/AGENTS.md
-~/.codex/skills/*     -> .agents/skills/*
+~/.codex/skills/*     -> .agents/skills/* plus gstack skills from ~/.gstack/repos/gstack
 ~/.tmux/plugins/tpm/  -> Tmux Plugin Manager (cloned)
 ```
 
@@ -55,6 +55,7 @@ The install script symlinks configs to their expected locations:
 - [Ghostty](https://ghostty.org/) - Terminal emulator
 - [Claude Code](https://claude.ai/code) - AI coding assistant
 - [Codex CLI](https://developers.openai.com/codex/) - AI coding assistant
+- [Bun](https://bun.sh/) - Required for gstack skill installation (`brew install oven-sh/bun/bun`)
 - [Oh-My-Zsh](https://ohmyz.sh/) - Zsh framework
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh theme
 - [FZF](https://github.com/junegunn/fzf) - `brew install fzf`
@@ -286,6 +287,17 @@ Codex uses:
 - `codex/config.toml` for runtime settings
 - `codex/AGENTS.md` for global behavior/context
 - Shared skills from `.agents/skills/`
+- gstack skills installed by `release.sh` into `~/.codex/skills/gstack-*`
+
+#### gstack for Codex
+
+`release.sh` clones or updates `https://github.com/garrytan/gstack` at `~/.gstack/repos/gstack` and runs:
+
+```bash
+./setup --host codex --prefix --quiet
+```
+
+This exposes gstack's workflow skills in Codex with namespaced skill names such as `$gstack-office-hours`, `$gstack-autoplan`, `$gstack-review`, `$gstack-qa`, `$gstack-ship`, `$gstack-investigate`, and `$gstack-cso`. Namespacing keeps them from colliding with local skills like `$review` and `$test`.
 
 ## Color Scheme
 

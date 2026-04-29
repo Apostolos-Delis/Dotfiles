@@ -45,6 +45,9 @@ brew install --cask amethyst
 brew install terminal-notifier  # For Claude Code notifications
 brew install --cask ghostty
 brew install codex
+if ! command -v bun &> /dev/null; then
+    brew install oven-sh/bun/bun || brew install bun
+fi
 
 # Install FZF key bindings and completion
 echo "==> Configuring FZF..."
@@ -164,6 +167,33 @@ for skill_dir in "$DOTFILES_DIR"/.agents/skills/*; do
         link_file "$skill_dir" "$HOME/.codex/skills/$skill_name"
     fi
 done
+
+
+# Install gstack skills for Codex
+echo "==> Installing gstack skills for Codex..."
+
+install_gstack_for_codex() {
+    local gstack_dir="$HOME/.gstack/repos/gstack"
+    mkdir -p "$(dirname "$gstack_dir")"
+
+    if [ -d "$gstack_dir/.git" ]; then
+        echo "    Updating gstack at $gstack_dir"
+        git -C "$gstack_dir" fetch --depth=1 origin main
+        git -C "$gstack_dir" checkout main
+        git -C "$gstack_dir" reset --hard origin/main
+    else
+        echo "    Cloning gstack to $gstack_dir"
+        git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git "$gstack_dir"
+    fi
+
+    (cd "$gstack_dir" && ./setup --host codex --prefix --quiet)
+}
+
+if command -v bun &> /dev/null; then
+    install_gstack_for_codex
+else
+    echo "    Bun not installed, skipping gstack. Install Bun and rerun ./release.sh."
+fi
 
 # =============================================================================
 # 6. Neovim setup
