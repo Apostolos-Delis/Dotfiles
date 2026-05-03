@@ -17,9 +17,8 @@ autoload -z edit-command-line
 zle -N edit-command-line
 bindkey '^G' edit-command-line
 
-# set terminal color if not TMUX
-# Reference: https://unix.stackexchange.com/questions/139082/zsh-set-term-screen-256color-in-tmux-but-xterm-256color-without-tmux
-[[ $TMUX = "" ]] && export TERM="xterm-256color"
+# Preserve Ghostty's TERM so tmux can detect extended-key support.
+[[ -z $TMUX && -z $GHOSTTY_RESOURCES_DIR ]] && export TERM="xterm-256color"
 
 # Get rid of duplicate values in path
 typeset -aU path

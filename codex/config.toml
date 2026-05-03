@@ -3,12 +3,11 @@
 
 model = "gpt-5.5"
 
-# Approval policy: "untrusted" | "on-failure" | "on-request" | "never"
+# Approval policy: "untrusted" | "on-request" | "never"
 # - untrusted: ask before everything
-# - on-failure: auto-approve until something fails, then ask
-# - on-request: ask before edits and commands
+# - on-request: let the model decide when approval is needed
 # - never: never ask (fully autonomous)
-approval_policy = "on-failure"
+approval_policy = "on-request"
 
 # Sandbox mode: "workspace-write" | "read-only" | "danger-full-access"
 sandbox_mode = "workspace-write"
@@ -22,6 +21,7 @@ plan_mode_reasoning_effort = "xhigh"
 network_access = false
 
 [features]
+goals = true
 multi_agent = true
 # Enable features as needed
 # example_feature = true
@@ -52,6 +52,15 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/apostolosdelis/Documents/repos/personal-os"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/atlas-parthenon/atlas-v1"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/atlas-parthenon/atlas"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com"]
 trust_level = "trusted"
 
 [notice.model_migrations]
