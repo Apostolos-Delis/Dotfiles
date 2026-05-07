@@ -2,6 +2,7 @@
 # Docs: https://developers.openai.com/codex/config-basic/
 
 model = "gpt-5.5"
+suppress_unstable_features_warning = true
 
 # Approval policy: "untrusted" | "on-request" | "never"
 # - untrusted: ask before everything
@@ -61,6 +62,18 @@ trust_level = "trusted"
 trust_level = "trusted"
 
 [projects."/Users/Apostolos.Delis@opendoor.com"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/atlas-parthenon/atlas-legacy"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/open-design"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/open-software"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/open-app"]
 trust_level = "trusted"
 
 [notice.model_migrations]
