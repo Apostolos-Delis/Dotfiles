@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ticket Loop"
+  short_description: "Implement tickets with strict review gates"
+  default_prompt: "Use $ticket-loop to implement these tickets one by one with thermo-nuclear review and validation after each ticket."

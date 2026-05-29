@@ -16,6 +16,8 @@ model_reasoning_effort = "xhigh"
 personality = "pragmatic"
 plan_mode_reasoning_effort = "xhigh"
 
+notify = ["/Users/Apostolos.Delis@opendoor.com/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
+
 [sandbox_workspace_write]
 # Network is blocked by default for security
 # Enable when needed for npm install, API calls, etc.
@@ -76,9 +78,63 @@ trust_level = "trusted"
 [projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/open-app"]
 trust_level = "trusted"
 
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/macro"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/conductor/workspaces/mortgages/las-vegas-v1"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/conductor/workspaces/mortgages/paris-v1"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/conductor/workspaces/mortgages/bangui"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/conductor/workspaces/mortgages/rio-de-janeiro"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/conductor/workspaces/mortgages/miami-v1"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/conductor/workspaces/mortgages/nagoya-v2"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/conductor/workspaces/mortgages/bangalore-v1"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
 
 [tui.model_availability_nux]
 "gpt-5.5" = 4
+
+[desktop]
+appearanceTheme = "dark"
+appearanceDarkCodeThemeId = "one"
+git-always-force-push = true
+git-pull-request-merge-method = "squash"
+git-show-sidebar-pr-icons = true
+git-create-pull-request-as-draft = false
+default-service-tier = "priority"
+
+[desktop.appearanceDarkChromeTheme]
+accent = "#4d78cc"
+contrast = 70
+ink = "#abb2bf"
+opaqueWindows = true
+surface = "#282c34"
+
+[desktop.appearanceDarkChromeTheme.fonts]
+
+[desktop.appearanceDarkChromeTheme.semanticColors]
+diffAdded = "#8cc265"
+diffRemoved = "#e05561"
+skill = "#c162de"
+
+[desktop.open-in-target-preferences]
+global = "ghostty"
+
+[desktop.open-in-target-preferences.perPath]
+"/Users/Apostolos.Delis@opendoor.com/Documents/repos/atlas-parthenon/atlas" = "ghostty"
+"/Users/Apostolos.Delis@opendoor.com/Documents/repos/cohort" = "ghostty"

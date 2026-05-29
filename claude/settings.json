@@ -113,5 +113,6 @@
   "skipDangerousModePermissionPrompt": true,
   "trustedDirectories": [
     "~/Documents/repos"
-  ]
+  ],
+  "effortLevel": "xhigh"
 }
