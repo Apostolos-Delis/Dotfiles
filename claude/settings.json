@@ -67,6 +67,15 @@
             "command": "~/.claude/hooks/tmux-reminder.sh"
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "rtk hook claude"
+          }
+        ]
       }
     ],
     "PostToolUse": [

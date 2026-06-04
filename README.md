@@ -38,9 +38,11 @@ The install script symlinks configs to their expected locations:
 ~/.claude/CLAUDE.md   -> claude/CLAUDE.md
 ~/.claude/commands/   -> claude/commands/*.md
 ~/.claude/skills/     -> .agents/skills/*
+~/.claude/RTK.md      -> claude/RTK.md
 ~/.codex/config.toml  -> codex/config.toml
 ~/.codex/AGENTS.md    -> codex/AGENTS.md
 ~/.codex/skills/*     -> .agents/skills/* plus gstack skills from ~/.gstack/repos/gstack
+~/.codex/RTK.md       -> codex/RTK.md
 ~/.tmux/plugins/tpm/  -> Tmux Plugin Manager (cloned)
 ```
 
@@ -55,6 +57,7 @@ The install script symlinks configs to their expected locations:
 - [Ghostty](https://ghostty.org/) - Terminal emulator
 - [Claude Code](https://claude.ai/code) - AI coding assistant
 - [Codex CLI](https://developers.openai.com/codex/) - AI coding assistant
+- [RTK](https://github.com/rtk-ai/rtk) - Token-optimized CLI proxy for agent shell commands
 - [Bun](https://bun.sh/) - Required for gstack skill installation (`brew install oven-sh/bun/bun`)
 - [Oh-My-Zsh](https://ohmyz.sh/) - Zsh framework
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh theme
@@ -298,6 +301,18 @@ Codex uses:
 ```
 
 This exposes gstack's workflow skills in Codex with namespaced skill names such as `$gstack-office-hours`, `$gstack-autoplan`, `$gstack-review`, `$gstack-qa`, `$gstack-ship`, `$gstack-investigate`, and `$gstack-cso`. Namespacing keeps them from colliding with local skills like `$review` and `$test`.
+
+#### RTK for Claude Code and Codex
+
+`release.sh` installs `rtk` with Homebrew, verifies the Rust Token Killer binary with `rtk gain`, links tracked RTK awareness files into `~/.claude/RTK.md` and `~/.codex/RTK.md`, then runs:
+
+```bash
+rtk init -g --hook-only --auto-patch
+```
+
+Claude Code uses a `PreToolUse` Bash hook (`rtk hook claude`) so supported shell commands are rewritten transparently. Codex uses the inline RTK rule in `codex/AGENTS.md`, so shell commands should be prefixed with `rtk`; `codex/RTK.md` is linked as a reproducible companion reference.
+
+Codex setup intentionally does not commit RTK's generated absolute `@/path/to/.codex/RTK.md` reference because that path is machine-specific. The portable source of truth is the inline RTK section in `codex/AGENTS.md` plus the `codex/RTK.md` symlink.
 
 ## Color Scheme
 
