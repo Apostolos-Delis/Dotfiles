@@ -45,6 +45,7 @@ brew install --cask amethyst
 brew install terminal-notifier  # For Claude Code notifications
 brew install --cask ghostty
 brew install codex
+brew install rtk
 if ! command -v bun &> /dev/null; then
     brew install oven-sh/bun/bun || brew install bun
 fi
@@ -146,6 +147,7 @@ link_file "$DOTFILES_DIR/worktrunk/config.toml" "$HOME/.config/worktrunk/config.
 mkdir -p "$HOME/.claude" "$HOME/.claude/analysis"
 link_file "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+link_file "$DOTFILES_DIR/claude/RTK.md" "$HOME/.claude/RTK.md"
 link_file "$DOTFILES_DIR/codex/AGENTS.md" "$HOME/.claude/AGENTS.md"
 link_file "$DOTFILES_DIR/claude/commands" "$HOME/.claude/commands"
 link_file "$DOTFILES_DIR/.agents/skills" "$HOME/.claude/skills"
@@ -161,12 +163,23 @@ link_file "$DOTFILES_DIR/claude/claude-hud-config.json" "$HOME/.claude/plugins/c
 mkdir -p "$HOME/.codex" "$HOME/.codex/skills"
 link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"
 link_file "$DOTFILES_DIR/codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
+link_file "$DOTFILES_DIR/codex/RTK.md" "$HOME/.codex/RTK.md"
 for skill_dir in "$DOTFILES_DIR"/.agents/skills/*; do
     if [ -d "$skill_dir" ]; then
         skill_name="$(basename "$skill_dir")"
         link_file "$skill_dir" "$HOME/.codex/skills/$skill_name"
     fi
 done
+
+# Set up RTK for Claude Code and Codex
+echo "==> Setting up RTK for Claude Code and Codex..."
+
+if command -v rtk &> /dev/null && rtk gain &> /dev/null; then
+    RTK_TELEMETRY_DISABLED=1 rtk init -g --hook-only --auto-patch < /dev/null
+else
+    echo "    RTK unavailable or wrong rtk binary found; skipping RTK agent setup."
+    echo "    Expected Rust Token Killer from https://github.com/rtk-ai/rtk with working: rtk gain"
+fi
 
 
 # Install gstack skills for Codex
