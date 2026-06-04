@@ -102,6 +102,18 @@ trust_level = "trusted"
 [projects."/Users/Apostolos.Delis@opendoor.com/conductor/workspaces/mortgages/bangalore-v1"]
 trust_level = "trusted"
 
+[projects."/Users/Apostolos.Delis@opendoor.com/conductor/workspaces/mortgages/berlin"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/pi"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/fia"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/conductor/workspaces/mortgages/london"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
