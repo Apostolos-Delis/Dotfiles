@@ -13,6 +13,7 @@ Personal dotfiles for a macOS development environment. Optimized for full-stack 
 | [Git](git/) | Git config with delta for beautiful diffs |
 | [Claude Code](claude/) | AI coding assistant configuration |
 | [Codex CLI](codex/) | OpenAI coding assistant configuration |
+| [Hermes Agent](hermes/) | Kanban orchestrator for parallel Codex sessions |
 | [Rubocop](rubocop/) | Ruby linting with Airbnb style guide |
 
 ## Installation
@@ -43,6 +44,13 @@ The install script symlinks configs to their expected locations:
 ~/.codex/AGENTS.md    -> codex/AGENTS.md
 ~/.codex/skills/*     -> .agents/skills/* plus gstack skills from ~/.gstack/repos/gstack
 ~/.codex/RTK.md       -> codex/RTK.md
+~/.hermes/config.yaml -> hermes/config.yaml
+~/.hermes/SOUL.md     -> hermes/SOUL.md
+~/.hermes/memories/   -> hermes/memories/
+~/.hermes/profiles/codex-worker/ -> hermes/profiles/codex-worker/
+~/.hermes/skill-bundles/ -> hermes/skill-bundles/
+~/.agents/dotfiles-skills -> .agents/skills/
+~/.local/bin/codex-worker -> hermes -p codex-worker
 ~/.tmux/plugins/tpm/  -> Tmux Plugin Manager (cloned)
 ```
 
@@ -57,6 +65,7 @@ The install script symlinks configs to their expected locations:
 - [Ghostty](https://ghostty.org/) - Terminal emulator
 - [Claude Code](https://claude.ai/code) - AI coding assistant
 - [Codex CLI](https://developers.openai.com/codex/) - AI coding assistant
+- [Hermes Agent](https://github.com/NousResearch/hermes-agent) - Optional Kanban orchestrator for Codex sessions
 - [RTK](https://github.com/rtk-ai/rtk) - Token-optimized CLI proxy for agent shell commands
 - [Bun](https://bun.sh/) - Required for gstack skill installation (`brew install oven-sh/bun/bun`)
 - [Oh-My-Zsh](https://ohmyz.sh/) - Zsh framework
@@ -314,6 +323,54 @@ Claude Code uses a `PreToolUse` Bash hook (`rtk hook claude`) so supported shell
 
 Codex setup intentionally does not commit RTK's generated absolute `@/path/to/.codex/RTK.md` reference because that path is machine-specific. The portable source of truth is the inline RTK section in `codex/AGENTS.md` plus the `codex/RTK.md` symlink.
 
+### Hermes Agent
+
+Hermes is configured as a small Kanban control plane over Codex coding lanes:
+
+- `hermes/config.yaml` enables the default dispatcher profile.
+- `hermes/profiles/codex-worker/` is the worker profile spawned by Kanban.
+- `hermes/memories/` and worker memories seed the agent with Dotfiles, Codex, Conductor, and PR workflow context.
+- `~/.agents/skills` remains available for personal skills; Dotfiles-managed skills are linked separately at `~/.agents/dotfiles-skills`.
+- `hermes/skill-bundles/codex-pr-lane.yaml` is an interactive bundle for loading the Codex and GitHub PR workflow skills together.
+- `hermes/scripts/hermes-kanban-create-codex-task` creates a fresh worktree task.
+- `hermes/scripts/hermes-conductor-register-workspace` registers an existing Conductor worktree without nesting another worktree inside it.
+
+Install or link the config:
+
+```bash
+./release.sh
+hermes/scripts/hermes-bootstrap.sh --install-hermes
+```
+
+Start the board:
+
+```bash
+hermes kanban init
+hermes gateway start
+```
+
+Create a fresh Codex worktree task from any git repo:
+
+```bash
+~/Documents/repos/Dotfiles/hermes/scripts/hermes-kanban-create-codex-task \
+  --body "Implement the requested change, run checks, and open a PR." \
+  "Implement docs cleanup"
+```
+
+Register a Conductor workspace Hermes should babysit:
+
+```bash
+~/Documents/repos/Dotfiles/hermes/scripts/hermes-conductor-register-workspace \
+  ~/conductor/workspaces/mortgages/philadelphia-v1 \
+  "Continue dashboard side chat work"
+```
+
+Run the self-check:
+
+```bash
+hermes/scripts/hermes-validate.sh
+```
+
 ## Color Scheme
 
 Atom One Dark is used consistently across all tools:
@@ -369,6 +426,12 @@ Dotfiles/
 ├── codex/             # Codex CLI assistant
 │   ├── config.toml
 │   └── AGENTS.md
+├── hermes/            # Hermes Kanban orchestrator for Codex lanes
+│   ├── config.yaml
+│   ├── memories/
+│   ├── profiles/
+│   ├── scripts/
+│   └── skill-bundles/
 ├── rubocop/           # Ruby linting
 │   └── .rubocop.yml
 └── release.sh         # Installation script

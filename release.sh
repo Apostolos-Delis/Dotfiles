@@ -171,6 +171,10 @@ for skill_dir in "$DOTFILES_DIR"/.agents/skills/*; do
     fi
 done
 
+# Hermes Agent config
+echo "==> Setting up Hermes Agent config..."
+"$DOTFILES_DIR/hermes/scripts/hermes-bootstrap.sh" --no-install --dotfiles "$DOTFILES_DIR"
+
 # Set up RTK for Claude Code and Codex
 echo "==> Setting up RTK for Claude Code and Codex..."
 
