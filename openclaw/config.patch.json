@@ -1,0 +1,54 @@
+{
+  "agents": {
+    "defaults": {
+      "workspace": "~/.openclaw/workspace",
+      "model": {
+        "primary": "openai/gpt-5.5"
+      },
+      "maxConcurrent": 4,
+      "subagents": {
+        "maxConcurrent": 8,
+        "archiveAfterMinutes": 60
+      }
+    }
+  },
+  "auth": {
+    "order": {
+      "openai": [
+        "openai:codex-api-key"
+      ]
+    }
+  },
+  "models": {
+    "providers": {
+      "openai": {
+        "agentRuntime": {
+          "id": "codex"
+        }
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "codex": {
+        "enabled": true,
+        "config": {
+          "appServer": {
+            "mode": "guardian"
+          },
+          "codexDynamicToolsLoading": "searchable",
+          "codexDynamicToolsExclude": []
+        }
+      },
+      "workboard": {
+        "enabled": true
+      }
+    }
+  },
+  "tools": {
+    "profile": "coding",
+    "exec": {
+      "mode": "auto"
+    }
+  }
+}
