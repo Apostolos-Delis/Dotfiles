@@ -1,0 +1,55 @@
+model:
+  provider: openai-codex
+  default: gpt-5.5
+  openai_runtime: auto
+
+toolsets:
+  - hermes-cli
+
+agent:
+  max_turns: 120
+  gateway_timeout: 7200
+  gateway_timeout_warning: 900
+  gateway_notify_interval: 180
+
+terminal:
+  backend: local
+  cwd: .
+  timeout: 1800
+  shell_init_files:
+    - ~/.zshrc
+  env_passthrough:
+    - OPENAI_API_KEY
+    - GITHUB_TOKEN
+
+memory:
+  memory_enabled: true
+  user_profile_enabled: true
+  memory_char_limit: 2200
+  user_char_limit: 1375
+
+skills:
+  external_dirs:
+    - ~/.agents/skills
+    - ~/.agents/dotfiles-skills
+  template_vars: true
+  inline_shell: false
+  guard_agent_created: false
+
+kanban:
+  dispatch_in_gateway: true
+  dispatch_interval_seconds: 30
+  failure_limit: 2
+  max_in_progress: 3
+  max_in_progress_per_profile: 1
+  max_spawn: 2
+  auto_decompose: false
+  default_assignee: codex-worker
+  orchestrator_profile: default
+  dispatch_stale_timeout_seconds: 14400
+
+display:
+  background_process_notifications: result
+
+code_execution:
+  mode: project

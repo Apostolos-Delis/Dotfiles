@@ -1,0 +1,9 @@
+name: codex-pr-lane
+description: Codex implementation lane with Hermes verification and GitHub PR handoff.
+skills:
+  - codex
+  - github-pr-workflow
+instruction: |
+  Use Codex only as a bounded implementation lane. Hermes owns task lifecycle,
+  review, verification, and PR handoff. For code-changing tasks, block with a
+  review-required handoff unless the task is explicitly terminal and low risk.

@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+ASSIGNEE="codex-worker"
+BOARD=""
+BODY=""
+MAX_RUNTIME="2h"
+PRIORITY=""
+IDEMPOTENCY_KEY=""
+
+usage() {
+    cat <<'EOF'
+Usage: hermes-conductor-register-workspace [OPTIONS] WORKSPACE_PATH "task title"
+
+Register an existing Conductor workspace as a Hermes Kanban task. The workspace
+is treated as an existing git worktree; Hermes should not create a nested one.
+
+Options:
+  --assignee NAME        Hermes profile assignee. Default: codex-worker.
+  --board SLUG           Target Kanban board.
+  --body TEXT            Extra task body / acceptance criteria.
+  --max-runtime VALUE    Runtime cap, e.g. 30m, 2h. Default: 2h.
+  --priority N           Kanban priority.
+  --idempotency-key KEY  Deduplicate automated task creation.
+  -h, --help             Show this help.
+EOF
+}
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --assignee)
+            ASSIGNEE="$2"
+            shift 2
+            ;;
+        --board)
+            BOARD="$2"
+            shift 2
+            ;;
+        --body)
+            BODY="$2"
+            shift 2
+            ;;
+        --max-runtime)
+            MAX_RUNTIME="$2"
+            shift 2
+            ;;
+        --priority)
+            PRIORITY="$2"
+            shift 2
+            ;;
+        --idempotency-key)
+            IDEMPOTENCY_KEY="$2"
+            shift 2
+            ;;
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        --)
+            shift
+            break
+            ;;
+        -*)
+            echo "Unknown option: $1" >&2
+            usage >&2
+            exit 1
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+if [ $# -ne 2 ]; then
+    usage >&2
+    exit 1
+fi
+
+WORKSPACE="$(cd "$1" && pwd)"
+TITLE="$2"
+
+if ! git -C "$WORKSPACE" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+    echo "Not a git worktree: $WORKSPACE" >&2
+    exit 1
+fi
+
+BRANCH="$(git -C "$WORKSPACE" branch --show-current || true)"
+REPO_ROOT="$(git -C "$WORKSPACE" rev-parse --show-toplevel)"
+STATUS="$(git -C "$WORKSPACE" status --short --branch)"
+
+TASK_BODY=$(cat <<EOF
+Conductor workspace: $WORKSPACE
+Git root: $REPO_ROOT
+Current branch: ${BRANCH:-detached HEAD}
+
+Use this existing Conductor workspace directly. Do not create a nested worktree.
+Hermes owns Kanban lifecycle, final verification, and handoff. Codex CLI may
+implement inside this workspace, but Hermes must review the diff and rerun
+relevant checks before accepting the result.
+
+Initial git status:
+$STATUS
+
+Acceptance criteria:
+${BODY:-Use the task title as the acceptance criteria. Block if the workspace state or task scope is ambiguous.}
+EOF
+)
+
+cmd=(hermes)
+if [ -n "$BOARD" ]; then
+    cmd+=(kanban --board "$BOARD" create "$TITLE")
+else
+    cmd+=(kanban create "$TITLE")
+fi
+
+cmd+=(--assignee "$ASSIGNEE")
+cmd+=(--workspace "worktree:$WORKSPACE")
+if [ -n "$BRANCH" ]; then
+    cmd+=(--branch "$BRANCH")
+fi
+cmd+=(--body "$TASK_BODY")
+cmd+=(--max-runtime "$MAX_RUNTIME")
+cmd+=(--skill codex)
+cmd+=(--skill github-pr-workflow)
+
+if [ -n "$PRIORITY" ]; then
+    cmd+=(--priority "$PRIORITY")
+fi
+if [ -n "$IDEMPOTENCY_KEY" ]; then
+    cmd+=(--idempotency-key "$IDEMPOTENCY_KEY")
+fi
+
+"${cmd[@]}"
