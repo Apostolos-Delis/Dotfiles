@@ -13,7 +13,7 @@ Personal dotfiles for a macOS development environment. Optimized for full-stack 
 | [Git](git/) | Git config with delta for beautiful diffs |
 | [Claude Code](claude/) | AI coding assistant configuration |
 | [Codex CLI](codex/) | OpenAI coding assistant configuration |
-| [Hermes Agent](hermes/) | Kanban orchestrator for parallel Codex sessions |
+| [OpenClaw](openclaw/) | Control UI and Workboard orchestrator for parallel Codex sessions |
 | [Rubocop](rubocop/) | Ruby linting with Airbnb style guide |
 
 ## Installation
@@ -44,13 +44,8 @@ The install script symlinks configs to their expected locations:
 ~/.codex/AGENTS.md    -> codex/AGENTS.md
 ~/.codex/skills/*     -> .agents/skills/* plus gstack skills from ~/.gstack/repos/gstack
 ~/.codex/RTK.md       -> codex/RTK.md
-~/.hermes/config.yaml -> hermes/config.yaml
-~/.hermes/SOUL.md     -> hermes/SOUL.md
-~/.hermes/memories/   -> hermes/memories/
-~/.hermes/profiles/codex-worker/ -> hermes/profiles/codex-worker/
-~/.hermes/skill-bundles/ -> hermes/skill-bundles/
+~/.openclaw/workspace/*.md -> openclaw/workspace/*.md
 ~/.agents/dotfiles-skills -> .agents/skills/
-~/.local/bin/codex-worker -> hermes -p codex-worker
 ~/.tmux/plugins/tpm/  -> Tmux Plugin Manager (cloned)
 ```
 
@@ -65,7 +60,7 @@ The install script symlinks configs to their expected locations:
 - [Ghostty](https://ghostty.org/) - Terminal emulator
 - [Claude Code](https://claude.ai/code) - AI coding assistant
 - [Codex CLI](https://developers.openai.com/codex/) - AI coding assistant
-- [Hermes Agent](https://github.com/NousResearch/hermes-agent) - Optional Kanban orchestrator for Codex sessions
+- [OpenClaw](https://github.com/openclaw/openclaw) - Control UI and Workboard orchestrator for Codex sessions
 - [RTK](https://github.com/rtk-ai/rtk) - Token-optimized CLI proxy for agent shell commands
 - [Bun](https://bun.sh/) - Required for gstack skill installation (`brew install oven-sh/bun/bun`)
 - [Oh-My-Zsh](https://ohmyz.sh/) - Zsh framework
@@ -323,52 +318,54 @@ Claude Code uses a `PreToolUse` Bash hook (`rtk hook claude`) so supported shell
 
 Codex setup intentionally does not commit RTK's generated absolute `@/path/to/.codex/RTK.md` reference because that path is machine-specific. The portable source of truth is the inline RTK section in `codex/AGENTS.md` plus the `codex/RTK.md` symlink.
 
-### Hermes Agent
+### OpenClaw
 
-Hermes is configured as a small Kanban control plane over Codex coding lanes:
+OpenClaw is configured as the local control plane for parallel Codex coding lanes:
 
-- `hermes/config.yaml` enables the default dispatcher profile.
-- `hermes/profiles/codex-worker/` is the worker profile spawned by Kanban.
-- `hermes/memories/` and worker memories seed the agent with Dotfiles, Codex, Conductor, and PR workflow context.
-- `~/.agents/skills` remains available for personal skills; Dotfiles-managed skills are linked separately at `~/.agents/dotfiles-skills`.
-- `hermes/skill-bundles/codex-pr-lane.yaml` is an interactive bundle for loading the Codex and GitHub PR workflow skills together.
-- `hermes/scripts/hermes-kanban-create-codex-task` creates a fresh worktree task.
-- `hermes/scripts/hermes-conductor-register-workspace` registers an existing Conductor worktree without nesting another worktree inside it.
+- `openclaw/config.patch.json` enables the Codex runtime, Workboard, default model, and auth profile.
+- `openclaw/workspace/` seeds the OpenClaw agent with local operating context.
+- `openclaw/scripts/openclaw-setup.sh` is the entry point used by `release.sh`; it installs OpenClaw if missing, installs the Codex plugin, links workspace files, applies config, and imports Codex CLI API-key auth when available.
+- `~/.openclaw/openclaw.json` is not symlinked because OpenClaw and its Control UI own live config writes.
 
-Install or link the config:
+Install or update the config:
 
 ```bash
 ./release.sh
-hermes/scripts/hermes-bootstrap.sh --install-hermes
 ```
 
-Start the board:
+Open the Control UI:
 
 ```bash
-hermes kanban init
-hermes gateway start
+openclaw dashboard
 ```
 
-Create a fresh Codex worktree task from any git repo:
+Useful checks:
 
 ```bash
-~/Documents/repos/Dotfiles/hermes/scripts/hermes-kanban-create-codex-task \
-  --body "Implement the requested change, run checks, and open a PR." \
-  "Implement docs cleanup"
+openclaw status
+openclaw gateway status
+openclaw logs --follow
+openclaw sessions list
+openclaw workboard list
 ```
 
-Register a Conductor workspace Hermes should babysit:
+Codex runtime commands from an OpenClaw chat:
 
-```bash
-~/Documents/repos/Dotfiles/hermes/scripts/hermes-conductor-register-workspace \
-  ~/conductor/workspaces/mortgages/philadelphia-v1 \
-  "Continue dashboard side chat work"
+```text
+/codex status
+/codex models
+/codex threads
+/codex resume <thread-id>
+/codex bind --cwd <path>
+/codex stop
 ```
+
+When Conductor already created a workspace, bind OpenClaw/Codex to that workspace instead of creating another worktree inside it.
 
 Run the self-check:
 
 ```bash
-hermes/scripts/hermes-validate.sh
+openclaw/scripts/openclaw-validate.sh
 ```
 
 ## Color Scheme
@@ -426,12 +423,10 @@ Dotfiles/
 ├── codex/             # Codex CLI assistant
 │   ├── config.toml
 │   └── AGENTS.md
-├── hermes/            # Hermes Kanban orchestrator for Codex lanes
-│   ├── config.yaml
-│   ├── memories/
-│   ├── profiles/
+├── openclaw/          # OpenClaw control plane for Codex lanes
+│   ├── config.patch.json
 │   ├── scripts/
-│   └── skill-bundles/
+│   └── workspace/
 ├── rubocop/           # Ruby linting
 │   └── .rubocop.yml
 └── release.sh         # Installation script

@@ -1,2 +1,0 @@
-description: "Supervises Codex CLI implementation lanes from Hermes Kanban, verifies diffs, runs tests, and prepares PR handoffs."
-description_auto: false
