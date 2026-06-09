@@ -1,7 +1,6 @@
 {
   "agents": {
     "defaults": {
-      "workspace": "~/.openclaw/workspace",
       "model": {
         "primary": "openai/gpt-5.5"
       },

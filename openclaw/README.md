@@ -43,12 +43,12 @@ The setup script:
 - installs the official `@openclaw/codex` plugin if missing
 - enables Codex and Workboard through `openclaw/config.patch.json`
 - enables the bundled `coding-agent` skill for background Codex worker lanes
-- links tracked workspace seed files into `~/.openclaw/workspace`
-- creates an untracked live `~/.openclaw/workspace/memory` directory for daily or noisy memory
+- configures `agents.defaults.workspace` to the tracked `openclaw/workspace` directory
+- creates an untracked live `openclaw/workspace/memory` directory for daily or noisy memory
 - imports the Codex CLI API key from `~/.codex/auth.json` into OpenClaw when the `openai:codex-api-key` profile is missing
 - writes an explicit plugin allowlist from the currently installed OpenClaw plugin catalog
 
-OpenClaw config itself is not symlinked. `~/.openclaw/openclaw.json` must stay a regular file because OpenClaw and the Control UI own atomic config writes.
+OpenClaw config itself is not symlinked. `~/.openclaw/openclaw.json` must stay a regular file because OpenClaw and the Control UI own atomic config writes. Workspace seed files are real files inside `openclaw/workspace`; do not symlink them into `~/.openclaw/workspace`, because OpenClaw treats bootstrap-file symlink escapes as unsafe.
 
 ## Useful Commands
 

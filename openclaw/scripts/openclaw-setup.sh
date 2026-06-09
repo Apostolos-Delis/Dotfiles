@@ -30,7 +30,7 @@ Options:
   --skip-plugins        Do not install OpenClaw plugins.
   --skip-auth           Do not import Codex CLI API-key auth into OpenClaw.
   --skip-config         Do not apply openclaw/config.patch.json.
-  --skip-workspace      Do not link workspace seed files.
+  --skip-workspace      Do not configure the Dotfiles workspace.
   --skip-plugin-allow   Do not write plugins.allow from the installed plugin catalog.
   --gateway-start       Start the gateway service after setup.
   --gateway-restart     Restart the gateway service after setup.
@@ -116,20 +116,7 @@ while [ $# -gt 0 ]; do
 done
 
 DOTFILES_DIR="$(cd "$DOTFILES_DIR" && pwd)"
-
-link_path() {
-    local src="$1"
-    local dest="$2"
-    mkdir -p "$(dirname "$dest")"
-    if [ -L "$dest" ]; then
-        rm "$dest"
-    elif [ -e "$dest" ]; then
-        mv "$dest" "$dest.backup"
-        echo "    Backed up existing $dest to $dest.backup"
-    fi
-    ln -s "$src" "$dest"
-    echo "    Linked $dest"
-}
+WORKSPACE_DIR="$DOTFILES_DIR/openclaw/workspace"
 
 install_openclaw() {
     if command -v openclaw >/dev/null 2>&1 && [ "$UPGRADE_CLI" = false ]; then
@@ -181,7 +168,7 @@ run_first_onboard_if_needed() {
         --non-interactive
         --mode local
         --auth-choice skip
-        --workspace "$HOME/.openclaw/workspace"
+        --workspace "$WORKSPACE_DIR"
         --gateway-port 18789
         --gateway-bind loopback
         --gateway-auth token
@@ -244,6 +231,24 @@ apply_config_patch() {
     openclaw config patch --file "$DOTFILES_DIR/openclaw/config.patch.json"
 }
 
+configure_workspace() {
+    if [ "$SKIP_WORKSPACE" = true ]; then
+        return
+    fi
+
+    echo "==> Configuring OpenClaw workspace"
+    mkdir -p "$WORKSPACE_DIR/memory"
+    node -e '
+const workspace = process.argv[1];
+process.stdout.write(JSON.stringify({ agents: { defaults: { workspace } } }, null, 2));
+' "$WORKSPACE_DIR" | openclaw config patch --stdin
+
+    if [ -e "$HOME/.openclaw/workspace/BOOTSTRAP.md" ] || [ -L "$HOME/.openclaw/workspace/BOOTSTRAP.md" ]; then
+        mv "$HOME/.openclaw/workspace/BOOTSTRAP.md" "$HOME/.openclaw/workspace/BOOTSTRAP.md.backup"
+        echo "    Backed up old BOOTSTRAP.md"
+    fi
+}
+
 profile_exists() {
     openclaw models auth list --provider openai --json 2>/dev/null | node -e '
 let input = "";
@@ -293,24 +298,6 @@ import_codex_auth() {
 
     echo "==> Importing Codex CLI API-key auth into OpenClaw"
     printf '%s\n' "$key" | openclaw models auth paste-api-key --provider openai --profile-id openai:codex-api-key
-}
-
-link_workspace_files() {
-    if [ "$SKIP_WORKSPACE" = true ]; then
-        return
-    fi
-
-    echo "==> Linking OpenClaw workspace files"
-    for file in AGENTS.md HEARTBEAT.md IDENTITY.md MEMORY.md SOUL.md TOOLS.md USER.md; do
-        link_path "$DOTFILES_DIR/openclaw/workspace/$file" "$HOME/.openclaw/workspace/$file"
-    done
-
-    mkdir -p "$HOME/.openclaw/workspace/memory"
-
-    if [ -e "$HOME/.openclaw/workspace/BOOTSTRAP.md" ] || [ -L "$HOME/.openclaw/workspace/BOOTSTRAP.md" ]; then
-        mv "$HOME/.openclaw/workspace/BOOTSTRAP.md" "$HOME/.openclaw/workspace/BOOTSTRAP.md.backup"
-        echo "    Backed up BOOTSTRAP.md"
-    fi
 }
 
 write_plugin_allowlist() {
@@ -364,6 +351,6 @@ run_first_onboard_if_needed
 install_plugins
 import_codex_auth
 apply_config_patch
-link_workspace_files
+configure_workspace
 write_plugin_allowlist
 handle_gateway

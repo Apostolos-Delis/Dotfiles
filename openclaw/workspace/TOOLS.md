@@ -6,7 +6,7 @@
 - Gateway: `http://127.0.0.1:18789/`
 - Service: macOS LaunchAgent `ai.openclaw.gateway`
 - State directory: `~/.openclaw`
-- Workspace: `~/.openclaw/workspace`
+- Workspace: `~/Documents/repos/Dotfiles/openclaw/workspace`
 - Main session key: `agent:main:main`
 
 Useful commands:
