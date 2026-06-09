@@ -21,6 +21,11 @@ Useful commands:
 - `openclaw workboard dispatch`
 - `openclaw models status`
 - `openclaw models auth list --provider openai`
+- `openclaw skills check`
+- `openclaw tasks list --status running`
+- `openclaw tasks audit`
+- `openclaw sessions --active 240 --all-agents`
+- `openclaw sessions tail --follow`
 
 ## Codex Runtime
 
@@ -29,6 +34,7 @@ Useful commands:
 - Auth profile: `openai:codex-api-key`
 - Codex plugin config: guardian app-server mode
 - Workboard plugin is enabled for local task tracking.
+- `coding-agent` skill is enabled for background Codex worker lanes.
 
 Use native `/codex` commands from OpenClaw chat surfaces for thread control:
 

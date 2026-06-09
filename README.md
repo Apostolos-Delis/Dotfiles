@@ -45,6 +45,7 @@ The install script symlinks configs to their expected locations:
 ~/.codex/skills/*     -> .agents/skills/* plus gstack skills from ~/.gstack/repos/gstack
 ~/.codex/RTK.md       -> codex/RTK.md
 ~/.openclaw/workspace/*.md -> openclaw/workspace/*.md
+~/.openclaw/workspace/memory/ -> live OpenClaw memory notes (created, not tracked)
 ~/.agents/dotfiles-skills -> .agents/skills/
 ~/.tmux/plugins/tpm/  -> Tmux Plugin Manager (cloned)
 ```
@@ -282,6 +283,8 @@ Command-equivalent skills for Codex include:
 - `$branch`, `$create-pr`, `$rebase`
 - `$plan-review`, `$create-hook`, `$explore-repo`
 
+Review workflow skills include `$ticket-loop`, `$thermos`, `$thermo-nuclear-review`, and `$thermo-nuclear-code-quality-review`.
+
 Run parity check:
 
 ```bash
@@ -323,9 +326,11 @@ Codex setup intentionally does not commit RTK's generated absolute `@/path/to/.c
 OpenClaw is configured as the local control plane for parallel Codex coding lanes:
 
 - `openclaw/config.patch.json` enables the Codex runtime, Workboard, default model, and auth profile.
-- `openclaw/workspace/` seeds the OpenClaw agent with local operating context.
+- The bundled `coding-agent` skill is enabled so OpenClaw can launch and supervise background Codex workers from chat.
+- `openclaw/workspace/` seeds the OpenClaw agent with local operating context, including `SOUL.md`, `MEMORY.md`, and `TOOLS.md`.
 - `openclaw/scripts/openclaw-setup.sh` is the entry point used by `release.sh`; it installs OpenClaw if missing, installs the Codex plugin, links workspace files, applies config, and imports Codex CLI API-key auth when available.
 - `~/.openclaw/openclaw.json` is not symlinked because OpenClaw and its Control UI own live config writes.
+- `~/.openclaw/workspace/memory/` is created as an untracked live directory for daily or noisy memory notes.
 
 Install or update the config:
 

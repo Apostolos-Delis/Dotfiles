@@ -45,6 +45,13 @@
       }
     }
   },
+  "skills": {
+    "entries": {
+      "coding-agent": {
+        "enabled": true
+      }
+    }
+  },
   "tools": {
     "profile": "coding",
     "exec": {
