@@ -14,6 +14,7 @@ openclaw/
 │   ├── HEARTBEAT.md
 │   ├── IDENTITY.md
 │   ├── MEMORY.md
+│   ├── SOUL.md
 │   ├── TOOLS.md
 │   └── USER.md
 └── scripts/
@@ -42,6 +43,7 @@ The setup script:
 - installs the official `@openclaw/codex` plugin if missing
 - enables Codex and Workboard through `openclaw/config.patch.json`
 - links tracked workspace seed files into `~/.openclaw/workspace`
+- creates an untracked live `~/.openclaw/workspace/memory` directory for daily or noisy memory
 - imports the Codex CLI API key from `~/.codex/auth.json` into OpenClaw when the `openai:codex-api-key` profile is missing
 - writes an explicit plugin allowlist from the currently installed OpenClaw plugin catalog
 

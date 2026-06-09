@@ -301,9 +301,11 @@ link_workspace_files() {
     fi
 
     echo "==> Linking OpenClaw workspace files"
-    for file in AGENTS.md HEARTBEAT.md IDENTITY.md MEMORY.md TOOLS.md USER.md; do
+    for file in AGENTS.md HEARTBEAT.md IDENTITY.md MEMORY.md SOUL.md TOOLS.md USER.md; do
         link_path "$DOTFILES_DIR/openclaw/workspace/$file" "$HOME/.openclaw/workspace/$file"
     done
+
+    mkdir -p "$HOME/.openclaw/workspace/memory"
 
     if [ -e "$HOME/.openclaw/workspace/BOOTSTRAP.md" ] || [ -L "$HOME/.openclaw/workspace/BOOTSTRAP.md" ]; then
         mv "$HOME/.openclaw/workspace/BOOTSTRAP.md" "$HOME/.openclaw/workspace/BOOTSTRAP.md.backup"

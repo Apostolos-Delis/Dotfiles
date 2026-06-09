@@ -27,7 +27,7 @@ assert_exists "$DOTFILES_DIR/openclaw/README.md"
 assert_exists "$DOTFILES_DIR/openclaw/config.patch.json"
 assert_exists "$DOTFILES_DIR/openclaw/scripts/openclaw-setup.sh"
 assert_exists "$DOTFILES_DIR/openclaw/scripts/openclaw-validate.sh"
-for file in AGENTS.md HEARTBEAT.md IDENTITY.md MEMORY.md TOOLS.md USER.md; do
+for file in AGENTS.md HEARTBEAT.md IDENTITY.md MEMORY.md SOUL.md TOOLS.md USER.md; do
     assert_exists "$DOTFILES_DIR/openclaw/workspace/$file"
 done
 
@@ -94,9 +94,11 @@ HOME="$tmp_home" PATH="$fakebin:$PATH" OPENCLAW_FAKE_LOG="$fake_log" \
     --skip-onboard \
     --dotfiles "$DOTFILES_DIR" >/dev/null
 
-for file in AGENTS.md HEARTBEAT.md IDENTITY.md MEMORY.md TOOLS.md USER.md; do
+for file in AGENTS.md HEARTBEAT.md IDENTITY.md MEMORY.md SOUL.md TOOLS.md USER.md; do
     assert_symlink_target "$tmp_home/.openclaw/workspace/$file" "$DOTFILES_DIR/openclaw/workspace/$file"
 done
+
+assert_exists "$tmp_home/.openclaw/workspace/memory"
 
 grep -q 'models auth paste-api-key' "$fake_log" || fail "setup did not import OpenClaw auth profile"
 grep -q 'config patch --file' "$fake_log" || fail "setup did not apply config patch"
