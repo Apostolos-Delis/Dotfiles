@@ -66,7 +66,8 @@ case "$1 $2" in
         ;;
     "config patch")
         if [ "${3:-}" = "--stdin" ]; then
-            cat >/dev/null
+            cat >> "$OPENCLAW_FAKE_LOG"
+            printf '\n' >> "$OPENCLAW_FAKE_LOG"
         fi
         exit 0
         ;;
@@ -79,6 +80,12 @@ exit 0
 EOF
 chmod +x "$fakebin/openclaw"
 
+cat > "$fakebin/qmd" <<'EOF'
+#!/usr/bin/env bash
+printf 'qmd fake\n'
+EOF
+chmod +x "$fakebin/qmd"
+
 HOME="$tmp_home" PATH="$fakebin:$PATH" OPENCLAW_FAKE_LOG="$fake_log" \
     "$DOTFILES_DIR/openclaw/scripts/openclaw-setup.sh" \
     --no-install-cli \
@@ -90,5 +97,6 @@ assert_exists "$DOTFILES_DIR/openclaw/workspace/memory"
 grep -q 'models auth paste-api-key' "$fake_log" || fail "setup did not import OpenClaw auth profile"
 grep -q 'config patch --file' "$fake_log" || fail "setup did not apply config patch"
 grep -q 'config patch --stdin' "$fake_log" || fail "setup did not write plugin allowlist"
+grep -q "$fakebin/qmd" "$fake_log" || fail "setup did not pin QMD command"
 
 echo "All OpenClaw orchestrator checks passed."

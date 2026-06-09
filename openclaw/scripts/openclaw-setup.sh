@@ -6,6 +6,8 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 INSTALL_CLI=true
 UPGRADE_CLI=false
 INSTALL_SERVICE=true
+SKIP_QMD=false
+UPGRADE_QMD=false
 SKIP_ONBOARD=false
 SKIP_PLUGINS=false
 SKIP_AUTH=false
@@ -26,6 +28,8 @@ Options:
   --upgrade-cli         Run npm install -g openclaw@latest even if OpenClaw exists.
   --install-service     Install the gateway LaunchAgent/systemd service on first onboard. Default.
   --no-install-service  Do not install the gateway service during first onboard.
+  --skip-qmd            Do not install or configure QMD memory.
+  --upgrade-qmd         Run npm install -g @tobilu/qmd even if QMD exists.
   --skip-onboard        Do not run first-run OpenClaw onboard.
   --skip-plugins        Do not install OpenClaw plugins.
   --skip-auth           Do not import Codex CLI API-key auth into OpenClaw.
@@ -61,6 +65,14 @@ while [ $# -gt 0 ]; do
             ;;
         --no-install-service)
             INSTALL_SERVICE=false
+            shift
+            ;;
+        --skip-qmd)
+            SKIP_QMD=true
+            shift
+            ;;
+        --upgrade-qmd)
+            UPGRADE_QMD=true
             shift
             ;;
         --skip-onboard)
@@ -138,6 +150,31 @@ install_openclaw() {
 
     echo "==> Installing OpenClaw CLI"
     npm install -g openclaw@latest
+}
+
+install_qmd() {
+    if [ "$SKIP_QMD" = true ]; then
+        return
+    fi
+
+    if command -v qmd >/dev/null 2>&1 && [ "$UPGRADE_QMD" = false ]; then
+        echo "==> QMD already installed: $(command -v qmd)"
+        qmd --version || true
+        return
+    fi
+
+    if ! command -v npm >/dev/null 2>&1; then
+        echo "==> npm is required to install QMD. Install Node.js and rerun setup." >&2
+        exit 1
+    fi
+
+    echo "==> Installing QMD"
+    npm install -g @tobilu/qmd
+
+    if ! command -v qmd >/dev/null 2>&1; then
+        echo "==> QMD install completed, but qmd is not on PATH. Add it to PATH and rerun setup." >&2
+        exit 1
+    fi
 }
 
 openclaw_available() {
@@ -249,6 +286,25 @@ process.stdout.write(JSON.stringify({ agents: { defaults: { workspace } } }, nul
     fi
 }
 
+configure_qmd() {
+    if [ "$SKIP_QMD" = true ]; then
+        return
+    fi
+
+    local qmd_command
+    qmd_command="$(command -v qmd || true)"
+    if [ -z "$qmd_command" ]; then
+        echo "==> QMD is unavailable; skipping pinned QMD command config." >&2
+        return
+    fi
+
+    echo "==> Pinning QMD command"
+    node -e '
+const command = process.argv[1];
+process.stdout.write(JSON.stringify({ memory: { qmd: { command } } }, null, 2));
+' "$qmd_command" | openclaw config patch --stdin
+}
+
 profile_exists() {
     openclaw models auth list --provider openai --json 2>/dev/null | node -e '
 let input = "";
@@ -349,8 +405,10 @@ fi
 
 run_first_onboard_if_needed
 install_plugins
+install_qmd
 import_codex_auth
 apply_config_patch
 configure_workspace
+configure_qmd
 write_plugin_allowlist
 handle_gateway

@@ -27,6 +27,23 @@
       }
     }
   },
+  "memory": {
+    "backend": "qmd",
+    "qmd": {
+      "searchMode": "vsearch",
+      "rerank": false,
+      "sessions": {
+        "enabled": true,
+        "retentionDays": 30
+      },
+      "update": {
+        "startup": "idle"
+      },
+      "limits": {
+        "timeoutMs": 120000
+      }
+    }
+  },
   "plugins": {
     "entries": {
       "codex": {

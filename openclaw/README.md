@@ -41,8 +41,10 @@ The setup script:
 - installs `openclaw` with npm if missing
 - creates a local loopback gateway config on first run
 - installs the official `@openclaw/codex` plugin if missing
+- installs QMD for the OpenClaw memory backend if missing
 - enables Codex and Workboard through `openclaw/config.patch.json`
 - enables the bundled `coding-agent` skill for background Codex worker lanes
+- enables QMD vector memory with session transcript indexing and pins the resolved `qmd` binary path
 - configures `agents.defaults.workspace` to the tracked `openclaw/workspace` directory
 - creates an untracked live `openclaw/workspace/memory` directory for daily or noisy memory
 - imports the Codex CLI API key from `~/.codex/auth.json` into OpenClaw when the `openai:codex-api-key` profile is missing
@@ -60,6 +62,8 @@ openclaw logs --follow
 openclaw sessions list
 openclaw workboard list
 openclaw skills check
+openclaw memory status --deep
+openclaw memory index --force
 openclaw tasks list --status running
 openclaw sessions tail --follow
 ```
