@@ -42,6 +42,7 @@ The setup script:
 - creates a local loopback gateway config on first run
 - installs the official `@openclaw/codex` plugin if missing
 - enables Codex and Workboard through `openclaw/config.patch.json`
+- enables the bundled `coding-agent` skill for background Codex worker lanes
 - links tracked workspace seed files into `~/.openclaw/workspace`
 - creates an untracked live `~/.openclaw/workspace/memory` directory for daily or noisy memory
 - imports the Codex CLI API key from `~/.codex/auth.json` into OpenClaw when the `openai:codex-api-key` profile is missing
@@ -58,6 +59,9 @@ openclaw gateway status
 openclaw logs --follow
 openclaw sessions list
 openclaw workboard list
+openclaw skills check
+openclaw tasks list --status running
+openclaw sessions tail --follow
 ```
 
 Codex runtime commands from an OpenClaw chat:
@@ -70,6 +74,14 @@ Codex runtime commands from an OpenClaw chat:
 /codex bind --cwd <path>
 /codex stop
 ```
+
+Background Codex worker workflow:
+
+```text
+Run six Codex worker lanes for /path/to/repo. Create or reuse isolated worktrees, monitor them, run adversarial review loops, and only interrupt me if blocked or when PRs are ready.
+```
+
+OpenClaw should use the bundled `coding-agent` skill for that workflow. Workboard is for visibility; it is not meant to be the normal manual control path.
 
 ## Auth
 
