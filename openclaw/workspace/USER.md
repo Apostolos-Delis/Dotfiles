@@ -14,5 +14,6 @@
 - Do not store secrets in repo files or memory.
 - Treat Conductor-created workspaces as the source of truth when they already exist.
 - Use OpenClaw to babysit coding sessions, manage follow-up prompts, verify work, and help create PRs.
+- Keep git history linear: never create merge commits; use squash merges or rebases.
 
 Keep this file practical. It is for workflow preferences and operating context, not personal profiling.

@@ -1,3 +1,5 @@
 .DS_Store
 tmp/*
 rtk/
+openclaw/workspace/.learnings/
+openclaw/workspace/.openclaw/
