@@ -283,7 +283,7 @@ Command-equivalent skills for Codex include:
 - `$branch`, `$create-pr`, `$rebase`
 - `$plan-review`, `$create-hook`, `$explore-repo`
 
-Review workflow skills include `$ticket-loop`, `$thermos`, `$thermo-nuclear-review`, and `$thermo-nuclear-code-quality-review`.
+Implementation/review/PR workflow skills include `$code`, `$ticket-loop`, `$thermos`, `$thermo-nuclear-review`, and `$thermo-nuclear-code-quality-review`.
 
 Run parity check:
 

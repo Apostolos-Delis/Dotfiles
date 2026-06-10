@@ -1,6 +1,6 @@
 ---
 name: ticket-loop
-description: Sequentially implement a batch of tickets, issues, or tasks one at a time with goal tracking, per-ticket validation, independent subagent review using the thermo-nuclear-code-quality-review rubric, remediation of every actionable finding, and continuation until all tickets are complete. Use when the user asks to implement multiple tickets one by one, says not to stop until all are implemented, or requests a review-and-fix loop after each ticket.
+description: Sequentially implement a batch of tickets, issues, or tasks one at a time with goal tracking, per-ticket validation, independent Thermos review, remediation of every actionable finding, and continuation until all tickets are complete. Use when the user asks to implement multiple tickets one by one, says not to stop until all are implemented, or requests a review-and-fix loop after each ticket.
 ---
 
 # Ticket Loop
@@ -39,21 +39,29 @@ For each ticket, complete these steps before advancing:
    - changed-file list and relevant surrounding files
    - validation commands and results
    - known assumptions or external blockers
-7. Invoke one independent read-only review subagent when subagents are available, and require it to use `$thermo-nuclear-code-quality-review` as the review rubric. If the subagent cannot load that skill by name, point it at `~/.codex/skills/thermo-nuclear-code-quality-review/SKILL.md` or `.agents/skills/thermo-nuclear-code-quality-review/SKILL.md` and rerun the review. If subagents are unavailable, run an explicit local review pass using the same rubric and state that fallback in the ticket notes.
+7. Run a `$thermos` review gate for the current ticket. Let Thermos decide whether to launch read-only review subagents or run the two review passes locally; do not wrap Thermos inside an extra review subagent. If `$thermos` cannot load by name, read `~/.codex/skills/thermos/SKILL.md` or `.agents/skills/thermos/SKILL.md`; if Thermos is unavailable, run both underlying rubrics in `thermo-nuclear-review` and `thermo-nuclear-code-quality-review` and synthesize the result.
 8. Address every actionable review finding before moving on.
 9. Re-run the relevant validation after fixes.
 10. If review fixes were substantial, run one more targeted review pass for that ticket.
 11. Mark the ticket complete only when implementation, validation, and review remediation are all done.
 
-## Review Subagent Prompt
+## Review Handoff Prompt
 
 Use this shape for the review handoff. Keep it artifact-first and avoid telling the reviewer what you expect it to find.
 
 ```text
-Use $thermo-nuclear-code-quality-review as the required review rubric. If that skill
-is not in your available skill list, read and follow the rubric at
-~/.codex/skills/thermo-nuclear-code-quality-review/SKILL.md or
-.agents/skills/thermo-nuclear-code-quality-review/SKILL.md.
+Use $thermos as the required review workflow. If that skill is not in your
+available skill list, run both review rubrics:
+- $thermo-nuclear-review for correctness, security, feature-gate, regression, and devex risks.
+- $thermo-nuclear-code-quality-review for structural quality, maintainability, abstraction, spaghetti branching, and boundary risks.
+
+If skills cannot load by name, read and follow the rubrics at:
+~/.codex/skills/thermos/SKILL.md
+~/.codex/skills/thermo-nuclear-review/SKILL.md
+~/.codex/skills/thermo-nuclear-code-quality-review/SKILL.md
+.agents/skills/thermos/SKILL.md
+.agents/skills/thermo-nuclear-review/SKILL.md
+.agents/skills/thermo-nuclear-code-quality-review/SKILL.md
 
 Review only the current ticket's changes. Do not edit files. Look for correctness bugs,
 edge cases, missing tests, structural quality issues, unnecessary complexity,
