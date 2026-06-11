@@ -62,6 +62,7 @@ See `claude/commands/no-use-effect.md` for full patterns, examples, and the `use
 
 - Shared local skills live at `.agents/skills/`
 - Command-equivalent skills: `review`, `test`, `explain`, `branch`, `create-hook`, `create-pr`, `plan-review`, `rebase`, `explore-repo`
+- Implementation/review/PR workflow skills: `code`, `ticket-loop`, `thermos`, `thermo-nuclear-review`, `thermo-nuclear-code-quality-review`
 
 ## GStack Skills
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Thermo-Nuclear Correctness Review"
+  short_description: "Strict bug, security, and regression audit"
+  default_prompt: "Use $thermo-nuclear-review to audit the current branch for correctness, security, feature-gate, and devex risks."

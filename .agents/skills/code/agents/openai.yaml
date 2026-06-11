@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code"
+  short_description: "Implement one task, review it, and open a PR"
+  default_prompt: "Use $code to implement this task end-to-end, validate it, run adversarial Thermos review, address findings, and open a PR."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Thermos"
+  short_description: "Combined correctness and code-quality review"
+  default_prompt: "Use $thermos to run both thermo-nuclear review passes and synthesize the findings."
