@@ -114,6 +114,9 @@ trust_level = "trusted"
 [projects."/Users/Apostolos.Delis@opendoor.com/conductor/workspaces/mortgages/london"]
 trust_level = "trusted"
 
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/prompt-proxy"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
@@ -150,3 +153,8 @@ global = "ghostty"
 [desktop.open-in-target-preferences.perPath]
 "/Users/Apostolos.Delis@opendoor.com/Documents/repos/atlas-parthenon/atlas" = "ghostty"
 "/Users/Apostolos.Delis@opendoor.com/Documents/repos/cohort" = "ghostty"
+
+[hooks.state]
+
+[hooks.state."/Users/Apostolos.Delis@opendoor.com/.codex/hooks.json:pre_tool_use:0:0"]
+trusted_hash = "sha256:c83ea5fb09f327c38448bbc85cadba2d8b87097c6f4d0ab72cdcace7a7457812"

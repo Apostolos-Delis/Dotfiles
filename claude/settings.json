@@ -26,7 +26,7 @@
       "Bash(dd if:*)"
     ]
   },
-  "model": "opus[1m]",
+  "model": "claude-fable-5",
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -119,9 +119,9 @@
     "code-simplifier@claude-plugins-official": true,
     "claude-mem@thedotmack": false
   },
+  "effortLevel": "xhigh",
   "skipDangerousModePermissionPrompt": true,
   "trustedDirectories": [
     "~/Documents/repos"
-  ],
-  "effortLevel": "xhigh"
+  ]
 }
