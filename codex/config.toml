@@ -27,6 +27,7 @@ network_access = false
 [features]
 goals = true
 multi_agent = true
+js_repl = false
 # Enable features as needed
 # example_feature = true
 
@@ -168,3 +169,22 @@ global = "ghostty"
 
 [hooks.state."/Users/Apostolos.Delis@opendoor.com/.codex/hooks.json:pre_tool_use:0:0"]
 trusted_hash = "sha256:c83ea5fb09f327c38448bbc85cadba2d8b87097c6f4d0ab72cdcace7a7457812"
+
+[mcp_servers.node_repl]
+args = []
+command = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node_repl"
+startup_timeout_sec = 120
+
+[mcp_servers.node_repl.env]
+NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
+NODE_REPL_NODE_MODULE_DIRS = "/Applications/Codex.app/Contents/Resources/cua_node/lib/node_modules"
+NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/Apostolos.Delis@opendoor.com/.codex"
+CODEX_HOME = "/Users/Apostolos.Delis@opendoor.com/.codex"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "5ee3754ef68f803b9cebf40e30f94ea22aaf446de1a0a24b109180fa2ae0bd3e"
+BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
+BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
+BROWSER_USE_CODEX_APP_VERSION = "26.616.71553"
+CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"

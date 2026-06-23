@@ -123,5 +123,6 @@
   "skipDangerousModePermissionPrompt": true,
   "trustedDirectories": [
     "~/Documents/repos"
-  ]
+  ],
+  "tui": "fullscreen"
 }
