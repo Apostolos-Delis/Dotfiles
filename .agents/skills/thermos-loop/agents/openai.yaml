@@ -1,0 +1,4 @@
+interface:
+  display_name: "Thermos Loop"
+  short_description: "Run Thermos, fix findings, repeat until clean"
+  default_prompt: "Use $thermos-loop to run Thermos, fix every actionable finding, and repeat until no issues remain."

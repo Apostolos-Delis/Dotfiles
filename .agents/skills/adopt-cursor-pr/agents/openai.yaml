@@ -1,0 +1,4 @@
+interface:
+  display_name: "Adopt Cursor PR"
+  short_description: "Replace Cursor-authored PRs under your GitHub user"
+  default_prompt: "Use $adopt-cursor-pr to adopt this Cursor-created PR under my GitHub user: <url>"
