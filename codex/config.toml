@@ -128,6 +128,12 @@ trust_level = "trusted"
 [projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/eng-metrics"]
 trust_level = "trusted"
 
+[projects."/Users/Apostolos.Delis@opendoor.com/Library/Application Support/com.conductor.app/bin"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/service-lifecycle"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
@@ -143,6 +149,8 @@ git-pull-request-merge-method = "squash"
 git-show-sidebar-pr-icons = true
 git-create-pull-request-as-draft = false
 default-service-tier = "priority"
+dock-icon-preference = "codex-dark"
+followUpQueueMode = "queue"
 
 [desktop.appearanceDarkChromeTheme]
 accent = "#4d78cc"
@@ -181,10 +189,10 @@ NODE_REPL_NODE_MODULE_DIRS = "/Applications/Codex.app/Contents/Resources/cua_nod
 NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/Apostolos.Delis@opendoor.com/.codex"
 CODEX_HOME = "/Users/Apostolos.Delis@opendoor.com/.codex"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "5ee3754ef68f803b9cebf40e30f94ea22aaf446de1a0a24b109180fa2ae0bd3e"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "3c87a3fea3d5c0ee63ca8b37090fda9202d1017c239573d4d76b37b208a4aeb7"
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.616.71553"
+BROWSER_USE_CODEX_APP_VERSION = "26.623.31443"
 CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"

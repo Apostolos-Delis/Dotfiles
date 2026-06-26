@@ -95,6 +95,17 @@
             "command": "~/.claude/hooks/validate-settings.sh"
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$HOME/.claude/skills/impeccable/scripts/hook.mjs\"",
+            "timeout": 5,
+            "statusMessage": "Checking UI changes"
+          }
+        ]
       }
     ],
     "SessionStart": [
@@ -120,9 +131,10 @@
     "claude-mem@thedotmack": false
   },
   "effortLevel": "xhigh",
+  "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "trustedDirectories": [
     "~/Documents/repos"
   ],
-  "tui": "fullscreen"
+  "skipWorkflowUsageWarning": true
 }
