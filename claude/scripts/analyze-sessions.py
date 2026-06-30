@@ -110,7 +110,7 @@ def load_current_config() -> dict:
         "settings": {},
         "claude_md": "",
         "agents": [],
-        "commands": [],
+        "skills": [],
     }
 
     # settings.json
@@ -137,13 +137,13 @@ def load_current_config() -> dict:
                     "content": f.read()[:1000],  # Truncate
                 })
 
-    # Commands
-    commands_dir = CONFIG["config_dir"] / "commands"
-    if commands_dir.exists():
-        for cmd_file in commands_dir.glob("*.md"):
-            with open(cmd_file) as f:
-                config["commands"].append({
-                    "name": cmd_file.stem,
+    # Skills
+    skills_dir = CONFIG["config_dir"] / "skills"
+    if skills_dir.exists():
+        for skill_file in skills_dir.glob("*/SKILL.md"):
+            with open(skill_file) as f:
+                config["skills"].append({
+                    "name": skill_file.parent.name,
                     "content": f.read()[:500],  # Truncate
                 })
 
@@ -185,10 +185,10 @@ def build_analysis_prompt(sessions_text: str, config: dict) -> str:
         for a in config["agents"]
     ) or "No agents configured"
 
-    commands_list = "\n".join(
-        f"- `/{c['name']}`: {c['content'][:150]}..."
-        for c in config["commands"]
-    ) or "No commands configured"
+    skills_list = "\n".join(
+        f"- `${s['name']}`: {s['content'][:150]}..."
+        for s in config["skills"]
+    ) or "No skills configured"
 
     return f"""You are analyzing Claude Code conversation history to improve the user's configuration.
 
@@ -207,8 +207,8 @@ def build_analysis_prompt(sessions_text: str, config: dict) -> str:
 ### Available Agents
 {agents_list}
 
-### Available Commands
-{commands_list}
+### Available Skills
+{skills_list}
 
 ## Recent Conversations
 
@@ -218,7 +218,7 @@ def build_analysis_prompt(sessions_text: str, config: dict) -> str:
 
 Analyze these conversations and identify:
 
-1. **Repeated Requests** - What does the user ask for frequently that could become a command or agent?
+1. **Repeated Requests** - What does the user ask for frequently that could become a skill or agent?
 
 2. **Pain Points** - Where did things take multiple turns or go wrong?
    Look for frustration signals in user messages:
@@ -281,7 +281,7 @@ Provide your response as JSON with this structure:
     ],
     "proposed_changes": [
         {{
-            "type": "hook|plugin|skill|config|agent|command",
+            "type": "hook|plugin|skill|config|agent",
             "name": "<name of the thing to add/change>",
             "action": "CREATE|EDIT|INSTALL",
             "reason": "<why this change helps based on conversation evidence>",

@@ -1,6 +1,6 @@
 ---
-description: Enforce the no-useEffect rule when writing or reviewing React code. ACTIVATE when writing React components, refactoring existing useEffect calls, reviewing PRs with useEffect, or when an agent adds useEffect "just in case." Provides the five replacement patterns and the useMountEffect escape hatch.
-allowed-tools: Bash, Read, Write, Edit, Grep, Glob
+name: no-use-effect
+description: "Use when writing React components, refactoring existing useEffect calls, reviewing PRs that introduce useEffect, or enforcing the no-useEffect rule with the five replacement patterns and useMountEffect escape hatch."
 ---
 
 # No useEffect

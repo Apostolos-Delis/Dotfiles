@@ -1,6 +1,6 @@
 ---
-description: Audit UI code for AI-generated design anti-patterns — catch the tells that make interfaces look obviously machine-made
-allowed-tools: Read, Bash, Glob, Grep
+name: design-review
+description: "Use when reviewing frontend or UI changes for visual quality, accessibility basics, design-system consistency, and AI-generated design anti-patterns."
 ---
 
 # Design Review
@@ -91,7 +91,7 @@ These are non-negotiable:
 
 ### Step 5: Classify and Report
 
-Use the same severity format as `/review`:
+Use the same severity format as `$review`:
 
 ```
 ## Design Review Summary

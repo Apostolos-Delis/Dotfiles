@@ -37,16 +37,15 @@ The install script symlinks configs to their expected locations:
 ~/.config/ghostty/    -> ghostty/config
 ~/.claude/settings.json -> claude/settings.json
 ~/.claude/CLAUDE.md   -> claude/CLAUDE.md
-~/.claude/commands/   -> claude/commands/*.md
 ~/.claude/skills/     -> .agents/skills/*
 ~/.claude/RTK.md      -> claude/RTK.md
+~/.agents/skills/     -> .agents/skills/*
 ~/.codex/config.toml  -> codex/config.toml
 ~/.codex/AGENTS.md    -> codex/AGENTS.md
 ~/.codex/skills/*     -> .agents/skills/* plus gstack skills from ~/.gstack/repos/gstack
 ~/.codex/RTK.md       -> codex/RTK.md
 ~/.openclaw/workspace/*.md -> openclaw/workspace/*.md
 ~/.openclaw/workspace/memory/ -> live OpenClaw memory notes (created, not tracked)
-~/.agents/dotfiles-skills -> .agents/skills/
 ~/.tmux/plugins/tpm/  -> Tmux Plugin Manager (cloned)
 ```
 
@@ -253,7 +252,7 @@ Leader: `,`
 
 ### Claude Code
 
-AI coding assistant with global settings and custom commands.
+AI coding assistant with global settings and shared skills.
 
 - **Model:** Opus
 - **Plugins:** claude-hud (status line), pyright-lsp
@@ -262,34 +261,22 @@ AI coding assistant with global settings and custom commands.
 
 Pre-configured to allow common dev tools (git, npm, python, docker, etc.) and deny access to sensitive files (.env, secrets, private keys).
 
-#### Custom Commands
-
-| Command | Description |
-|---------|-------------|
-| `/review` | Review git changes for issues |
-| `/explain` | Explain how code works |
-| `/test` | Generate tests for a file |
-
 #### Global Memory
 
 `CLAUDE.md` contains coding preferences, environment info, and workflow guidelines that apply to all projects.
 
 #### Shared Skills
 
-Reusable skills are stored once in `.agents/skills/` and linked into both Claude and Codex.
+Reusable skills are stored once in `.agents/skills/` and linked individually into Claude, Codex, and `~/.agents/skills`.
+`skills.sh.json` groups those skills for the skills.sh catalog view.
 
-Command-equivalent skills for Codex include:
+Shared workflow skills include:
 - `$review`, `$test`, `$explain`
 - `$branch`, `$create-pr`, `$rebase`
 - `$plan-review`, `$create-hook`, `$explore-repo`
+- `$design-review`, `$no-use-effect`, `$reference`
 
 Implementation/review/PR workflow skills include `$code`, `$ticket-loop`, `$thermos`, `$thermo-nuclear-review`, and `$thermo-nuclear-code-quality-review`.
-
-Run parity check:
-
-```bash
-./claude/scripts/check-command-skill-parity.sh
-```
 
 ### Codex CLI
 
@@ -420,11 +407,10 @@ Dotfiles/
 ├── git/               # Git configuration
 │   └── .gitconfig
 ├── .agents/
-│   └── skills/        # Shared skills for Claude + Codex
+│   └── skills/        # Shared skills for Claude, Codex, and skills.sh
 ├── claude/            # Claude Code AI assistant
 │   ├── settings.json  # Global settings and permissions
-│   ├── CLAUDE.md      # Global memory/context
-│   └── commands/      # Custom slash commands
+│   └── CLAUDE.md      # Global memory/context
 ├── codex/             # Codex CLI assistant
 │   ├── config.toml
 │   └── AGENTS.md

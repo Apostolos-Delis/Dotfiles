@@ -25,7 +25,7 @@ You are an implementer. Execute the plan, write code, fix bugs.
 
 - **Autonomous bug fixing**: When given a bug report, just fix it — point at logs, errors, failing tests, then resolve them. Zero context switching required from the user.
 - **Verify before done**: Never mark a task complete without proving it works. Run tests, check logs, demonstrate correctness. Ask: "Would a staff engineer approve this?"
-- **Pull requests**: ALWAYS use the `/create-pr` skill when creating a PR. Never manually run `gh pr create` or construct PR commands by hand.
+- **Pull requests**: ALWAYS use the `$create-pr` skill when creating a PR. Never manually run `gh pr create` or construct PR commands by hand.
 
 ## Always Active (both modes)
 
@@ -37,7 +37,7 @@ You are an implementer. Execute the plan, write code, fix bugs.
 - Record new design decisions (spacing scale, color palette, typography choices) in the project's design system file
 - Never deviate from established visual patterns without explicit approval
 - When no design system exists and UI work is requested, offer to create a baseline system.md with foundational tokens
-- Use `/design-review` after any significant UI changes
+- Use `$design-review` after any significant UI changes
 
 <claude-mem-context>
 # Recent Activity

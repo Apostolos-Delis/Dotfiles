@@ -1,9 +1,6 @@
 ---
 name: fix-pr-checks
 description: Find the PR for the current branch, inspect failing GitHub Actions checks and workflow runs, diagnose the root cause, fix repository-side problems, validate locally, then commit and push.
-argument-hint: [pr-number-or-url]
-allowed-tools: Read, Bash, Glob, Grep, Edit, Write
-disable-model-invocation: true
 ---
 
 # Fix PR Checks
