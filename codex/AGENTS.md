@@ -56,12 +56,12 @@ Never call `useEffect` directly. Use these replacements:
 | One-time external sync on mount | `useMountEffect` |
 | Resetting state when a prop changes | `key` prop on parent |
 
-See `claude/commands/no-use-effect.md` for full patterns, examples, and the `useMountEffect` escape hatch.
+See `.agents/skills/no-use-effect/SKILL.md` for full patterns, examples, and the `useMountEffect` escape hatch.
 
 ## Shared Skills
 
 - Shared local skills live at `.agents/skills/`
-- Command-equivalent skills: `review`, `test`, `explain`, `branch`, `create-hook`, `create-pr`, `plan-review`, `rebase`, `explore-repo`
+- Core workflow skills: `review`, `test`, `explain`, `branch`, `create-hook`, `create-pr`, `plan-review`, `rebase`, `explore-repo`, `design-review`, `no-use-effect`, `reference`
 - Implementation/review/PR workflow skills: `code`, `ticket-loop`, `thermos`, `thermo-nuclear-review`, `thermo-nuclear-code-quality-review`
 
 ## GStack Skills

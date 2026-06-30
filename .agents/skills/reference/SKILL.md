@@ -1,6 +1,6 @@
 ---
-description: Load reference patterns and best practices before starting work in an unfamiliar domain — warm up context before executing
-allowed-tools: Read, Bash, Glob, Grep, WebSearch, WebFetch
+name: reference
+description: "Use before starting work in an unfamiliar domain to gather local project patterns, examples, docs, and focused external best practices into a concise reference brief."
 ---
 
 # Reference
@@ -12,14 +12,14 @@ Gather reference material and established patterns before starting work in a dom
 ## Usage
 
 ```
-/reference <domain> [optional focus]
+$reference <domain> [optional focus]
 ```
 
 Examples:
-- `/reference auth` — authentication patterns for this project
-- `/reference payments stripe` — payment integration with Stripe focus
-- `/reference design onboarding` — design patterns for onboarding flows
-- `/reference graphql mutations` — GraphQL mutation patterns in this codebase
+- `$reference auth` — authentication patterns for this project
+- `$reference payments stripe` — payment integration with Stripe focus
+- `$reference design onboarding` — design patterns for onboarding flows
+- `$reference graphql mutations` — GraphQL mutation patterns in this codebase
 
 ## Instructions
 

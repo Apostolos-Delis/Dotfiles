@@ -1,0 +1,72 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Execution",
+      "description": "Skills for coding work, validation, branching, shipping, and PR creation.",
+      "skills": [
+        "code",
+        "ticket-loop",
+        "branch",
+        "rebase",
+        "create-pr",
+        "ship",
+        "verify"
+      ]
+    },
+    {
+      "title": "Review",
+      "description": "Skills for code review, design review, React effect cleanup, and strict quality gates.",
+      "skills": [
+        "review",
+        "plan-review",
+        "design-review",
+        "thermo-nuclear-review",
+        "thermo-nuclear-code-quality-review",
+        "thermos",
+        "thermos-loop",
+        "no-use-effect",
+        "frontend-design"
+      ]
+    },
+    {
+      "title": "GitHub",
+      "description": "Skills for PR feedback, failing checks, and adopting external PR branches.",
+      "skills": [
+        "address-pr-comments",
+        "fix-pr-checks",
+        "adopt-cursor-pr"
+      ]
+    },
+    {
+      "title": "Planning",
+      "description": "Skills for exploration, explanation, debugging, product critique, and workflow design.",
+      "skills": [
+        "explore-repo",
+        "reference",
+        "explain",
+        "debug",
+        "plan-ceo",
+        "create-cli",
+        "create-hook"
+      ]
+    },
+    {
+      "title": "Reports",
+      "description": "Skills for tests and engineering retrospectives.",
+      "skills": [
+        "test",
+        "retro"
+      ]
+    },
+    {
+      "title": "Utilities",
+      "description": "Skills for local tools and document conversion.",
+      "skills": [
+        "1password",
+        "markdown-converter"
+      ]
+    }
+  ]
+}

@@ -1,9 +1,6 @@
 ---
 name: address-pr-comments
 description: Fetch all actionable GitHub PR conversation comments, review summaries, and inline review threads; address feedback item by item; resolve addressed threads with gh CLI; validate, commit, and push.
-argument-hint: [pr-number-or-url]
-allowed-tools: Read, Bash, Glob, Grep, Edit, Write
-disable-model-invocation: true
 ---
 
 # Address PR Comments

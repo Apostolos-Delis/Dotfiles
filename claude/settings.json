@@ -101,7 +101,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"$HOME/.claude/skills/impeccable/scripts/hook.mjs\"",
+            "command": "bash -lc 'hook=\"$HOME/.claude/skills/impeccable/scripts/hook.mjs\"; if [ -f \"$hook\" ]; then exec node \"$hook\"; fi'",
             "timeout": 5,
             "statusMessage": "Checking UI changes"
           }

@@ -182,6 +182,27 @@ trust_level = "trusted"
 [projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_56502846a29d4611a4b543f0b4faa191/mortgages"]
 trust_level = "trusted"
 
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/t3code"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_1ac8f05d1394446d90e2f6dd1e8a6b8d/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_00c5d26e44544ea8b24dbe0dd0a11f82/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_dd66a576297847ba8310613f20a19f0f/mortgages"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Desktop/repos/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_bf408cb895f9434da59146db3b41d649/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_3d92728e2bef4f2aa1593b145d6ab562/mortgages"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
