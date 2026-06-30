@@ -44,7 +44,7 @@ The install script symlinks configs to their expected locations:
 ~/.agents/skills/     -> .agents/skills/*
 ~/.codex/config.toml  -> codex/config.toml
 ~/.codex/AGENTS.md    -> codex/AGENTS.md
-~/.codex/skills/*     -> .agents/skills/* plus gstack skills from ~/.gstack/repos/gstack
+~/.codex/skills/*     -> .agents/skills/*
 ~/.codex/RTK.md       -> codex/RTK.md
 ~/.openclaw/workspace/*.md -> openclaw/workspace/*.md
 ~/.openclaw/workspace/memory/ -> live OpenClaw memory notes (created, not tracked)
@@ -65,7 +65,7 @@ The install script symlinks configs to their expected locations:
 - [Codex CLI](https://developers.openai.com/codex/) - AI coding assistant
 - [OpenClaw](https://github.com/openclaw/openclaw) - Control UI and Workboard orchestrator for Codex sessions
 - [RTK](https://github.com/rtk-ai/rtk) - Token-optimized CLI proxy for agent shell commands
-- [Bun](https://bun.sh/) - Required for gstack skill installation (`brew install oven-sh/bun/bun`)
+- [Bun](https://bun.sh/) - Required for the Claude HUD status line (`brew install oven-sh/bun/bun`)
 - [Oh-My-Zsh](https://ohmyz.sh/) - Zsh framework
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh theme
 - [FZF](https://github.com/junegunn/fzf) - `brew install fzf`
@@ -295,17 +295,7 @@ Codex uses:
 - `codex/config.toml` for runtime settings
 - `codex/AGENTS.md` for global behavior/context
 - Shared skills from `.agents/skills/`
-- gstack skills installed by `release.sh` into `~/.codex/skills/gstack-*`
-
-#### gstack for Codex
-
-`release.sh` clones or updates `https://github.com/garrytan/gstack` at `~/.gstack/repos/gstack` and runs:
-
-```bash
-./setup --host codex --prefix --quiet
-```
-
-This exposes gstack's workflow skills in Codex with namespaced skill names such as `$gstack-office-hours`, `$gstack-autoplan`, `$gstack-review`, `$gstack-qa`, `$gstack-ship`, `$gstack-investigate`, and `$gstack-cso`. Namespacing keeps them from colliding with local skills like `$review` and `$test`.
+- Codex-owned system/runtime skills, when installed by Codex itself
 
 #### RTK for Claude Code and Codex
 

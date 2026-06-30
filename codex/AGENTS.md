@@ -64,12 +64,6 @@ See `.agents/skills/no-use-effect/SKILL.md` for full patterns, examples, and the
 - Core workflow skills: `review`, `test`, `explain`, `branch`, `create-hook`, `create-pr`, `plan-review`, `rebase`, `explore-repo`, `design-review`, `no-use-effect`, `reference`
 - Implementation/review/PR workflow skills: `code`, `ticket-loop`, `thermos`, `thermo-nuclear-review`, `thermo-nuclear-code-quality-review`
 
-## GStack Skills
-
-- gstack skills install into `~/.codex/skills/` from `~/.gstack/repos/gstack` via `./release.sh`.
-- Use namespaced gstack skills to avoid collisions with local skills: `$gstack-office-hours`, `$gstack-autoplan`, `$gstack-plan-ceo-review`, `$gstack-plan-eng-review`, `$gstack-plan-design-review`, `$gstack-plan-devex-review`, `$gstack-plan-tune`, `$gstack-design-consultation`, `$gstack-design-shotgun`, `$gstack-design-html`, `$gstack-review`, `$gstack-qa`, `$gstack-qa-only`, `$gstack-ship`, `$gstack-land-and-deploy`, `$gstack-canary`, `$gstack-benchmark`, `$gstack-browse`, `$gstack-open-gstack-browser`, `$gstack-setup-browser-cookies`, `$gstack-setup-deploy`, `$gstack-setup-gbrain`, `$gstack-devex-review`, `$gstack-design-review`, `$gstack-investigate`, `$gstack-cso`, `$gstack-careful`, `$gstack-freeze`, `$gstack-guard`, `$gstack-unfreeze`, `$gstack-retro`, `$gstack-document-release`, `$gstack-learn`, `$gstack-health`, `$gstack-context-save`, `$gstack-context-restore`, `$gstack-make-pdf`, `$gstack-pair-agent`, `$gstack-landing-report`, `$gstack-claude`, `$gstack-benchmark-models`, `$gstack-upgrade`.
-- Prefer gstack for full workflow requests: product idea → `$gstack-office-hours`; planning → `$gstack-autoplan`; code review → `$gstack-review`; browser QA → `$gstack-qa`; shipping → `$gstack-ship`; root-cause debugging → `$gstack-investigate`; security audit → `$gstack-cso`.
-
 ## RTK
 
 - `release.sh` installs Rust Token Killer and links `codex/RTK.md` to `~/.codex/RTK.md`.
