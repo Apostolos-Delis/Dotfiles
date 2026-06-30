@@ -44,6 +44,7 @@ brew install max-sixty/worktrunk/wt
 brew install --cask amethyst
 brew install terminal-notifier  # For Claude Code notifications
 brew install --cask ghostty
+brew install --cask wezterm
 brew install codex
 brew install rtk
 if ! command -v bun &> /dev/null; then
@@ -135,6 +136,10 @@ link_file "$DOTFILES_DIR/nvim" "$HOME/.config/nvim"
 # Ghostty config
 mkdir -p "$HOME/.config/ghostty"
 link_file "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
+
+# WezTerm config
+mkdir -p "$HOME/.config/wezterm"
+link_file "$DOTFILES_DIR/wezterm/wezterm.lua" "$HOME/.config/wezterm/wezterm.lua"
 
 # btop config (entire directory)
 link_file "$DOTFILES_DIR/btop" "$HOME/.config/btop"

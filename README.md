@@ -7,6 +7,7 @@ Personal dotfiles for a macOS development environment. Optimized for full-stack 
 | Tool | Description |
 |------|-------------|
 | [Ghostty](ghostty/) | GPU-accelerated terminal emulator |
+| [WezTerm](wezterm/) | GPU-accelerated terminal emulator with Lua configuration |
 | [Tmux](tmux/) | Terminal multiplexer with vim-style navigation |
 | [Zsh](zsh/) | Shell with Powerlevel10k prompt and plugins |
 | [Neovim](nvim/) | Editor with LSP, linting, and snippets |
@@ -35,6 +36,7 @@ The install script symlinks configs to their expected locations:
 ~/.tmux.conf          -> tmux/.tmux.conf
 ~/.config/nvim/       -> nvim/ (entire directory)
 ~/.config/ghostty/    -> ghostty/config
+~/.config/wezterm/wezterm.lua -> wezterm/wezterm.lua
 ~/.claude/settings.json -> claude/settings.json
 ~/.claude/CLAUDE.md   -> claude/CLAUDE.md
 ~/.claude/commands/   -> claude/commands/*.md
@@ -59,6 +61,7 @@ The install script symlinks configs to their expected locations:
 - [Tmux](https://github.com/tmux/tmux) - `brew install tmux`
 - [TPM](https://github.com/tmux-plugins/tpm) - Tmux Plugin Manager (auto-installed)
 - [Ghostty](https://ghostty.org/) - Terminal emulator
+- [WezTerm](https://wezterm.org/) - Terminal emulator
 - [Claude Code](https://claude.ai/code) - AI coding assistant
 - [Codex CLI](https://developers.openai.com/codex/) - AI coding assistant
 - [OpenClaw](https://github.com/openclaw/openclaw) - Control UI and Workboard orchestrator for Codex sessions
@@ -86,6 +89,14 @@ Minimal, fast terminal with transparency and blur.
 - **Font:** JetBrains Mono 14pt
 - **Features:** 85% opacity, hidden titlebar, Option-as-Alt
 - **Quick Terminal:** `Ctrl+`` for Quake-style dropdown
+
+### WezTerm
+
+Lua-configured terminal using Rose Pine Moon.
+
+- **Theme:** Rose Pine Moon
+- **Font:** Hack Nerd Font DemiBold 15pt on macOS
+- **Features:** 80% opacity, 50px macOS blur, integrated buttons, inactive pane dimming
 
 ### Tmux
 
@@ -375,7 +386,7 @@ openclaw/scripts/openclaw-validate.sh
 
 ## Color Scheme
 
-Atom One Dark is used consistently across all tools:
+Atom One Dark is used consistently across most tools. WezTerm uses Rose Pine Moon.
 
 | Color | Hex | Usage |
 |-------|-----|-------|
@@ -395,6 +406,8 @@ Atom One Dark is used consistently across all tools:
 Dotfiles/
 ├── ghostty/           # Terminal emulator
 │   └── config
+├── wezterm/           # Terminal emulator
+│   └── wezterm.lua
 ├── tmux/              # Terminal multiplexer
 │   └── .tmux.conf
 ├── zsh/               # Shell configuration
