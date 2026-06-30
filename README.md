@@ -67,6 +67,7 @@ The install script symlinks configs to their expected locations:
 - [RTK](https://github.com/rtk-ai/rtk) - Token-optimized CLI proxy for agent shell commands
 - [gh-axi](https://github.com/kunchenguid/gh-axi) - Agent-native GitHub CLI wrapper
 - [chrome-devtools-axi](https://github.com/kunchenguid/chrome-devtools-axi) - Agent-native browser automation CLI wrapper
+- [no-mistakes](https://github.com/kunchenguid/no-mistakes) - Local git gate for validated PR creation
 - [Bun](https://bun.sh/) - Required for the Claude HUD status line (`brew install oven-sh/bun/bun`)
 - [Oh-My-Zsh](https://ohmyz.sh/) - Zsh framework
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh theme
@@ -302,6 +303,10 @@ Codex uses:
 #### Agent-Native CLIs
 
 `release.sh` installs `gh-axi` and `chrome-devtools-axi` globally with npm. The shared agent instructions tell Codex and Claude to prefer them for GitHub inspection/workflows and browser automation when a shell CLI is the right interface.
+
+#### no-mistakes
+
+`release.sh` installs `no-mistakes` into `~/.no-mistakes/bin` and links it into `~/.local/bin`. Initialize individual repositories with `no-mistakes init` when you want `git push no-mistakes` to gate a branch through review, tests, linting, PR creation, and CI monitoring before forwarding it to the real remote.
 
 #### RTK for Claude Code and Codex
 

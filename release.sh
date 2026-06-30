@@ -293,6 +293,13 @@ npm install --global yarn
 npm install --global gh-axi chrome-devtools-axi
 
 # =============================================================================
+# 10. no-mistakes
+# =============================================================================
+echo "==> Installing no-mistakes..."
+mkdir -p "$HOME/.local/bin"
+curl -fsSL https://raw.githubusercontent.com/kunchenguid/no-mistakes/main/docs/install.sh | NO_MISTAKES_LINK_DIR="$HOME/.local/bin" sh
+
+# =============================================================================
 # Done!
 # =============================================================================
 echo ""

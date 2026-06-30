@@ -70,6 +70,12 @@ See `.agents/skills/no-use-effect/SKILL.md` for full patterns, examples, and the
 - Use `chrome-devtools-axi` for browser automation when a shell CLI is the right interface.
 - These are installed globally by `release.sh`; keep mutations explicit and non-interactive.
 
+## No-Mistakes
+
+- `release.sh` installs `no-mistakes`; initialize it per repository with `no-mistakes init` when the user wants that repo gated.
+- Use no-mistakes only when the user asks to gate/publish through it or the current repo is already configured with a `no-mistakes` remote.
+- Do not replace ordinary local validation with no-mistakes unless the task is specifically about the no-mistakes gate.
+
 ## RTK
 
 - `release.sh` installs Rust Token Killer and links `codex/RTK.md` to `~/.codex/RTK.md`.
