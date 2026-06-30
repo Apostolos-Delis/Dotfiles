@@ -290,6 +290,7 @@ echo "    Run manually: ~/.claude/scripts/analyze-sessions.py --days 7"
 # =============================================================================
 echo "==> Installing global npm packages..."
 npm install --global yarn
+npm install --global gh-axi chrome-devtools-axi
 
 # =============================================================================
 # Done!
