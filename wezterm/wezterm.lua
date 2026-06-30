@@ -14,6 +14,28 @@ config.inactive_pane_hsb = {
   saturation = 0.0,
   brightness = 0.5,
 }
+config.mouse_bindings = {
+  {
+    event = { Up = { streak = 1, button = "Left" } },
+    mods = "CMD|SHIFT",
+    action = wezterm.action.OpenLinkAtMouseCursor,
+  },
+  {
+    event = { Down = { streak = 1, button = "Left" } },
+    mods = "CMD|SHIFT",
+    action = wezterm.action.Nop,
+  },
+  {
+    event = { Up = { streak = 1, button = "Left" } },
+    mods = "CMD",
+    action = wezterm.action.OpenLinkAtMouseCursor,
+  },
+  {
+    event = { Down = { streak = 1, button = "Left" } },
+    mods = "CMD",
+    action = wezterm.action.Nop,
+  },
+}
 
 if is_windows then
   config.win32_system_backdrop = "Acrylic"
