@@ -134,6 +134,54 @@ trust_level = "trusted"
 [projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/service-lifecycle"]
 trust_level = "trusted"
 
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/tmp.k31jW87IBy"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/tmp.udBvTTlDOQ"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_e67bfb7483c549d3901097a8f1a19a2b/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_98a749ebeb2940368d11f95a594f21e9/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_6f891d6c07c9473cbf985663ecd3deda/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_284cdf2b488e4df1ac607f4c15b4e8fe/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_5f16f04133814093b46a58537cd394df/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_a2a09d2c464c431ea69a9ccacca618ad/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_2bdbb5f9627c43bcb4a71ce016c6e207/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_60bfa3562cd443758bd3a0dfac755935/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_ad46993300c7428dac3b9fb0ea7bcd41/repo-1782774025113"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_2401d0005df549d8b38d414da0745720/repo-1782774677504"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_f75c7b41722d4507b560124b85c5ce55/repo-1782775138390"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_0ba7e64d6dfa4b2c839d856abe6fb316/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_aff2b4267f5b496db97df24de7b0bee7/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_56502846a29d4611a4b543f0b4faa191/mortgages"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
@@ -189,10 +237,10 @@ NODE_REPL_NODE_MODULE_DIRS = "/Applications/Codex.app/Contents/Resources/cua_nod
 NODE_REPL_NODE_PATH = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/Apostolos.Delis@opendoor.com/.codex"
 CODEX_HOME = "/Users/Apostolos.Delis@opendoor.com/.codex"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "3c87a3fea3d5c0ee63ca8b37090fda9202d1017c239573d4d76b37b208a4aeb7"
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "59e7bb81812ddd5f102e1d580335166e552c91686b5726218a985b59b4f89ca1"
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
 NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
 NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.623.31443"
+BROWSER_USE_CODEX_APP_VERSION = "26.623.42026"
 CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"
