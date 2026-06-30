@@ -65,6 +65,8 @@ The install script symlinks configs to their expected locations:
 - [Codex CLI](https://developers.openai.com/codex/) - AI coding assistant
 - [OpenClaw](https://github.com/openclaw/openclaw) - Control UI and Workboard orchestrator for Codex sessions
 - [RTK](https://github.com/rtk-ai/rtk) - Token-optimized CLI proxy for agent shell commands
+- [gh-axi](https://github.com/kunchenguid/gh-axi) - Agent-native GitHub CLI wrapper
+- [chrome-devtools-axi](https://github.com/kunchenguid/chrome-devtools-axi) - Agent-native browser automation CLI wrapper
 - [Bun](https://bun.sh/) - Required for the Claude HUD status line (`brew install oven-sh/bun/bun`)
 - [Oh-My-Zsh](https://ohmyz.sh/) - Zsh framework
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh theme
@@ -296,6 +298,10 @@ Codex uses:
 - `codex/AGENTS.md` for global behavior/context
 - Shared skills from `.agents/skills/`
 - Codex-owned system/runtime skills, when installed by Codex itself
+
+#### Agent-Native CLIs
+
+`release.sh` installs `gh-axi` and `chrome-devtools-axi` globally with npm. The shared agent instructions tell Codex and Claude to prefer them for GitHub inspection/workflows and browser automation when a shell CLI is the right interface.
 
 #### RTK for Claude Code and Codex
 

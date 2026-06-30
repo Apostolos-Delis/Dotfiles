@@ -64,6 +64,12 @@ See `.agents/skills/no-use-effect/SKILL.md` for full patterns, examples, and the
 - Core workflow skills: `review`, `test`, `explain`, `branch`, `create-hook`, `create-pr`, `plan-review`, `rebase`, `explore-repo`, `design-review`, `no-use-effect`, `reference`
 - Implementation/review/PR workflow skills: `code`, `ticket-loop`, `thermos`, `thermo-nuclear-review`, `thermo-nuclear-code-quality-review`
 
+## Agent-Native CLIs
+
+- Use `gh-axi` for GitHub inspection and workflow operations when it fits the task.
+- Use `chrome-devtools-axi` for browser automation when a shell CLI is the right interface.
+- These are installed globally by `release.sh`; keep mutations explicit and non-interactive.
+
 ## RTK
 
 - `release.sh` installs Rust Token Killer and links `codex/RTK.md` to `~/.codex/RTK.md`.
