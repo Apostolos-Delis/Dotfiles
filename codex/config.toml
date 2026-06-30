@@ -203,6 +203,12 @@ trust_level = "trusted"
 [projects."/private/tmp/synth-workspaces/workspace_3d92728e2bef4f2aa1593b145d6ab562/mortgages"]
 trust_level = "trusted"
 
+[projects."/private/tmp/synth-workspaces/workspace_bdd3f8231f9a4a03aead66efefaa7804/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_fd5d018aa4be40438d0a31bb37e31615/mortgages"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
