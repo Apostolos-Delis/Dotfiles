@@ -96,7 +96,7 @@ Lua-configured terminal using Rose Pine Moon.
 
 - **Theme:** Rose Pine Moon
 - **Font:** Hack Nerd Font DemiBold 15pt on macOS
-- **Features:** 80% opacity, 50px macOS blur, integrated buttons, inactive pane dimming
+- **Features:** 80% opacity, 50px macOS blur, hidden title/tab bar, inactive pane dimming
 
 ### Tmux
 
