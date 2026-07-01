@@ -284,6 +284,12 @@ Pre-configured to allow common dev tools (git, npm, python, docker, etc.) and de
 Reusable skills are stored once in `.agents/skills/` and linked individually into Claude, Codex, and `~/.agents/skills`.
 `skills.sh.json` groups those skills for the skills.sh catalog view.
 
+Sync shared skills without running the full installer:
+
+```bash
+./scripts/sync-agent-skills.sh
+```
+
 Shared workflow skills include:
 - `$review`, `$test`, `$explain`
 - `$branch`, `$create-pr`, `$rebase`
