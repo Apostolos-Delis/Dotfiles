@@ -209,6 +209,45 @@ trust_level = "trusted"
 [projects."/private/tmp/synth-workspaces/workspace_fd5d018aa4be40438d0a31bb37e31615/mortgages"]
 trust_level = "trusted"
 
+[projects."/private/tmp/claude-502/-Users-Apostolos-Delis-opendoor-com-Documents-repos-synth/7fe1ac31-439e-4401-8e1d-e80089d7bd1f/scratchpad"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_619eaea23bce4d2c8ac62bcc0ecdd8ec/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_929a49627d4a4134bc79d2cbd6f58638/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_56e94c23fc06413ab6ddbd328297d4b7/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_6585d1b1d5924ea797618f14988bbc75/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_ceb16503032042b7aee477d9c742df03/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_ec6af4c03e3b4cca91de60acaff94eab/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_1cef98ea2ef64c1caf6e0b7e1a4fa1d5/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_d4619fffcabd47f3b2bcb5fb468ad830/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_a40f630a4f8e4545be06f62e8c8319b8/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_373470339b1541ffbf8a16810f55bbdf/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_842bc40b8dff4651acbade7d197c1f3d/mortgages"]
+trust_level = "trusted"
+
+[projects."/private/tmp/synth-workspaces/workspace_8e25adc1bef141f5bd16df7500a3d7c5/mortgages"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
