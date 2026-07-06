@@ -134,118 +134,13 @@ trust_level = "trusted"
 [projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/service-lifecycle"]
 trust_level = "trusted"
 
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/tmp.k31jW87IBy"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/tmp.udBvTTlDOQ"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_e67bfb7483c549d3901097a8f1a19a2b/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_98a749ebeb2940368d11f95a594f21e9/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_6f891d6c07c9473cbf985663ecd3deda/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_284cdf2b488e4df1ac607f4c15b4e8fe/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_5f16f04133814093b46a58537cd394df/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_a2a09d2c464c431ea69a9ccacca618ad/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_2bdbb5f9627c43bcb4a71ce016c6e207/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_60bfa3562cd443758bd3a0dfac755935/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_ad46993300c7428dac3b9fb0ea7bcd41/repo-1782774025113"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_2401d0005df549d8b38d414da0745720/repo-1782774677504"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_f75c7b41722d4507b560124b85c5ce55/repo-1782775138390"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_0ba7e64d6dfa4b2c839d856abe6fb316/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_aff2b4267f5b496db97df24de7b0bee7/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_56502846a29d4611a4b543f0b4faa191/mortgages"]
-trust_level = "trusted"
-
 [projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/t3code"]
-trust_level = "trusted"
-
-[projects."/private/var/folders/5m/ggt494hx34x0h_2ctx3hfn6r0000gp/T/synth-workspaces/workspace_1ac8f05d1394446d90e2f6dd1e8a6b8d/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_00c5d26e44544ea8b24dbe0dd0a11f82/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_dd66a576297847ba8310613f20a19f0f/mortgages"]
 trust_level = "trusted"
 
 [projects."/Users/Apostolos.Delis@opendoor.com/Desktop/repos/mortgages"]
 trust_level = "trusted"
 
-[projects."/private/tmp/synth-workspaces/workspace_bf408cb895f9434da59146db3b41d649/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_3d92728e2bef4f2aa1593b145d6ab562/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_bdd3f8231f9a4a03aead66efefaa7804/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_fd5d018aa4be40438d0a31bb37e31615/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/claude-502/-Users-Apostolos-Delis-opendoor-com-Documents-repos-synth/7fe1ac31-439e-4401-8e1d-e80089d7bd1f/scratchpad"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_619eaea23bce4d2c8ac62bcc0ecdd8ec/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_929a49627d4a4134bc79d2cbd6f58638/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_56e94c23fc06413ab6ddbd328297d4b7/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_6585d1b1d5924ea797618f14988bbc75/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_ceb16503032042b7aee477d9c742df03/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_ec6af4c03e3b4cca91de60acaff94eab/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_1cef98ea2ef64c1caf6e0b7e1a4fa1d5/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_d4619fffcabd47f3b2bcb5fb468ad830/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_a40f630a4f8e4545be06f62e8c8319b8/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_373470339b1541ffbf8a16810f55bbdf/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_842bc40b8dff4651acbade7d197c1f3d/mortgages"]
-trust_level = "trusted"
-
-[projects."/private/tmp/synth-workspaces/workspace_8e25adc1bef141f5bd16df7500a3d7c5/mortgages"]
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/ai-gateway"]
 trust_level = "trusted"
 
 [notice.model_migrations]
@@ -292,6 +187,18 @@ global = "ghostty"
 [hooks.state."/Users/Apostolos.Delis@opendoor.com/.codex/hooks.json:pre_tool_use:0:0"]
 trusted_hash = "sha256:c83ea5fb09f327c38448bbc85cadba2d8b87097c6f4d0ab72cdcace7a7457812"
 
+[hooks.state."/Users/Apostolos.Delis@opendoor.com/.codex/hooks.json:post_tool_use:0:0"]
+trusted_hash = "sha256:ad7750c4f45a0ff2621e1a2fc7d173630cd853d57f337f34fb81e03c9e5e1149"
+
+[hooks.state."ponytail@ponytail:hooks/claude-codex-hooks.json:session_start:0:0"]
+trusted_hash = "sha256:10e0ac0497512b279dc2b073d0d559fb9fb252bc18b9c943d2f0a6d58152b1f4"
+
+[hooks.state."ponytail@ponytail:hooks/claude-codex-hooks.json:user_prompt_submit:0:0"]
+trusted_hash = "sha256:2a3c9015a1fe10f0809ffec8da3d67c326e27c38ebf720725099283b1e2085a8"
+
+[hooks.state."ponytail@ponytail:hooks/claude-codex-hooks.json:subagent_start:0:0"]
+trusted_hash = "sha256:4765354e31cc783c9cc7379f8beac7ac7ff68743c3cd7dad333d1f6a64e7a6f3"
+
 [mcp_servers.node_repl]
 args = []
 command = "/Applications/Codex.app/Contents/Resources/cua_node/bin/node_repl"
@@ -310,3 +217,12 @@ NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunct
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
 BROWSER_USE_CODEX_APP_VERSION = "26.623.42026"
 CODEX_CLI_PATH = "/Applications/Codex.app/Contents/Resources/codex"
+
+[marketplaces.ponytail]
+last_updated = "2026-07-02T04:18:42Z"
+last_revision = "40e50d9e03242aa5dd53ac771950f9127362b25f"
+source_type = "git"
+source = "https://github.com/DietrichGebert/ponytail.git"
+
+[plugins."ponytail@ponytail"]
+enabled = true

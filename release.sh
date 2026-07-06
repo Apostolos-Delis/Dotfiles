@@ -120,31 +120,6 @@ link_file() {
     echo "    Linked $dest"
 }
 
-link_skill_catalog() {
-    local dest_dir="$1"
-
-    if [ -L "$dest_dir" ]; then
-        rm "$dest_dir"
-    fi
-
-    mkdir -p "$dest_dir"
-
-    for skill_dir in "$DOTFILES_DIR"/.agents/skills/*; do
-        if [ -d "$skill_dir" ]; then
-            local skill_name
-            local dest
-            skill_name="$(basename "$skill_dir")"
-            dest="$dest_dir/$skill_name"
-
-            if [ -e "$dest" ] && [ "$dest" -ef "$skill_dir" ]; then
-                continue
-            fi
-
-            link_file "$skill_dir" "$dest"
-        fi
-    done
-}
-
 # Zsh config
 link_file "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
 link_file "$DOTFILES_DIR/zsh/.p10k.zsh" "$HOME/.p10k.zsh"
@@ -181,13 +156,12 @@ link_file "$DOTFILES_DIR/claude/settings.json" "$HOME/.claude/settings.json"
 link_file "$DOTFILES_DIR/claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 link_file "$DOTFILES_DIR/claude/RTK.md" "$HOME/.claude/RTK.md"
 link_file "$DOTFILES_DIR/codex/AGENTS.md" "$HOME/.claude/AGENTS.md"
-link_skill_catalog "$HOME/.claude/skills"
 link_file "$DOTFILES_DIR/claude/agents" "$HOME/.claude/agents"
 link_file "$DOTFILES_DIR/claude/scripts" "$HOME/.claude/scripts"
 link_file "$DOTFILES_DIR/claude/hooks" "$HOME/.claude/hooks"
 
 # Shared agent skills
-link_skill_catalog "$HOME/.agents/skills"
+"$DOTFILES_DIR/scripts/sync-agent-skills.sh"
 
 # Claude HUD config
 mkdir -p "$HOME/.claude/plugins/claude-hud"
@@ -198,7 +172,6 @@ mkdir -p "$HOME/.codex" "$HOME/.codex/skills"
 link_file "$DOTFILES_DIR/codex/config.toml" "$HOME/.codex/config.toml"
 link_file "$DOTFILES_DIR/codex/AGENTS.md" "$HOME/.codex/AGENTS.md"
 link_file "$DOTFILES_DIR/codex/RTK.md" "$HOME/.codex/RTK.md"
-link_skill_catalog "$HOME/.codex/skills"
 
 # OpenClaw config
 echo "==> Setting up OpenClaw config..."

@@ -13,6 +13,10 @@ Verify: in a git repo, not on main/master, clean working tree. Detect the base b
 
 ## Rebase Workflow
 
+## Subagent Use
+
+Keep all mutating git operations in the main harness: fetch, rebase, conflict edits, staging, continue, and push. If subagents are available and the user asked for delegation or cheaper execution, use the cheapest appropriate read-only subagent only for sidecar work: conflict analysis, dropped-commit checks, or post-rebase diff review. In Codex, prefer `gpt-5.4-mini`; in other agents, use their cheapest safe equivalent if model selection is supported.
+
 ### 1. Start Rebase
 
 Rebase onto `origin/<base>`. If no conflicts, skip to verification.
