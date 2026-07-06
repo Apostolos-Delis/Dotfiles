@@ -15,6 +15,10 @@ Automate staging, formatting, commit creation, push, and GitHub PR creation.
 
 ## Main Workflow
 
+## Subagent Use
+
+Keep staging, formatting, committing, pushing, and PR creation in the main harness. If subagents are available and the user asked for delegation or cheaper execution, use the cheapest appropriate read-only subagent only for sidecar work: self-review, risk/test-gap notes, or a PR title/body draft based on the actual diff and test output. In Codex, prefer `gpt-5.4-mini`; in other agents, use their cheapest safe equivalent if model selection is supported.
+
 ### 1. Stage and Format
 
 Stage all changes. Detect and run project formatter (prettier, black, rubocop, etc.) on changed files, then re-stage.
