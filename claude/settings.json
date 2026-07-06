@@ -128,7 +128,16 @@
     "pyright-lsp@claude-plugins-official": true,
     "ralph-wiggum@claude-code-plugins": true,
     "code-simplifier@claude-plugins-official": true,
-    "claude-mem@thedotmack": false
+    "claude-mem@thedotmack": false,
+    "ponytail@ponytail": true
+  },
+  "extraKnownMarketplaces": {
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
   },
   "effortLevel": "xhigh",
   "tui": "fullscreen",
