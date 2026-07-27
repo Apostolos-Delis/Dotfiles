@@ -36,7 +36,7 @@
       "Bash(dd if:*)"
     ]
   },
-  "model": "opendoor/glm-5.2",
+  "model": "opendoor/opus-5",
   "availableModels": [
     "opendoor/glm-5.2",
     "opendoor/opus-5"
@@ -156,8 +156,8 @@
   "effortLevel": "xhigh",
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
   "trustedDirectories": [
     "~/Documents/repos"
-  ],
-  "skipWorkflowUsageWarning": true
+  ]
 }
