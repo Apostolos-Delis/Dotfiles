@@ -1,7 +1,11 @@
+# >>> ai-gateway codex defaults >>>
+model = "opendoor/glm-5.2"
+model_provider = "ai_gateway"
+model_catalog_json = "/Users/Apostolos.Delis@opendoor.com/.codex/ai_gateway_models.json"
+# <<< ai-gateway codex defaults <<<
 # Codex CLI Configuration
 # Docs: https://developers.openai.com/codex/config-basic/
 
-model = "gpt-5.5"
 suppress_unstable_features_warning = true
 
 # Approval policy: "untrusted" | "on-request" | "never"
@@ -226,3 +230,13 @@ source = "https://github.com/DietrichGebert/ponytail.git"
 
 [plugins."ponytail@ponytail"]
 enabled = true
+
+# >>> ai-gateway codex provider ai_gateway >>>
+
+[model_providers.ai_gateway]
+name = "AI Gateway"
+base_url = "https://inference.baseten.co/v1"
+env_key = "AI_GATEWAY_API_KEY"
+wire_api = "responses"
+supports_websockets = false
+# <<< ai-gateway codex provider ai_gateway <<<
