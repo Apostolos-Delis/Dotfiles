@@ -248,3 +248,18 @@ OD_TOOL_SOURCE_SCRIPT="$OD_CODE_ROOT/scripts/infra/sourced_on_shell_load.sh"
 
 # bun completions
 [ -s "/Users/Apostolos.Delis@opendoor.com/.bun/_bun" ] && source "/Users/Apostolos.Delis@opendoor.com/.bun/_bun"
+
+# >>> ai-gateway env >>>
+export AI_GATEWAY_ROOT_URL="https://inference.baseten.co"
+export AI_GATEWAY_BASE_URL="https://inference.baseten.co/v1"
+export AI_GATEWAY_API_KEY="$(cat /Users/Apostolos.Delis@opendoor.com/.ai-gateway/token)"
+export AI_GATEWAY_AUTH_HEADER="Api-Key $(cat /Users/Apostolos.Delis@opendoor.com/.ai-gateway/token)"
+# <<< ai-gateway env <<<
+
+# >>> ai-gateway claude-code env >>>
+export ANTHROPIC_BASE_URL="https://inference.baseten.co"
+export ANTHROPIC_CUSTOM_HEADERS="Authorization: Api-Key $(cat /Users/Apostolos.Delis@opendoor.com/.ai-gateway/token)"
+unset ANTHROPIC_AUTH_TOKEN ANTHROPIC_API_KEY
+export CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY="1"
+unset CLAUDE_CODE_USE_BEDROCK CLAUDE_CODE_USE_VERTEX CLAUDE_CODE_USE_FOUNDRY
+# <<< ai-gateway claude-code env <<<

@@ -1,4 +1,14 @@
 {
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://inference.baseten.co",
+    "CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY": "1",
+    "CLAUDE_CODE_USE_BEDROCK": "0",
+    "CLAUDE_CODE_USE_VERTEX": "0",
+    "CLAUDE_CODE_USE_FOUNDRY": "0",
+    "ANTHROPIC_CUSTOM_MODEL_OPTION": "opendoor/opus-5",
+    "ANTHROPIC_CUSTOM_MODEL_OPTION_NAME": "opendoor/opus-5",
+    "ANTHROPIC_CUSTOM_MODEL_OPTION_DESCRIPTION": "Gateway model"
+  },
   "attribution": {
     "commit": "",
     "pr": ""
@@ -26,7 +36,11 @@
       "Bash(dd if:*)"
     ]
   },
-  "model": "opus[1m]",
+  "model": "opendoor/opus-5",
+  "availableModels": [
+    "opendoor/glm-5.2",
+    "opendoor/opus-5"
+  ],
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -142,8 +156,8 @@
   "effortLevel": "xhigh",
   "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
   "trustedDirectories": [
     "~/Documents/repos"
-  ],
-  "skipWorkflowUsageWarning": true
+  ]
 }
