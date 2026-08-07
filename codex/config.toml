@@ -1,7 +1,6 @@
 # Codex CLI Configuration
 # Docs: https://developers.openai.com/codex/config-basic/
 
-model = "gpt-5.6-sol"
 suppress_unstable_features_warning = true
 
 # Approval policy: "untrusted" | "on-request" | "never"
@@ -146,6 +145,9 @@ trust_level = "trusted"
 [projects."/Users/Apostolos.Delis@opendoor.com/conductor/workspaces/cohort/victoria-v3"]
 trust_level = "trusted"
 
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
@@ -248,3 +250,4 @@ enabled = true
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
 NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "583bf903a6cfb9b00a01e1583381ce921c71d7585085c6fa6b805baa0f60230b,6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f"
 NODE_REPL_TRUSTED_CODE_PATHS = "/Users/Apostolos.Delis@opendoor.com/.codex"
+
