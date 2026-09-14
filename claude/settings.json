@@ -1,5 +1,4 @@
 {
-  "env": {},
   "attribution": {
     "commit": "",
     "pr": ""
@@ -27,6 +26,7 @@
       "Bash(dd if:*)"
     ]
   },
+  "model": "claude-fable-5-1[1m]",
   "hooks": {
     "UserPromptSubmit": [
       {
@@ -145,6 +145,5 @@
   "skipWorkflowUsageWarning": true,
   "trustedDirectories": [
     "~/Documents/repos"
-  ],
-  "modelOverrides": {}
+  ]
 }

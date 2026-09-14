@@ -17,6 +17,7 @@ plan_mode_reasoning_effort = "xhigh"
 
 notify = ["/Users/Apostolos.Delis@opendoor.com/.codex/computer-use/Codex Computer Use.app/Contents/SharedSupport/SkyComputerUseClient.app/Contents/MacOS/SkyComputerUseClient", "turn-ended"]
 service_tier = "default"
+model = "gpt-6-astra"
 
 [sandbox_workspace_write]
 # Network is blocked by default for security
@@ -148,6 +149,27 @@ trust_level = "trusted"
 [projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos"]
 trust_level = "trusted"
 
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/opendoor/trace"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/repos/OpenMausBot"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/Codex/2026-09-04/build-x20"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/Codex/2026-09-06/use-the-opendoor-models-tool-to"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/Codex/2026-09-10/x20-e"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/Codex/2026-09-11/x20-thermos-users-apostolos-delis-opendoor"]
+trust_level = "trusted"
+
+[projects."/Users/Apostolos.Delis@opendoor.com/Documents/Codex/2026-09-13/x20-thermos-users-apostolos-delis-opendoor"]
+trust_level = "trusted"
+
 [notice.model_migrations]
 "gpt-5.2-codex" = "gpt-5.3-codex"
 "gpt-5.3-codex" = "gpt-5.4"
@@ -155,6 +177,7 @@ trust_level = "trusted"
 [tui.model_availability_nux]
 "gpt-5.5" = 4
 "gpt-5.6-sol" = 4
+gpt-6-astra = 4
 
 [desktop]
 appearanceTheme = "dark"
@@ -166,6 +189,9 @@ git-create-pull-request-as-draft = false
 default-service-tier = "priority"
 dock-icon-preference = "codex-dark"
 followUpQueueMode = "queue"
+conversationDetailMode = "STEPS_COMMANDS"
+enabled-reasoning-efforts = ["low", "medium", "high", "xhigh", "ultra", "persistent", "max"]
+worktree-upstream-refresh-mode = "best-effort"
 
 [desktop.appearanceDarkChromeTheme]
 accent = "#4d78cc"
@@ -214,15 +240,17 @@ startup_timeout_sec = 120
 NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS = "1000"
 NODE_REPL_NODE_MODULE_DIRS = "/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
 NODE_REPL_NODE_PATH = "/Applications/ChatGPT.app/Contents/Resources/cua_node/bin/node"
-NODE_REPL_TRUSTED_CODE_PATHS = "/Users/Apostolos.Delis@opendoor.com/.codex"
+NODE_REPL_TRUSTED_CODE_PATHS = "/Users/Apostolos.Delis@opendoor.com/.codex:/Applications/ChatGPT.app/Contents/Resources/cua_node/lib/node_modules"
 CODEX_HOME = "/Users/Apostolos.Delis@opendoor.com/.codex"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "583bf903a6cfb9b00a01e1583381ce921c71d7585085c6fa6b805baa0f60230b,6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f"
 BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
-NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = "Control the in-app browser in conjunction with the Browser Plugin."
-NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = "Control the Chrome browser in conjunction with the Chrome Plugin. Prefer this method of controlling Chrome over alternatives (such as Computer Use) unless the user explicitly mentions an alternative."
-NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = "Control desktop apps on macOS through Computer Use."
+BROWSER_USE_TINYSKY_ENABLED = "1"
+NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME = ""
+NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE = ""
 BROWSER_USE_CODEX_APP_BUILD_FLAVOR = "prod"
-BROWSER_USE_CODEX_APP_VERSION = "26.715.52143"
+BROWSER_USE_CODEX_APP_VERSION = "26.908.40834"
+NODE_REPL_TRUSTED_SERVICES = '{"browser":"/Users/Apostolos.Delis@opendoor.com/.codex/plugins/cache/openai-bundled/browser/26.908.40834/scripts/browser-service.mjs","sky":"@oai/sky/service"}'
+SKY_CUA_SERVICE_PATH = "/Users/Apostolos.Delis@opendoor.com/.codex/computer-use/Codex Computer Use.app"
 CODEX_CLI_PATH = "/Applications/ChatGPT.app/Contents/Resources/codex"
 
 [mcp_servers.openaiDeveloperDocs]
@@ -237,17 +265,67 @@ args = ["mcp"]
 cwd = "."
 enabled = false
 
+[mcp_servers.od_ai_models]
+command = "/Users/Apostolos.Delis@opendoor.com/.asdf/installs/python/3.12.3/bin/python3"
+args = ["/Users/Apostolos.Delis@opendoor.com/Documents/repos/ai-gateway/scripts/od_ai_gateway_mcp.py", "--base-url", "http://127.0.0.1:45274/v1", "--model", "opendoor/GLM-5.3-flash"]
+tool_timeout_sec = 120.0
+
+[mcp_servers.slack]
+url = "https://opendoor.runlayer.com/api/v1/proxy/5ab76c8d-596c-4b52-8f37-01d5965ac942/mcp"
+
 [marketplaces.ponytail]
-last_updated = "2026-07-16T12:31:28Z"
-last_revision = "16f29800fd2681bdf24f3eb4ccffe38be3baec6b"
+last_updated = "2026-08-07T22:08:51Z"
+last_revision = "2ed6c52c9d7e5e56942508591085fd45dea277d3"
 source_type = "git"
 source = "https://github.com/DietrichGebert/ponytail.git"
+
+[marketplaces.openai-bundled]
+source_type = "local"
+source = "/Users/Apostolos.Delis@opendoor.com/.codex/.tmp/bundled-marketplaces/openai-bundled"
+
+[marketplaces.openai-primary-runtime]
+source_type = "local"
+source = "/Users/Apostolos.Delis@opendoor.com/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime"
 
 [plugins."ponytail@ponytail"]
 enabled = true
 
-[shell_environment_policy.set]
-BROWSER_USE_AVAILABLE_BACKENDS = "chrome,iab"
-NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "583bf903a6cfb9b00a01e1583381ce921c71d7585085c6fa6b805baa0f60230b,6d25aa7656feac858f3a3bdaea5bcbab0dbfd426c9de8e6931ce90c399ee8e4f"
-NODE_REPL_TRUSTED_CODE_PATHS = "/Users/Apostolos.Delis@opendoor.com/.codex"
+[plugins."browser@openai-bundled"]
+enabled = true
 
+[plugins."visualize@openai-bundled"]
+enabled = true
+
+[plugins."documents@openai-primary-runtime"]
+enabled = true
+
+[plugins."pdf@openai-primary-runtime"]
+enabled = true
+
+[plugins."spreadsheets@openai-primary-runtime"]
+enabled = true
+
+[plugins."presentations@openai-primary-runtime"]
+enabled = true
+
+[plugins."template-creator@openai-primary-runtime"]
+enabled = true
+
+[plugins."codex-app-tools@openai-bundled"]
+enabled = true
+
+[plugins."computer-use@openai-bundled"]
+enabled = true
+
+[plugins."unified-computer-use@openai-bundled"]
+enabled = true
+
+[plugins."sites@openai-bundled"]
+enabled = true
+
+[plugins."chrome@openai-bundled"]
+enabled = true
+
+[shell_environment_policy.set]
+NODE_REPL_TRUSTED_BROWSER_CLIENT_SHA256S = "8e86beb821b9afc846211798e0113bd4b9e79312dfcd135eb447bdb154f64071"
+# <<< ai-gateway codex model tools <<<
